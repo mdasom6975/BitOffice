@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ShareMapper">
+ 	
+ 	
+	<resultMap id="shareSelectMap" type="share">
+		<result property="shareNo" 				column="share_no" 				jdbcType="VARCHAR"/>
+		<result property="requestEmployeeNo"	column="request_employee_no" 	jdbcType="VARCHAR" />
+		<result property="acceptEmployeeNo"		column="accept_employee_no" 	jdbcType="VARCHAR" />		
+		<result property="acceptStatus" 		column="accept_status" 			jdbcType="VARCHAR" />
+		<result property="shareColor"			column="share_color" 			jdbcType="VARCHAR" />
+		<result property="regDate"				column="reg_date" 				jdbcType="VARCHAR" />		
+		<result property="requestDepartmentName"		column="request_department_name" 			jdbcType="VARCHAR" />
+		<result property="requestPositionName"			column="request_position_name" 				jdbcType="VARCHAR" />
+		<result property="requestEmployeeName"			column="request_employee_name" 				jdbcType="VARCHAR" />	
+		<result property="acceptDepartmentName"			column="department_name" 			jdbcType="VARCHAR" />
+		<result property="acceptPositionName"			column="position_name" 				jdbcType="VARCHAR" />
+		<result property="acceptEmployeeName"			column="employee_name" 				jdbcType="VARCHAR" />				
+	</resultMap>
+	
+	<!-- SQL : INSERT -->
+	<insert 	id="addShare"		parameterType="share" >
+	 	INSERT
+		INTO schedule_share( share_no, request_employee_no, accept_employee_no, accept_status, share_color, reg_date) 
+		VALUES	 (	#{shareNo}, #{requestEmployeeNo}, #{acceptEmployeeNo}, #{acceptStatus}, #{shareColor}, SYSDATE )
+	 </insert>
+	 
+	 <!-- SQL : SELECT ONE -->
+	 <select 	id="getShare"	parameterType="string"	resultMap="shareSelectMap">
+		SELECT share_no, request_employee_no, accept_employee_no, accept_status, share_color, reg_date
+		FROM schedule_share
+		WHERE share_no = #{shareNo}
+	
+	 </select>
+	 
+	 <!-- SQL : UPDATE -->
+	 <update	id="updateShare"	parameterType="share">
+	   	UPDATE schedule_share
+	   	<set>
+			accept_status 	=  #{acceptStatus},
+			share_color		=  #{shareColor}
+	   	</set>
+	   	WHERE share_no = #{shareNo}
+	 </update>
+	 
+	 <!-- SQL : DELETE -->
+	 <delete	id="deleteShare"	parameterType="share" >
+	   	DELETE FROM schedule_share WHERE share_no = #{shareNo}
+	 </delete>
+	 	 
+		 
+	<!-- SQL : SELECT LIST -->
+	<select  id="getShareList"  parameterType="search"	resultMap="shareSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		( 					
+									select
+											TRIM(s2.share_No) as shareNo, 
+											s2.request_employee_no as requestEmployeeNo,
+											s2.accept_employee_no as	acceptEmployeeNo,
+											s2.request_department_name as requestDepartmentName,
+											s2.request_position_name as requestPositionName,
+											s2.request_employee_name as requestEmployeeName,
+											s2.accept_status as acceptStatus, 
+											s2.share_Color as shareColor, 
+											s2.reg_Date as regDate,
+											d2.department_name as acceptDepartmentName,
+											p2.position_name as acceptPositionName,
+											e2.employee_name as acceptEmployeeName
+									FROM 
+									(SELECT  TRIM(s.share_no) as share_No, 
+											s.request_employee_no as request_employee_no,
+											s.accept_employee_no as accept_employee_no,
+											d.department_name as request_department_name,
+											p.position_name as request_position_name,
+											e.employee_name as request_employee_name,
+											s.accept_status as accept_status, 
+											s.share_color as share_color, 
+											to_char(reg_date,'YYYY-mm-dD') as reg_Date
+										FROM schedule_share s, employee e, department d, position p
+										WHERE
+											  s.request_employee_no = e.employee_no
+											  and e.department_no = d.department_no
+											  and e.position_no = p.position_no 
+											<if test="searchCondition != null">												
+												<if test="searchCondition == 0 and searchKeyword !='' ">
+									 				and e.employee_name like '%'||#{searchKeyword}||'%'
+												</if>
+												<if test="searchCondition == 1 and searchKeyword !='' ">
+									 				and d.department_name like '%'||#{searchKeyword}||'%'
+												</if>
+												<if test="searchCondition == 2 and searchKeyword !='' ">
+									 				and s.request_employee_no = #{searchKeyword}
+												</if>												
+											</if>												  	
+									) s2, employee e2, department d2, position p2
+									WHERE
+									  s2.accept_employee_no = e2.employee_no
+									  and e2.department_no = d2.department_no
+									  and e2.position_no = p2.position_no	  					
+									  ORDER BY s2.reg_Date DESC) inner_table
+						WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	 </select>
+	 	<!--  위 두번째 subQuery 의  
+	 			WHERE ROWNUM &lt;= #{endRowNum} ) 는
+	 			WHERE ROWNUM <= #{endRowNum} ) 의미이며..
+	 			< 는 keyword 로 &lt; 를	사용.
+	 			
+	 			<![CDATA[  ~~~  ]]> 를 이용하여 아래와 같이 사용  할 수 있다.
+	 			CDATA ==> Character Data 의 의미 Java 에서 \n 같은 특수문자 처리  
+
+				WHERE ROWNUM <![CDATA[ <=]]> #{endRowNum} )
+		-->
+	
+	<!-- SQL : SELECT ROW Count -->	 
+	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT  s.share_no, 
+						s.request_employee_no,	
+						d.department_name,
+						p.position_name,
+					        e.employee_name,
+						s.accept_status, 
+						s.share_color, 
+						s.reg_date
+						FROM schedule_share s, employee e, department d, position p
+				WHERE s.request_employee_no = e.employee_no
+					  and e.department_no = d.department_no
+					  and e.position_no = p.position_no  						
+						<if test="searchCondition != null">							
+							<if test="searchCondition == 0 and searchKeyword !='' ">
+				 				and employee_name like '%'||#{searchKeyword}||'%'
+							</if>
+							<if test="searchCondition == 1 and searchKeyword !='' ">
+				 				and department_name like '%'||#{searchKeyword}||'%'
+							</if>	
+							<if test="searchCondition == 3 and searchKeyword !='' ">
+				 				and request_employee_no = #{searchKeyword}
+							</if>														
+						</if> ) countTable						
+	 </select>
+	 
+</mapper>

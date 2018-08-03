@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE configuration
+ 		 PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ 		"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!-- mybatis-config.xml :: MyBatis Framework MetaData -->
+<configuration>
+
+	<!-- 기타 설정정보 :: [MyBatis_Home]/mybatis-3.2.1.pdf 참조 -->
+	<settings>
+		<setting name="callSettersOnNulls" value="false" />
+	</settings>
+
+	<!-- FQCN(Full Qualified Class Name) Alias(별칭관리) -->
+	<typeAliases>
+		<typeAlias alias="search" type="com.bitoffice.common.Search" />
+		<typeAlias alias="employee" type="com.bitoffice.service.domain.Employee" />
+		<typeAlias alias="department" type="com.bitoffice.service.domain.Department" />
+		<typeAlias alias="position" type="com.bitoffice.service.domain.Position" />
+		<typeAlias alias="attendance" type="com.bitoffice.service.domain.Attendance" />
+		<typeAlias alias="organization" type="com.bitoffice.service.domain.Organization" />
+		<typeAlias alias="ip" type="com.bitoffice.service.domain.Ip" />
+		<typeAlias alias="standardTime" type="com.bitoffice.service.domain.StandardTime" />
+		<typeAlias alias="meetingRoom" type="com.bitoffice.service.domain.MeetingRoom" />
+		<typeAlias alias="schedule" type="com.bitoffice.service.domain.Schedule" />
+		<typeAlias alias="share" type="com.bitoffice.service.domain.Share" />
+		<typeAlias alias="reservation" type="com.bitoffice.service.domain.Reservation" />
+		<typeAlias alias="board" type="com.bitoffice.service.domain.Board" />
+		<typeAlias alias="approval" type="com.bitoffice.service.domain.Approval" />
+		<typeAlias alias="approvalEmployee" type="com.bitoffice.service.domain.ApprovalEmployee" />
+	</typeAliases>
+
+	<!-- SQL Definition :: file include -->
+	<mappers>
+		<mapper resource="sql/EmployeeMapper.xml" />
+		<mapper resource="sql/DepartmentMapper.xml" />
+		<mapper resource="sql/PositionMapper.xml" />
+		<mapper resource="sql/AttendanceMapper.xml" />
+		<mapper resource="sql/OrganizationMapper.xml" />
+		<mapper resource="sql/IpMapper.xml" />
+		<mapper resource="sql/StandardTimeMapper.xml" />
+		<mapper resource="sql/MeetingRoomMapper.xml" />
+		<mapper resource="sql/ScheduleMapper.xml" />
+		<mapper resource="sql/ShareMapper.xml" />
+		<mapper resource="sql/ReservationMapper.xml" />
+		<mapper resource="sql/BoardMapper.xml" />
+		<mapper resource="sql/ApprovalMapper.xml"/>
+		<mapper resource="sql/ApprovalEmployeeMapper.xml"/>	
+	</mappers>
+
+</configuration>

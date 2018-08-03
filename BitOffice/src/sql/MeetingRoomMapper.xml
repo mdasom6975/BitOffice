@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MeetingRoomMapper">
+	<resultMap id="meetingRoomSelectMap" type="meetingRoom">
+		<result property="meetingRoomCode"	column="meetingroom_code"	jdbcType="INTEGER"/>
+		<result property="mettingRoomName" column="meetingroom_name" jdbcType="VARCHAR"/>
+		<result property="mR" column="mr" jdbcType="NUMERIC"/>
+	</resultMap>
+	
+	<select  id="getMeetingRoomList"  parameterType="search"	resultMap="meetingRoomSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	SELECT meetingroom_code , meetingroom_name, mr
+											FROM meetingroom
+											<if test="searchCondition != null">
+												<where>
+													<if test="searchCondition == 0 and searchKeyword !='' ">
+										 				meetingroom_code like '%${searchKeyword}%'
+													</if>
+													<if test="searchCondition == 1 and searchKeyword !='' ">
+										 				meetingroom_name like '%${searchKeyword}%'
+													</if>
+												</where>
+											</if>
+											ORDER BY meetingroom_name ) inner_table
+						WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	 </select>
+	
+	<select id="getTotalCount" parameterType="search" resultType="int">
+	SELECT COUNT(*)
+	FROM( SELECT meetingroom_code, meetingroom_name, mr
+	FROM meetingroom
+		<if test="searchCondition != null">
+			<where>
+				<if test="searchCondition == 0 and searchKeyword !='' ">
+					meetingroom_code like '%${searchKeyword}%'
+				</if>
+				<if test="searchCondition == 1 and searchKeyword !='' ">
+					meetingroom_name like '%${searchKeyword}%'
+				</if>
+			</where>
+		</if>
+		ORDER BY meetingroom_name ) counTable
+	</select>
+	
+	<delete id="deleteMeetingRoom" parameterType="int">
+		DELETE 
+		FROM meetingroom 
+		WHERE meetingroom_code = #{meetingRoomCode}	
+	</delete>
+	
+	<insert id="addMeetingRoom" parameterType="meetingRoom">
+		INSERT 
+		INTO meetingroom 
+		(meetingroom_code, meetingroom_name, mr) 
+		VALUES (#{meetingRoomCode}, #{mettingRoomName}, seq_mr.nextval)
+	</insert>
+	
+	<select id="getMeetingRoom" parameterType="String" resultMap="meetingRoomSelectMap">
+		SELECT
+		meetingroom_code, meetingroom_name, mr
+		FROM meetingroom
+		WHERE mR = #{value}
+	</select>
+	
+	<select id="codeCheck" parameterType="String" resultType="Integer">
+		SELECT COUNT(*) FROM meetingroom
+		WHERE meetingroom_code = #{meetingRoomCode}
+	</select>
+	
+	<select id="nameCheck" parameterType="String" resultType="Integer">
+		SELECT COUNT(*) FROM meetingroom
+		WHERE meetingroom_name = #{mettingRoomName}
+	</select>
+	
+	<update id="updateMeetingRoom" parameterType="meetingRoom">
+		UPDATE meetingRoom
+		<set>
+			meetingroom_code = #{meetingRoomCode},
+			meetingroom_name = #{mettingRoomName}
+		</set>
+			WHERE mr = #{mR}
+	</update>
+	
+	<select id="getReserveMeetingRoom" resultMap="meetingRoomSelectMap">
+		SELECT
+		meetingroom_code, meetingroom_name, mr
+		FROM meetingroom
+		ORDER BY meetingroom_name
+	</select>
+	
+</mapper>

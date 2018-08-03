@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ReservationMapper">
+	<resultMap id="reservationSelectMap" type="reservation">
+		<result property="mettingRoomName" column="meetingroom_name" jdbcType="VARCHAR"/>
+		<result property="employeeNo" column="employee_no" jdbcType="VARCHAR"/>
+		<result property="startTime" column="start_time" jdbcType="VARCHAR"/>
+		<result property="endTime" column="end_date" jdbcType="VARCHAR"/>
+		<result property="usePurpose" column="reservation_detail" jdbcType="VARCHAR"/>		
+		<result property="reserveDate" column="reservation_date" jdbcType="DATE"/>
+		<result property="reNum" column="re_num" jdbcType="NUMERIC"/>
+		<result property="nowDate" column="now_date" jdbcType="DATE"/>
+	</resultMap>
+	
+	<delete id="cancelReservation" parameterType="int">
+		DELETE 
+		FROM reservation 
+		WHERE re_num = #{reNum}	
+	</delete>
+	
+	<insert id="addReservation" parameterType="reservation">
+		INSERT 
+		INTO reservation(employee_no, meetingroom_name, reservation_date, start_time, end_date, reservation_detail, re_num) 
+		VALUES (#{employeeNo},
+				#{mettingRoomName}, 
+				#{reserveDate}, 
+				#{startTime}, 
+				#{endTime}, 
+				#{usePurpose, jdbcType=VARCHAR},
+				seq_re_num.nextval)
+				
+	</insert>
+	
+	<select id="myReservation" parameterType="search" resultMap="reservationSelectMap">
+		SELECT * 
+		FROM ( SELECT inner_table.*, ROWNUM AS row_seq 
+					FROM ( SELECT r.meetingroom_name, r.start_time, r.end_date, r.reservation_date, r.employee_no, r.re_num
+						FROM meetingroom m, reservation r, employee e 
+						WHERE r.employee_no = #{employeeNo} 
+						AND r.employee_no(+) = e.employee_no 
+						AND m.meetingroom_name = r.meetingroom_name
+						ORDER BY reservation_date, start_time) inner_table 
+			WHERE ROWNUM <![CDATA[<=]]> #{search.endRowNum} ) 
+			WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum}
+	</select>
+
+	<select id="myTotalCount" parameterType="map" resultType="int">
+		SELECT COUNT(*)
+			FROM( SELECT m.meetingroom_name, r.start_time, r.end_date, r.reservation_date, r.employee_no, r.re_num
+				FROM meetingroom m, reservation r, employee e
+		WHERE e.employee_no = #{employeeNo}
+		AND r.employee_no(+) = e.employee_no 
+		AND m.meetingroom_name = r.meetingroom_name
+		ORDER BY reservation_date, start_time ) countTable
+	</select>
+	
+	<select id="getReservationList" parameterType="search" resultMap="reservationSelectMap">
+		SELECT * 
+		FROM ( SELECT inner_table.*, ROWNUM AS row_seq 
+				FROM ( SELECT m.meetingroom_name, r.start_time, r.end_date, r.reservation_date, r.employee_no, r.re_num 
+						FROM meetingroom m, reservation r, employee e
+						ORDER BY meetingroom_name) inner_table 
+			WHERE ROWNUM <![CDATA[<=]]> #{search.endRowNum} ) 
+			WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum}
+	</select>
+	
+	<select id="getTotalCount" parameterType="map" resultType="int">
+		SELECT COUNT(*) 
+		FROM( SELECT m.meetingroom_name, r.start_time, r.end_date, r.reservation_date, r.employee_no , r.re_num
+				FROM meetingroom m, reservation r, employee e 
+				ORDER BY meetingroom_name ) countTable
+	</select>
+	
+	<update id="updateReservation" parameterType="reservation">
+		UPDATE reservation
+		<set>
+			start_time = #{startTime},
+			end_date = #{endTime},
+			reservation_detail = #{usePurpose}
+		</set>
+		WHERE re_num = #{reNum}
+	</update>
+	
+	<select id="getReservation" parameterType="String" resultMap="reservationSelectMap">
+		SELECT
+		meetingroom_name, employee_no, start_time, end_date, reservation_detail, reservation_date, re_num
+		FROM reservation
+		WHERE re_num = #{value} 
+	</select>
+	
+</mapper>

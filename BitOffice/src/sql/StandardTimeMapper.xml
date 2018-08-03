@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="StandardTimeMapper">
+ 	
+ 	
+	<resultMap id="standardtimeSelectMap" type="standardtime">
+		<result property="serialNo" 			column="serial_no" 			jdbcType="INTEGER"/>
+		<result property="stdStartTime"		column="std_start_time" 			jdbcType="VARCHAR" />
+		<result property="stdEndTime"		column="std_end_time" 			jdbcType="VARCHAR" />		
+		<result property="regDate" 		column="reg_date" 			jdbcType="DATE" />
+		<result property="regEmployeeNo"		column="reg_id" 			jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<!-- SQL : INSERT -->
+	<insert 	id="addStandardTime"		parameterType="standardtime" >
+	 	INSERT
+		INTO standard_time( serial_no, std_start_time, std_end_time, reg_date, reg_id) 
+		VALUES	 (SEQ_STDTIME_NO.NEXTVAL, #{stdStartTime},  #{stdEndTime}, SYSDATE, #{regEmployeeNo})
+	 </insert>
+	 
+	 <!-- SQL : SELECT ONE -->
+	 <select 	id="getStandardTime"	parameterType="string"	resultMap="standardtimeSelectMap">
+		SELECT
+			serial_no, std_start_time, std_end_time, reg_date, reg_id
+		FROM standard_time
+		WHERE ROWNUM = 1
+	 </select>
+	 
+	 <!-- SQL : UPDATE -->
+	 <update	id="updateStandardTime"	parameterType="standardtime" >
+	   	UPDATE standard_time
+	   	<set>
+	   		std_start_time 	= #{stdStartTime} ,
+			std_end_time	= #{stdEndTime},
+			reg_date 				= SYSDATE ,
+			reg_id				=	#{regEmployeeNo}
+	   	</set>
+	   	WHERE serial_no = #{serialNo}
+	 </update>
+	 
+	 <!-- SQL : DELETE -->
+	 <delete	id="deleteStandardTime"	parameterType="standardtime" >
+	   	DELETE FROM standard_time WHERE serial_no = #{serialNo}
+	 </delete>
+	 	 
+		 
+	<!-- SQL : SELECT LIST -->
+	<select  id="getStandardTimeList"  parameterType="search"	resultMap="standardtimeSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	SELECT serial_no, std_start_time, std_end_time, reg_date, reg_id
+											FROM standard_time
+											<if test="searchCondition != null">
+												<where>	
+													<if test="searchCondition == 0 and searchKeyword !='' ">
+										 				std_start_time = #{searchKeyword}
+													</if>
+												</where>
+											</if>
+											ORDER BY std_start_time desc) inner_table
+						WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	 </select>
+	 	<!--  위 두번째 subQuery 의  
+	 			WHERE ROWNUM &lt;= #{endRowNum} ) 는
+	 			WHERE ROWNUM <= #{endRowNum} ) 의미이며..
+	 			< 는 keyword 로 &lt; 를	사용.
+	 			
+	 			<![CDATA[  ~~~  ]]> 를 이용하여 아래와 같이 사용  할 수 있다.
+	 			CDATA ==> Character Data 의 의미 Java 에서 \n 같은 특수문자 처리  
+
+				WHERE ROWNUM <![CDATA[ <=]]> #{endRowNum} )
+		-->
+	
+	<!-- SQL : SELECT ROW Count -->	 
+	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT serial_no, std_start_time, std_end_time, reg_date, reg_id
+						FROM standard_time
+						<if test="searchCondition != null">
+							<where>
+								<if test="searchCondition == 0 and searchKeyword !='' ">
+						 			std_start_time = #{searchKeyword}
+								</if>
+
+							</where>
+						</if> ) countTable						
+	 </select>
+	 
+</mapper>

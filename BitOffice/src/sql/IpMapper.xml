@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="IpMapper">
+ 	
+ 	
+	<resultMap id="ipSelectMap" type="ip">
+		<result property="serialNo" 			column="serial_no" 			jdbcType="INTEGER"/>
+		<result property="startIp"		column="start_ip" 			jdbcType="VARCHAR" />
+		<result property="endIp"		column="end_ip" 			jdbcType="VARCHAR" />		
+		<result property="regDate" 		column="reg_date" 			jdbcType="DATE" />
+		<result property="regId"		column="reg_id" 			jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<!-- SQL : INSERT -->
+	<insert 	id="addIp"		parameterType="ip" >
+	 	INSERT
+		INTO ip( serial_no, start_ip, end_ip, reg_date, reg_id) 
+		VALUES	 (SEQ_IP_NO.NEXTVAL, #{startIp},  #{endIp}, SYSDATE, #{regId})
+	 </insert>
+	 
+	 <!-- SQL : SELECT ONE -->
+	 <select 	id="getIp"	parameterType="string"	resultMap="ipSelectMap">
+		SELECT serial_no, start_ip, end_ip, reg_date, reg_id
+		FROM ip
+		WHERE ((start_ip <![CDATA[ <= ]]> #{startIp} AND end_IP <![CDATA[ >= ]]> #{startIp}) OR  (start_ip <![CDATA[ <= ]]> #{endIp} AND end_IP <![CDATA[ >= ]]> #{endIp}))		
+	
+	 </select>
+	 
+	 <!-- SQL : UPDATE -->
+	 <update	id="updateIp"	parameterType="ip">
+	   	UPDATE ip
+	   	<set>
+	   		start_ip 	= #{startIp} ,
+			end_ip	= #{endIp},
+			reg_date 				= SYSDATE ,
+			reg_id				=	#{regId}
+	   	</set>
+	   	WHERE serial_no = #{serialNo}
+	 </update>
+	 
+	 <!-- SQL : DELETE -->
+	 <delete	id="deleteIp"	parameterType="ip" >
+	   	DELETE FROM ip WHERE serial_no = #{serialNo}
+	 </delete>
+	 	 
+		 
+	<!-- SQL : SELECT LIST -->
+	<select  id="getIpList"  parameterType="search"	resultMap="ipSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	SELECT serial_no, start_ip, end_ip, reg_date, reg_id
+											FROM ip
+											<if test="searchCondition != null">
+												<where>	
+													<if test="searchCondition == 0 and searchKeyword !='' ">
+										 				start_ip like '%'||#{searchKeyword}||'%'
+													</if>
+												</where>
+											</if>
+											ORDER BY reg_date DESC, start_ip DESC) inner_table
+						WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	 </select>
+	 	<!--  위 두번째 subQuery 의  
+	 			WHERE ROWNUM &lt;= #{endRowNum} ) 는
+	 			WHERE ROWNUM <= #{endRowNum} ) 의미이며..
+	 			< 는 keyword 로 &lt; 를	사용.
+	 			
+	 			<![CDATA[  ~~~  ]]> 를 이용하여 아래와 같이 사용  할 수 있다.
+	 			CDATA ==> Character Data 의 의미 Java 에서 \n 같은 특수문자 처리  
+
+				WHERE ROWNUM <![CDATA[ <=]]> #{endRowNum} )
+		-->
+	
+	<!-- SQL : SELECT ROW Count -->	 
+	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT serial_no, start_ip, end_ip, reg_date, reg_id
+						FROM ip
+						<if test="searchCondition != null">
+							<where>
+								<if test="searchCondition == 0 and searchKeyword !='' ">
+						 			start_ip like '%'||#{searchKeyword}||'%'
+								</if>
+
+							</where>
+						</if> ) countTable						
+	 </select>
+	 
+</mapper>

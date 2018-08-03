@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PositionMapper">
+	<resultMap id="positionSelectMap" type="position">
+		<result property="positionNo" column="position_no" jdbcType="VARCHAR" />
+		<result property="positionName" column="position_name"
+			jdbcType="VARCHAR" />
+		<result property="rankCode" column="rank_code" jdbcType="CHAR" />
+	</resultMap>
+
+	<!-- SQL : INSERT -->
+
+	<insert id="addPosition" parameterType="position">
+		INSERT
+		INTO
+		position(position_no,position_name,rank_code)
+		VALUES ( #{positionNo}
+		,#{positionName},#{rankCode})
+	</insert>
+
+	<!-- SQL : SELECT -->
+	<select id="getPosition" parameterType="string" resultMap="positionSelectMap">
+		SELECT
+		position_no, position_name, rank_code
+		FROM position
+		WHERE position_no
+		=#{positionNo}
+	</select>
+
+	<select id="getAllPosition" resultMap="positionSelectMap">
+		SELECT
+		position_no, position_name
+		FROM position
+	</select>
+
+	<!-- SQL : UPDATE -->
+	<update id="updatePosition" parameterType="position">
+		UPDATE position
+		<set>
+			position_name = #{positionName},
+			rank_code = #{rankCode}
+		</set>
+		WHERE position_no = #{positionNo}
+	</update>
+
+	<select id="dbCheckPosition" parameterType="String" resultType="Integer">
+		SELECT
+		COUNT(*) FROM position
+		WHERE
+		position_name = #{positionName}
+	</select>
+
+	<!-- SQL : SELECT LIST -->
+	<select id="getPositionList" parameterType="search" resultMap="positionSelectMap">
+		SELECT *
+		FROM ( SELECT inner_table.* , ROWNUM AS row_seq
+		FROM ( SELECT
+		position_no, position_name, rank_code
+		FROM position
+		ORDER BY
+		position_no) inner_table
+		WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq
+		BETWEEN #{startRowNum} AND
+		#{endRowNum}
+	</select>
+
+	<!-- SQL : SELECT ROW Count -->
+	<select id="getTotalCount" parameterType="search" resultType="int">
+		SELECT COUNT(*)
+		FROM( SELECT position_no, position_name, rank_code
+		FROM
+		position
+		) countTable
+	</select>
+	
+	<!-- SQL : DELETE -->
+	<delete id="deletePosition" parameterType="String">
+	DELETE 
+	FROM
+	position
+	<where>
+	position_no=#{positionNo}
+	</where>
+	</delete>
+</mapper>

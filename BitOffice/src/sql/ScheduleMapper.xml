@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ScheduleMapper">
+ 	
+ 	
+	<resultMap id="scheduleSelectMap" type="schedule">
+		<result property="scheSerialNo" 		column="sche_serial_no" 	jdbcType="INTEGER"/>
+		<result property="startDate"			column="start_date" 		jdbcType="VARCHAR" />
+		<result property="endDate" 				column="end_date" 			jdbcType="VARCHAR" />
+		<result property="startTime" 			column="start_time" 		jdbcType="VARCHAR" />
+		<result property="endTime" 				column="end_time" 			jdbcType="VARCHAR" />
+		<result property="shareRange" 			column="share_range" 		jdbcType="VARCHAR" />
+		<result property="title" 				column="title" 				jdbcType="VARCHAR" />
+		<result property="content" 				column="content" 			jdbcType="VARCHAR" />
+		<result property="regDate" 				column="reg_date" 			jdbcType="VARCHAR" />	
+		<result property="employeeNo" 			column="employee_no" 		jdbcType="VARCHAR" />
+		<result property="color" 				column="color" 				jdbcType="VARCHAR" />		
+		
+		<result property="departmentName" 		column="department_name" 	jdbcType="VARCHAR" />
+		<result property="postionName" 			column="postion_name" 		jdbcType="VARCHAR" />	
+		<result property="employeeName" 		column="employee_name" 		jdbcType="VARCHAR" />		
+	</resultMap>
+	
+	<!-- SQL : INSERT -->
+	<insert 	id="addSchedule"		parameterType="schedule" >
+	 	INSERT
+		INTO schedule( sche_serial_no , start_date , end_date , start_time , end_time, share_range, title, content, reg_date, employee_no, color) 
+		VALUES	 (	seq_schedule_no.nextval , #{startDate:VARCHAR} , #{endDate:VARCHAR} , #{startTime:VARCHAR} , #{endTime:VARCHAR} , #{shareRange:VARCHAR} , #{title:VARCHAR} , #{content:VARCHAR} , SYSDATE, #{employeeNo}, #{color:VARCHAR} )
+	 </insert>
+	 
+	 <!-- SQL : SELECT ONE -->
+	 <select 	id="getSchedule"	parameterType="string"	resultMap="scheduleSelectMap">
+		SELECT
+			sche_serial_no , start_date , end_date , start_time , end_time, share_range, title, content, reg_date, employee_no, color
+		FROM schedule 
+		WHERE employee_no = #{employeeNo}
+	 </select>
+	 
+	 <!-- SQL : UPDATE -->
+	 <update	id="updateSchedule"	parameterType="schedule" >
+	   	UPDATE schedule
+	   	<set>
+	   		title 	= #{title:VARCHAR} ,
+	   		content 	= #{content:VARCHAR} ,
+			start_date	= #{startDate:VARCHAR} ,
+			end_date	= #{endDate:VARCHAR}, 
+			start_time	= #{startTime:VARCHAR},
+			end_time	= #{endTime:VARCHAR},	
+			share_range = #{shareRange:VARCHAR},
+			reg_date	= #{regDate:VARCHAR},
+			color	    = #{color:VARCHAR}
+	   	</set>
+	   	WHERE sche_serial_no = #{scheSerialNo} 
+	 </update>
+	 
+	 <!-- SQL : DELETE -->
+	 <delete	id="deleteSchedule"	parameterType="schedule" >
+	   	delete from schedule
+	   	WHERE sche_serial_no = #{id} 
+	 </delete>	 
+		 
+	<!-- SQL : SELECT LIST -->
+	<select  id="getScheduleList"  parameterType="search"	resultMap="scheduleSelectMap">
+		SELECT s1.sche_serial_no as scheSerialNo, 
+			s1.start_date as startDate, 
+			s1.end_date as endDate, 
+			s1.start_time as startTime, 
+			s1.end_time as endTime, 
+			s1.share_range as shareRange, 
+			s1.title as title, 
+			s1.content as content, 
+			s1.reg_date as regDate, 
+			s1.employee_no as employeeNo, 
+			s1.color as color,
+			d.department_name as departmentName,
+			p.position_name as positionName,	
+			e.employee_name as employeeName	
+		FROM schedule s1, employee e, department d, position p
+		WHERE
+			s1.employee_no = #{searchKeyword}
+			AND s1.employee_no = e.employee_no
+		    AND d.department_no = e.department_no  
+			AND p.position_no = e.position_no					
+	UNION
+		SELECT s2.sche_serial_no as scheSerialNo, 
+			s2.start_date as startDate, 
+			s2.end_date as endDate, 
+			s2.start_time as startTime, 
+			s2.end_time as endTime, 
+			s2.share_range as shareRange, 
+			s2.title as title, 
+			s2.content as content, 
+			s2.reg_date as regDate, 
+			s2.employee_no as employeeNo, 
+			h.share_color as color,
+			d.department_name as departmentName,
+			p.position_name as positionName,	
+			e.employee_name as employeeName	
+		FROM schedule s2, employee e, department d, position p, schedule_share h
+		WHERE s2.employee_no = h.accept_employee_no
+			  AND s2.share_range in ('2')
+			  AND s2.employee_no = e.employee_no
+		      AND d.department_no = e.department_no  
+			  AND p.position_no = e.position_no	
+			  AND h.request_employee_no = #{searchKeyword}
+			  AND h.accept_status ='Y'			  		
+	UNION
+		SELECT s3.sche_serial_no as scheSerialNo, 
+			s3.start_date as startDate, 
+			s3.end_date as endDate, 
+			s3.start_time as startTime, 
+			s3.end_time as endTime, 
+			s3.share_range as shareRange, 
+			s3.title as title, 
+			s3.content as content, 
+			s3.reg_date as regDate, 
+			s3.employee_no as employeeNo, 
+			'#FFBB00' as color,
+			d.department_name as departmentName,
+			p.position_name as positionName,	
+			e.employee_name as employeeName	
+		FROM schedule s3, employee e, department d, position p
+		WHERE s3.share_range in ('3')
+		AND s3.employee_no != #{searchKeyword}
+		AND s3.employee_no = e.employee_no
+		AND d.department_no = e.department_no  
+		AND p.position_no = e.position_no	
+			
+	 </select>
+	 	<!--  위 두번째 subQuery 의  
+	 			WHERE ROWNUM &lt;= #{endRowNum} ) 는
+	 			WHERE ROWNUM <= #{endRowNum} ) 의미이며..
+	 			< 는 keyword 로 &lt; 를	사용.
+	 			
+	 			<![CDATA[  ~~~  ]]> 를 이용하여 아래와 같이 사용  할 수 있다.
+	 			CDATA ==> Character Data 의 의미 Java 에서 \n 같은 특수문자 처리  
+
+				WHERE ROWNUM <![CDATA[ <=]]> #{endRowNum} )
+		-->
+	
+	<!-- SQL : SELECT ROW Count -->	 
+	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT sche_serial_no , start_date , end_date , start_time , end_time, share_range, title, content, reg_date, employee_no, color
+						FROM schedule
+						<if test="searchCondition != null">
+							<where>
+								<if test="searchCondition == 0 and searchKeyword !='' ">
+						 			employee_no = #{searchKeyword}
+								</if>
+							</where>
+						</if> ) countTable						
+	 </select>
+	 
+</mapper>

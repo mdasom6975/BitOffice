@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AttendanceMapper">
+ 	
+ 	
+	<resultMap id="attendanceSelectMap" type="attendance">
+		<result property="attendanceNo" 			column="attendance_no" 			jdbcType="VARCHAR"/>
+		<result property="attendateDate"			column="attendate_date" 			jdbcType="VARCHAR" />
+		<result property="employeeNo"				column="employee_no" 			jdbcType="VARCHAR" />	
+		<result property="stdStartTime"				column="std_start_time" 			jdbcType="VARCHAR" />
+		<result property="startTime"				column="start_time" 			jdbcType="VARCHAR" />
+		<result property="startIp"					column="start_ip" 			jdbcType="VARCHAR" />
+		<result property="leaveDate"				column="leave_date" 			jdbcType="VARCHAR" />
+		<result property="stdEndTime"				column="std_end_time" 			jdbcType="VARCHAR" />
+		<result property="endTime"					column="end_time" 			jdbcType="VARCHAR" />
+		<result property="endIp"					column="end_ip" 			jdbcType="VARCHAR" />
+		<result property="memo"						column="memo" 				jdbcType="VARCHAR" />
+		<result property="employeeName"				column="employee_name" 		jdbcType="VARCHAR" />
+		<result property="departmentNo"				column="department_no" 		jdbcType="VARCHAR" />
+		<result property="departmentName"			column="department_name" 	jdbcType="VARCHAR" />
+		<result property="positionNo"				column="position_no" 		jdbcType="VARCHAR" />
+		<result property="positionName"				column="position_name" 		jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<!-- SQL : INSERT -->
+	<insert 	id="addAttendance"		parameterType="attendance" >
+INSERT
+		INTO attendance( attendance_no, attendate_date, employee_no, std_start_time, start_time, start_ip, leave_date, std_end_time, end_time, end_ip, memo) 
+		VALUES	 (#{attendanceNo}, #{attendateDate},  #{employeeNo},  (SELECT std_start_time FROM standard_time WHERE rownum=1),  #{startTime},  #{startIp, jdbcType=VARCHAR},  null, null,  null,  null,  null)
+	 </insert>
+	 
+	 <!-- SQL : SELECT ONE -->
+	 <select 	id="getAttendance"	parameterType="string"	resultMap="attendanceSelectMap">	
+		SELECT
+			a.attendance_no as attendance_no,
+			a.attendate_date as attendate_date,
+			a.employee_no as employee_no,
+			a.std_start_time as std_start_time,
+			a.start_time as start_time,
+			a.start_ip as start_ip,
+			a.leave_date as leave_date,
+			a.std_end_time as std_end_time,
+			a.end_time as end_time,
+			a.end_ip as end_ip,
+			a.memo as memo,
+			e.employee_name as employee_name,
+			d.department_no as department_no,
+			d.department_name as department_name,
+			p.position_no as position_no,
+			p.position_name as position_name
+		FROM attendance a, employee e, department d, position p
+		WHERE a.attendance_no = #{attendanceNo} 
+			  and a.employee_no = e.employee_no
+		      and d.department_no = e.department_no  
+			  and p.position_no = e.position_no
+	 </select>
+	 
+	 <!-- SQL : UPDATE -->
+	 <update	id="updateAttendance"	parameterType="attendance" >
+	   	UPDATE attendance
+	   	<set>
+	   		leave_date 	= #{leaveDate} ,
+	   		std_end_time = (SELECT STD_END_TIME FROM standard_time WHERE rownum=1),
+			end_time	= #{endTime},
+			end_ip 				= #{endIp} ,
+			memo				=	#{memo, jdbcType=VARCHAR}
+	   	</set>
+	   	WHERE  attendance_no = #{attendanceNo}
+	 </update>
+	 
+	 <!-- SQL : DELETE -->
+	 <delete	id="deleteAttendance"	parameterType="attendance" >
+	   	DELETE FROM attendance WHERE attendance_no = #{attendanceNo}
+	 </delete>
+	 	 
+		 
+	<!-- SQL : SELECT LIST -->
+	<select  id="getAttendanceList"  parameterType="search"	resultMap="attendanceSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	SELECT 
+												a.attendance_no as attendance_no,
+												a.attendate_date as attendate_date,
+												a.employee_no as employee_no,
+												a.std_start_time as std_start_time,
+												a.start_time as start_time,
+												a.start_ip as start_ip,
+												a.leave_date as leave_date,
+												a.std_end_time as std_end_time,
+												a.end_time as end_time,
+												a.end_ip as end_ip,
+												a.memo as memo,
+												e.employee_name as employee_name,
+												d.department_no as departmentNo,
+												d.department_name as department_name,
+												p.position_no as position_no,
+												p.position_name as position_name 					
+											FROM attendance a, employee e, department d, position p
+											WHERE
+												  a.employee_no = e.employee_no
+											      and d.department_no = e.department_no  
+												  and p.position_no = e.position_no											
+											<if test="searchCondition != null">
+												<!-- <where>	 -->
+													<if test="searchCondition == 0 and searchKeyword !='' ">
+											 			and department_name like '%'||#{searchKeyword}||'%'
+													</if>													
+													<if test="searchCondition == 1 and searchKeyword !='' ">
+										 				and employee_name like '%'||#{searchKeyword}||'%'
+													</if>
+												<!-- </where> -->
+											</if>
+											ORDER BY attendate_date	desc, start_time desc) inner_table
+						WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	 </select>
+	 	<!--  위 두번째 subQuery 의  
+	 			WHERE ROWNUM &lt;= #{endRowNum} ) 는
+	 			WHERE ROWNUM <= #{endRowNum} ) 의미이며..
+	 			< 는 keyword 로 &lt; 를	사용.
+	 			
+	 			<![CDATA[  ~~~  ]]> 를 이용하여 아래와 같이 사용  할 수 있다.
+	 			CDATA ==> Character Data 의 의미 Java 에서 \n 같은 특수문자 처리  
+
+				WHERE ROWNUM <![CDATA[ <=]]> #{endRowNum} )
+		-->
+	
+	<!-- SQL : SELECT ROW Count -->	 
+	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT
+							a.attendance_no as attendance_no,
+							a.attendate_date as attendate_date,
+							a.employee_no as employee_no,
+							a.std_start_time as std_start_time,
+							a.start_time as start_time,
+							a.start_ip as start_ip,
+							a.leave_date as leave_date,
+							a.std_end_time as std_end_time,
+							a.end_time as end_time,
+							a.end_ip as end_ip,
+							a.memo as memo,
+							e.employee_name as employee_name,
+							d.department_no as departmentNo,
+							d.department_name as department_name,
+							p.position_no as position_no,
+							p.position_name as position_name  	
+						FROM attendance a, employee e, department d, position p
+						WHERE
+							  a.employee_no = e.employee_no
+						      and d.department_no = e.department_no  
+							  and p.position_no = e.position_no							
+						<if test="searchCondition != null">
+							<!-- <where> -->
+								<if test="searchCondition == 0 and searchKeyword !='' ">
+						 			and department_name like '%'||#{searchKeyword}||'%'
+								</if>							
+								<if test="searchCondition == 1 and searchKeyword !='' ">
+						 			and employee_name like '%'||#{searchKeyword}||'%'
+								</if>
+
+							<!-- </where> -->
+						</if> ) countTable						
+	 </select>
+	 
+</mapper>

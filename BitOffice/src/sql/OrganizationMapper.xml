@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="OrganizationMapper">
+ 	
+ 	
+	<resultMap id="organizationSelectMap" type="organization">
+		<result property="id" 			column="id" 			jdbcType="VARCHAR"/>
+		<result property="parent"			column="dept" 		jdbcType="VARCHAR" />
+		<result property="text" 		column="usename" 		jdbcType="VARCHAR" />
+	</resultMap>
+	 
+	<!-- SQL : SELECT LIST -->
+	<select  id="getOrganizationList"  parameterType="search"	resultMap="organizationSelectMap">
+				select department_no as id,
+					   '#' as dept, 
+					   department_name as usename, 
+					   '#' as p_id
+			    from department 
+				union all
+				 select 
+				 		   e.employee_no as id,
+						   d.department_no as deptid,  
+						   t.position_name||' '||e.employee_name as usename,
+						   t.position_no as p_id
+			     from employee e , department d, position t
+					where e.department_no = d.department_no
+						  and e.position_no=t.position_no
+						  and e.role !='resign'
+				 order by dept, p_id asc
+	 </select>
+
+	 
+</mapper>

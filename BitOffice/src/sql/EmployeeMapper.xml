@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="EmployeeMapper">
+
+	<resultMap id="employeeSelectMap" type="employee">
+		<result property="employeeNo" column="employee_no" jdbcType="VARCHAR" />
+		<result property="employeeName" column="employee_name"
+			jdbcType="VARCHAR" />
+		<result property="password" column="password" jdbcType="VARCHAR" />
+		<result property="departmentNo" column="department_no"
+			jdbcType="VARCHAR" />
+		<result property="positionNo" column="position_no" jdbcType="VARCHAR" />
+		<result property="hireDate" column="emp_hire_date" jdbcType="DATE" />
+		<result property="endDate" column="emp_end_date" jdbcType="DATE" />
+		<result property="birthDate" column="birth_date" jdbcType="DATE" />
+		<result property="phone" column="phone" jdbcType="VARCHAR" />
+		<result property="extension" column="extension" jdbcType="VARCHAR" />
+		<result property="email" column="email" jdbcType="VARCHAR" />
+		<result property="address" column="address" jdbcType="VARCHAR" />
+		<result property="annualLeave" column="annual_leave" jdbcType="NUMERIC" />
+		<result property="role" column="role" jdbcType="VARCHAR" />
+		<result property="signImage" column="sign_image" jdbcType="VARCHAR" />
+		<result property="profileImage" column="profile_image"
+			jdbcType="VARCHAR" />
+		<result property="logCode" column="log_code" jdbcType="CHAR" />
+		<result property="positionName" column="position_name"
+			jdbcType="VARCHAR" />
+		<result property="departmentName" column="department_name"
+			jdbcType="VARCHAR" />
+		<result property="rankCode" column="rank_code" jdbcType="VARCHAR" />
+		<result property="parent" column="parent" jdbcType="CHAR"/>
+		<result property="docType"				column="doc_type" 			jdbcType="VARCHAR" />
+		<result property="docStatus"			column="status" 			jdbcType="VARCHAR" />
+		<result property="startDate"			column="start_date" 		jdbcType="VARCHAR" />
+		<result property="leaveEndDate"				column="leave_end_date" 			jdbcType="VARCHAR" />
+		<result property="useDay"				column="use_day" 			jdbcType="VARCHAR" />
+		<result property="title"				column="title" 				jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<!-- SQL : INSERT -->
+	<insert id="addEmployee" parameterType="employee">
+		INSERT
+		INTO
+		employee(employee_no, employee_name, password, department_no,
+		position_no, emp_hire_date, birth_date, email, annual_leave, role,
+		sign_image, log_code)
+		VALUES (#{employeeNo}, #{employeeName},
+		#{password}, #{departmentNo},
+		#{positionNo}, #{hireDate}, #{birthDate},
+		#{email}, #{annualLeave},
+		'employee', #{signImage}, 'N')
+	</insert>
+	
+		<!-- SQL : SELECT ONE -->
+	<select id="logIn" parameterType="string" resultMap="employeeSelectMap">
+		SELECT
+		e.password, 
+		e.employee_name,
+		e.role,
+		e.log_code,
+		e.employee_no,
+		e.annual_leave,
+		e.role,
+		e.profile_image,
+		d.department_name as departmentName
+		FROM employee e, department d
+		WHERE
+		 e.department_no=d.department_no
+		AND e.employee_no =#{value}
+	</select>
+
+	<!-- SQL : SELECT ONE -->
+	<select id="getEmployee" parameterType="string" resultMap="employeeSelectMap">
+		SELECT
+		e.password, 
+		d.department_name as departmentName,
+		p.position_name as positionName,
+		e.employee_no,
+		e.employee_name,
+		e.phone,
+		e.address,
+		e.extension,
+		e.emp_hire_date, 
+		e.birth_date, 
+		e.email,
+		e.annual_leave,
+		e.role,
+		e.sign_image,
+		e.profile_image,
+		e.log_code
+		FROM employee e, department d, position p
+		WHERE
+		 e.department_no=d.department_no
+		 AND
+		 e.position_no=p.position_no
+		AND e.employee_no =#{value}
+	</select>
+
+	<!-- SQL : UPDATE -->
+	<update id="updateEmployee" parameterType="employee">
+		UPDATE employee
+		<set>
+			employee_name =#{employeeName},
+			password=#{password:VARCHAR},
+			birth_date=#{birthDate:DATE},
+			phone=#{phone:VARCHAR},
+			extension=#{extension:VARCHAR},
+			email=#{email:VARCHAR},
+			profile_image=#{profileImage:VARCHAR},
+			address=#{address:VARCHAR},
+			log_code ='Y'
+		</set>
+		WHERE employee_no = #{employeeNo}
+	</update>
+
+	<!-- SQL : SELECT LIST -->
+	<select id="getEmployeeList" parameterType="search" resultMap="employeeSelectMap">
+		SELECT *
+		FROM ( SELECT inner_table.* , ROWNUM AS row_seq
+		FROM ( SELECT
+		e.department_no,
+		e.position_no,
+		e.employee_no,
+		e.employee_name ,
+		e.emp_hire_date ,
+		e.email,
+		e.extension,
+		e.role,
+		d.department_name as
+		department_name,
+		p.position_name as position_name
+		FROM employee e,
+		department d, position p
+		WHERE
+		e.department_no=d.department_no
+		AND
+		e.position_no=p.position_no
+		AND role='employee'
+		<if test="searchCondition != null and searchKeyword != ''">
+			<if test="searchCondition == 0 and searchKeyword !='' ">
+				AND e.department_no LIKE '%${searchKeyword}%'
+			</if>
+			<if test="searchCondition == 1 and searchKeyword !='' ">
+				AND e.position_no LIKE '%${searchKeyword}%'
+			</if>
+			<if test="searchCondition == 2 and searchKeyword !='' ">
+				AND e.employee_name LIKE '%${searchKeyword}%'
+			</if>
+
+		</if>
+		ORDER BY d.department_name) inner_table
+		WHERE ROWNUM &lt;= #{endRowNum}
+		)
+		WHERE row_seq BETWEEN #{startRowNum} AND
+		#{endRowNum}
+	</select>
+
+	<!-- SQL : SELECT ROW Count -->
+	<select id="getTotalCount" parameterType="search" resultType="int">
+		SELECT COUNT(*)
+		FROM( SELECT
+		e.department_no,
+		e.position_no,
+		e.employee_no,
+		e.employee_name ,
+		e.emp_hire_date ,
+		e.email,
+		e.extension,
+		e.role,
+		d.department_name as department_name,
+		p.position_name as
+		position_name
+		FROM employee e, department d, position p
+		WHERE
+		e.department_no=d.department_no
+		AND e.position_no=p.position_no
+		AND
+		role='employee'
+		<if test="searchCondition != null and searchKeyword != ''">
+			<if test="searchCondition == 0 and searchKeyword !='' ">
+				AND e.department_no LIKE '%${searchKeyword}%'
+			</if>
+			<if test="searchCondition == 1 and searchKeyword !='' ">
+				AND e.position_no LIKE '%${searchKeyword}%'
+			</if>
+			<if test="searchCondition == 2 and searchKeyword !='' ">
+				AND e.employee_name LIKE '%${searchKeyword}%'
+			</if>
+
+		</if>
+
+		) countTable
+	</select>
+
+	<!-- 사번 존재여부 확인 -->
+	<select id="idCheck" parameterType="String" resultType="Integer">
+		SELECT
+		COUNT(*) FROM employee
+		WHERE
+		employee_no = #{employeeNo}
+	</select>
+
+	<!-- 임시 비밀번호로 변경 -->
+	<update id="emailPassword" parameterType="employee">
+		UPDATE employee
+		<set>
+			password = #{password}
+		</set>
+		WHERE employee_no= #{employeeNo}
+	</update>
+
+	<!-- 퇴사처리 -->
+	<update id="resignationEmp" parameterType="String">
+		UPDATE employee
+		<set>
+			role='resign',
+			emp_end_date=SYSDATE
+		</set>
+		WHERE employee_no= #{employeeNo}
+	</update>
+
+
+	<!-- SQL : SELECT LIST -->
+	<select id="getResignList" parameterType="search" resultMap="employeeSelectMap">
+		SELECT *
+		FROM ( SELECT inner_table.* , ROWNUM AS row_seq
+		FROM ( SELECT
+		e.department_no,
+		e.position_no,
+		e.employee_no,
+		e.employee_name ,
+		e.emp_hire_date ,
+		e.emp_end_date,
+		e.email,
+		e.role,
+		d.department_name as
+		department_name,
+		p.position_name as position_name
+		FROM employee e,
+		department d, position p
+		WHERE
+		e.department_no=d.department_no
+		AND
+		e.position_no=p.position_no
+		AND role='resign'
+		<if test="searchCondition != null and searchKeyword != ''">
+			<if test="searchCondition == 0 and searchKeyword !='' ">
+				AND e.department_no LIKE '%${searchKeyword}%'
+			</if>
+			<if test="searchCondition == 1 and searchKeyword !='' ">
+				AND e.position_no LIKE '%${searchKeyword}%'
+			</if>
+			<if test="searchCondition == 2 and searchKeyword !='' ">
+				AND e.employee_name LIKE '%${searchKeyword}%'
+			</if>
+
+		</if>
+		ORDER BY d.department_name ) inner_table
+		WHERE ROWNUM &lt;=
+		#{endRowNum}
+		)
+		WHERE row_seq BETWEEN #{startRowNum} AND
+		#{endRowNum}
+	</select>
+
+	<!-- SQL : SELECT ROW Count -->
+	<select id="getResignTotalCount" parameterType="search"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM( SELECT
+		e.department_no,
+		e.position_no,
+		e.employee_no,
+		e.employee_name ,
+		e.emp_hire_date ,
+		e.emp_end_date,
+		e.email,
+		e.role,
+		d.department_name as department_name,
+		p.position_name as
+		position_name
+		FROM employee e, department d, position p
+		WHERE
+		e.department_no=d.department_no
+		AND e.position_no=p.position_no
+		AND
+		role='resign'
+		<if test="searchCondition != null and searchKeyword != ''">
+			<if test="searchCondition == 0 and searchKeyword !='' ">
+				AND e.department_no LIKE '%${searchKeyword}%'
+			</if>
+			<if test="searchCondition == 1 and searchKeyword !='' ">
+				AND e.position_no LIKE '%${searchKeyword}%'
+			</if>
+			<if test="searchCondition == 2 and searchKeyword !='' ">
+				AND e.employee_name LIKE '%${searchKeyword}%'
+			</if>
+
+		</if>
+
+		) countTable
+	</select>
+
+	<select id="treeEmployee" resultMap="employeeSelectMap">
+		SELECT
+		p.rank_code,
+		e.employee_name ,
+		d.department_name as department_name,
+		p.position_name as position_name
+		FROM employee e, department d, position p
+		WHERE
+		e.department_no=d.department_no
+		AND e.position_no=p.position_no AND e.role = 'employee'
+ORDER BY e.department_no, p.rank_code
+	</select>
+	
+		<!-- 부서 사용 여부 확인 -->
+	<select id="useDepartmentCheck" parameterType="String" resultType="Integer">
+		SELECT
+		COUNT(*) FROM employee
+		WHERE
+		department_no = #{departmentNo}
+	</select>
+	
+			<!-- 직급 사용 여부 확인 -->
+	<select id="usePositionCheck" parameterType="String" resultType="Integer">
+		SELECT
+		COUNT(*) FROM employee
+		WHERE
+		position_no = #{positionNo}
+	</select>
+	
+	<!-- 연차사용내역 -->
+	<select id="useAnnualLeave" parameterType="String" resultMap="employeeSelectMap">
+	SELECT
+	e.employee_no,
+	e.employee_name,
+	e.annual_leave,
+	a.doc_type as doc_type, 
+	a.status as status,
+	to_char(to_date(a.start_date),'yyyy/mm/dd') as start_date, 
+	to_char(to_date(a.end_date),'yyyy/mm/dd') as leave_end_date,
+	a.use_day as use_day,
+	a.title as title
+	FROM approval a, employee e
+	WHERE
+	e.employee_no=a.reg_employee_no(+)
+	AND a.doc_type=1 
+	AND a.status=3
+	AND e.employee_no= #{employeeNo}
+	
+	</select>
+
+</mapper>

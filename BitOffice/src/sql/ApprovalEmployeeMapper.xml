@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ApprovalEmployeeMapper">
+ 	
+ 	
+	<resultMap id="approvalEmployeeSelectMap" type="approvalEmployee">
+		<result property="serialNo" 			column="serial_no" 			jdbcType="INTEGER"/>
+		<result property="docNo"				column="doc_no" 			jdbcType="VARCHAR" />
+		<result property="gubun"				column="gubun" 				jdbcType="VARCHAR" />	
+		<result property="approvalOrder"		column="approval_order" 	jdbcType="VARCHAR" />
+		<result property="status"				column="status" 			jdbcType="VARCHAR" />
+		<result property="approvalDate"			column="approval_date" 		jdbcType="VARCHAR" />
+		<result property="signImage"			column="sign_image" 		jdbcType="VARCHAR" />
+		<result property="regDate"				column="reg_date" 			jdbcType="VARCHAR" />
+		<result property="employeeNo"			column="employee_no" 		jdbcType="VARCHAR" />
+		<result property="employeeName"			column="employee_name" 		jdbcType="VARCHAR" />
+		<result property="departmentName"		column="department_name" 	jdbcType="VARCHAR" />
+		<result property="positionName"			column="position_name" 		jdbcType="VARCHAR" />	
+		<result property="memo"					column="memo" 				jdbcType="VARCHAR" />	
+		<result property="docEmployeeNo"		column="doc_Employee_No" 	jdbcType="VARCHAR" />	
+	</resultMap>
+	
+	<!-- SQL : INSERT -->
+	<insert 	id="addApprovalEmployee"		parameterType="approvalEmployee" >
+		INSERT INTO approval_employee(serial_no, doc_no, gubun, approval_order, status, approval_date, sign_image, reg_date, employee_no, memo) 
+		VALUES	 (SEQ_APPROVAL_EMPLOYEE_NO.NEXTVAL, 
+				 (SELECT doc_no
+						FROM
+					 	(SELECT doc_no
+							FROM approval
+						WHERE reg_employee_no=#{docEmployeeNo}
+						ORDER BY doc_no DESC)
+				  WHERE rownum=1),  
+				  #{gubun},  
+				  #{approvalOrder},  
+				  #{status:VARCHAR},  
+				  #{approvalDate:VARCHAR},  
+				  (SELECT nvl(sign_image,null) 
+				  	FROM employee 
+				  WHERE employee_no=#{employeeNo}),  
+				  sysdate,  
+				  #{employeeNo},
+				  #{memo:VARCHAR})
+	 </insert>
+	 
+	 <!-- SQL : SELECT ONE -->
+	 <select 	id="getApprovalEmployee"	parameterType="string"	resultMap="approvalEmployeeSelectMap">	
+		SELECT
+			a.serial_no as serial_no, 
+			a.doc_no as doc_no, 
+			a.gubun as gubun, 
+			a.approval_order as approval_order, 
+			a.status as status, 
+			a.approval_date as approval_date, 
+			a.sign_image as sign_image, 
+			a.reg_date as reg_date, 
+			a.employee_no as employee_no, 
+			a.memo as memo,	
+			e.employee_name as employee_name,
+			d.department_name as department_name,
+			p.position_name as position_name
+		FROM approval_employee a, employee e, department d, position p
+		WHERE 
+		      a.serialNo = #{serialNo}
+			  and a.employee_no = e.employee_no
+		      and d.department_no = e.department_no  
+			  and p.position_no = e.position_no
+	 </select>
+	 
+	 <!-- SQL : SELECT ONE -->
+	 <select 	id="getApprovalEmployeeReference"	parameterType="string"	resultMap="approvalEmployeeSelectMap">	
+		SELECT
+			a.serial_no as serial_no, 
+			a.doc_no as doc_no, 
+			a.gubun as gubun, 
+			a.approval_order as approval_order, 
+			a.status as status, 
+			a.approval_date as approval_date, 
+			a.sign_image as sign_image, 
+			a.reg_date as reg_date, 
+			a.employee_no as employee_no, 
+			a.memo as memo,	
+			e.employee_name as employee_name,
+			d.department_name as department_name,
+			p.position_name as position_name
+		FROM approval_employee a, employee e, department d, position p
+		WHERE 
+		      a.doc_no = #{docNo}
+			  and a.employee_no = e.employee_no
+		      and d.department_no = e.department_no  
+			  and p.position_no = e.position_no
+	 </select>	 
+	 
+	 <!-- SQL : UPDATE -->
+	 <update	id="updateApprovalEmployee"	parameterType="approvalEmployee" >
+	   	UPDATE approval_employee a
+	   	<set>
+	   		a.approval_order = #{approvalOrder}</set>
+		WHERE a.doc_no = #{docNo}
+		      and a.employee_no = #{employeeNo} 
+
+	 </update>
+	 
+	 <!-- SQL : UPDATE -->
+	 <update	id="updateApprovalEmployeeStatus" parameterType="approvalEmployee" >
+	   	UPDATE approval_employee a
+	   	<set>
+	   		a.status = #{status},
+	   		a.approval_date = sysdate,  
+	   		a.memo = #{memo:VARCHAR}  		
+	   	</set>
+		WHERE a.doc_no = #{docNo}
+		      and a.employee_no = #{employeeNo} 
+	 </update>	 
+	 
+	 <!-- SQL : DELETE -->
+	 <delete	id="deleteApprovalEmployee"	parameterType="approvalEmployee" >
+	   	DELETE FROM approval_employee WHERE doc_no = #{docNo} 
+	 </delete>
+	 	 
+		 
+	<!-- SQL : SELECT LIST -->
+	<select  id="getApprovalEmployeeList"  parameterType="search"	resultMap="approvalEmployeeSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	SELECT 
+												a.serial_no as serial_no, 
+												a.doc_no as doc_no, 
+												a.gubun as gubun, 
+												a.approval_order as approval_order, 
+												a.status as status, 
+												a.approval_date as approval_date, 
+												a.sign_image as sign_image, 
+												a.reg_date as reg_date, 
+												a.employee_no as employee_no,
+												a.memo as memo,
+												e.employee_name as employee_name,
+												d.department_name as department_name,
+												p.position_name as position_name 					
+											FROM approval_employee a, employee e, department d, position p
+											WHERE
+											      a.employee_no = e.employee_no
+											      and d.department_no = e.department_no  
+												  and p.position_no = e.position_no											
+											<if test="searchCondition != null">
+												<!-- <where>	 -->
+													<if test="searchCondition == 0 and searchKeyword !='' ">
+											 			and e.employee_name like '%'||#{searchKeyword}||'%'
+													</if>													
+													<if test="searchCondition == 1 and searchKeyword !='' ">
+										 				and a.doc_no = #{searchKeyword}										 				
+													</if>												
+												<!-- </where> -->
+											</if>
+											ORDER BY serial_no asc) inner_table
+						WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	 </select>
+	 	<!--  위 두번째 subQuery 의  
+	 			WHERE ROWNUM &lt;= #{endRowNum} ) 는
+	 			WHERE ROWNUM <= #{endRowNum} ) 의미이며..
+	 			< 는 keyword 로 &lt; 를	사용.
+	 			
+	 			<![CDATA[  ~~~  ]]> 를 이용하여 아래와 같이 사용  할 수 있다.
+	 			CDATA ==> Character Data 의 의미 Java 에서 \n 같은 특수문자 처리  
+
+				WHERE ROWNUM <![CDATA[ <=]]> #{endRowNum} )
+		-->
+	
+	<!-- SQL : SELECT ROW Count -->	 
+	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT
+						a.serial_no as serial_no, 
+						a.doc_no as doc_no, 
+						a.gubun as gubun, 
+						a.approval_order as approval_order, 
+						a.status as status, 
+						a.approval_date as approval_date, 
+						a.sign_image as sign_image, 
+						a.reg_date as reg_date, 
+						a.employee_no as employee_no,
+						a.memo as memo,
+						e.employee_name as employee_name,
+						d.department_name as department_name,
+						p.position_name as position_name 				
+						FROM approval_employee a, employee e, department d, position p
+						WHERE
+							  a.employee_no = e.employee_no
+						      and d.department_no = e.department_no  
+							  and p.position_no = e.position_no							
+						<if test="searchCondition != null">
+							<!-- <where> -->
+								<if test="searchCondition == 0 and searchKeyword !='' ">
+						 			and e.employee_name like '%'||#{searchKeyword}||'%'
+								</if>						
+								<if test="searchCondition == 2 and searchKeyword !='' ">
+					 				and a.doc_no = #{searchKeyword}
+								</if>	
+							<!-- </where> -->
+						</if> ) countTable						
+	 </select>
+	 
+</mapper>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DepartmentMapper">
+	<resultMap id="departmentSelectMap" type="department">
+		<result property="departmentName" column="department_name"
+			jdbcType="VARCHAR" />
+		<result property="departmentNo" column="department_no"
+			jdbcType="VARCHAR" />
+	</resultMap>
+
+	<!-- SQL : INSERT -->
+
+	<insert id="addDepartment" parameterType="department">
+		INSERT
+		INTO
+		department(department_name, department_no)
+		VALUES ( #{departmentName} ,
+		#{departmentNo} )
+	</insert>
+
+	<!-- SQL : SELECT -->
+	<select id="getDepartment" parameterType="string" resultMap="departmentSelectMap">
+		SELECT
+		department_no, department_name
+		FROM department
+		WHERE department_no
+		=#{departmentNo}
+	</select>
+
+	<select id="getAllDepartment"  resultMap="departmentSelectMap">
+		SELECT
+		department_no, department_name
+		FROM department
+	</select>
+
+	<!-- SQL : UPDATE -->
+	<update id="updateDepartment" parameterType="department">
+		UPDATE department
+		<set>
+			department_name = #{departmentName}
+		</set>
+		WHERE department_no =#{departmentNo}
+	</update>
+
+	<select id="dbCheckDepartment" parameterType="String" resultType="Integer">
+		SELECT
+		COUNT(*) FROM department
+		WHERE
+		department_name =
+		#{departmentName}
+	</select>
+
+	<!-- SQL : SELECT LIST -->
+	<select id="getDepartmentList" parameterType="search"
+		resultMap="departmentSelectMap">
+		SELECT *
+		FROM ( SELECT inner_table.* , ROWNUM AS row_seq
+		FROM ( SELECT
+		department_no, department_name
+		FROM department
+		<if test="searchCondition != null">
+			<where>
+				<if test="searchCondition == 0 and searchKeyword !='' ">
+					department_no like '%${searchKeyword}%'
+				</if>
+				<if test="searchCondition == 1 and searchKeyword !='' ">
+					department_name like '%${searchKeyword}%'
+				</if>
+			</where>
+		</if>
+		ORDER BY department_no) inner_table
+		WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND
+		#{endRowNum}
+	</select>
+
+	<!-- SQL : SELECT ROW Count -->
+	<select id="getTotalCount" parameterType="search" resultType="int">
+		SELECT COUNT(*)
+		FROM( SELECT department_no, department_name
+		FROM
+		department
+		<if test="searchCondition != null">
+			<where>
+				<if test="searchCondition == 0 and searchKeyword !='' ">
+					department_no like '%${searchKeyword}%'
+				</if>
+				<if test="searchCondition == 1 and searchKeyword !='' ">
+					department_name like '%${searchKeyword}%'
+				</if>
+			</where>
+		</if>
+		) countTable
+	</select>
+	
+	<!-- SQL : DELETE -->
+	<delete id="deleteDepartment" parameterType="String">
+	DELETE 
+	FROM
+	department
+	<where>
+	department_no=#{departmentNo}
+	</where>
+	</delete>
+</mapper>

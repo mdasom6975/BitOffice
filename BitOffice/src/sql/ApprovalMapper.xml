@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ApprovalMapper">
+ 	
+ 	
+	<resultMap id="approvalSelectMap" type="approval">
+		<result property="docNo" 				column="doc_no" 			jdbcType="VARCHAR"/>
+		<result property="docType"				column="doc_type" 			jdbcType="VARCHAR" />
+		<result property="docApprovalOrder"		column="approval_order" 	jdbcType="VARCHAR" />	
+		<result property="docStatus"			column="status" 			jdbcType="VARCHAR" />
+		<result property="startDate"			column="start_date" 		jdbcType="VARCHAR" />
+		<result property="endDate"				column="end_date" 			jdbcType="VARCHAR" />
+		<result property="useDay"				column="use_day" 			jdbcType="INTEGER" />
+		<result property="title"				column="title" 				jdbcType="VARCHAR" />
+		<result property="content"				column="content" 			jdbcType="VARCHAR" />
+		<result property="memo"					column="memo" 				jdbcType="VARCHAR" />
+		<result property="fileName1"			column="filename1" 			jdbcType="VARCHAR" />
+		<result property="fileName2"			column="filename2" 			jdbcType="VARCHAR" />
+		<result property="fileName3"			column="filename3" 			jdbcType="VARCHAR" />
+		<result property="regDate"				column="reg_date" 			jdbcType="VARCHAR" />
+		<result property="regEmployeeNo"		column="reg_employee_no" 	jdbcType="VARCHAR" />
+		<result property="modDate"				column="mod_date" 			jdbcType="VARCHAR" />
+		<result property="modEmployeeNo"		column="mod_employee_no" 	jdbcType="VARCHAR" />
+		<result property="regEmployeeName"		column="employee_name" 		jdbcType="VARCHAR" />	
+		<result property="departmentName"		column="department_name" 	jdbcType="VARCHAR" />
+		<result property="positionName"			column="position_name" 		jdbcType="VARCHAR" />			
+	</resultMap>
+	
+	<!-- SQL : INSERT -->
+	<insert 	id="addApproval"		parameterType="approval" >
+		INSERT INTO approval(doc_no, doc_type, approval_order, status, start_date, end_date, use_day, title, content, memo, filename1, filename2, filename3, reg_date,  reg_employee_no, mod_date, mod_employee_no) 
+		VALUES	 (#{docNo}||SEQ_APPROVAL_NO.NEXTVAL, #{docType},  #{docApprovalOrder},  #{docStatus},  #{startDate:VARCHAR},  #{endDate:VARCHAR},  #{useDay:INTEGER},  #{title},  #{content},  #{memo:VARCHAR},  #{fileName1:VARCHAR},  #{fileName2:VARCHAR},  #{fileName3:VARCHAR},  sysdate,  #{regEmployeeNo},  sysdate,  #{modEmployeeNo})
+	 </insert>
+	 
+	 <!-- SQL : SELECT ONE -->
+	 <select 	id="getApproval"	parameterType="string"	resultMap="approvalSelectMap">	
+		SELECT
+			a.doc_no as doc_no, 
+			a.doc_type as doc_type, 
+			a.approval_order as approval_order, 
+			a.status as status, 
+			a.start_date as start_date, 
+			a.end_date as end_date, 
+			a.use_day as use_day, 
+			a.title as title, 
+			a.content as content, 
+			a.memo as memo, 
+			a.filename1 as filename1, 
+			a.filename2 as filename2, 
+			a.filename3 as filename3, 
+			a.reg_date as reg_date,  
+			a.reg_employee_no as reg_employee_no, 
+			a.mod_date as mod_date, 
+			a.mod_employee_no as mod_employee_no,			
+			e.employee_name as employee_name,
+			d.department_name as department_name,
+			p.position_name as position_name
+		FROM approval a, employee e, department d, position p
+		WHERE a.doc_no = #{docNo} 
+			  and a.reg_employee_no = e.employee_no
+		      and d.department_no = e.department_no  
+			  and p.position_no = e.position_no
+	 </select>
+	 
+	 <!-- SQL : UPDATE -->
+	 <update	id="updateApproval"	parameterType="approval" >
+	   	UPDATE approval
+	   	<set>
+	   		start_date 	= #{startDate:VARCHAR} ,
+	   		end_date 	= #{endDate:VARCHAR} ,
+	   		use_day 	= #{useDay:INTEGER} ,
+	   		title 		= #{title} ,
+	   		content 	= #{content} ,
+	   		memo 		= #{memo:VARCHAR} ,
+	   		filename1 	= #{fileName1:VARCHAR} ,
+	   		filename2 	= #{fileName2:VARCHAR} ,
+	   		filename3 	= #{fileName3:VARCHAR} ,
+	   		mod_date	= sysdate ,
+	   		mod_employee_no	= #{modEmployeeNo:VARCHAR} 
+	   	</set>
+	   	WHERE doc_no = #{docNo}
+	 </update>
+	 
+	 <!-- SQL : UPDATE -->
+	 <update	id="updateApprovalStatus"	parameterType="approval" >
+	   	UPDATE approval
+	   	<set>
+	   		status 	= (
+						SELECT CASE WHEN tp='000' THEN '1' 
+							   WHEN tp='110' THEN '2'
+							   WHEN tp='100' THEN '1'
+							   WHEN tp='001' THEN '4'
+							   WHEN tp='010' THEN '3'
+							   WHEN tp='101' THEN '9'
+							   WHEN tp='011' THEN '9'
+							   WHEN tp='111' THEN '9'
+							   ELSE '0' END
+						FROM 
+						(
+							SELECT MAX(tp1)||MAX(tp2)||MAX(tp3) as tp
+							FROM (
+								SELECT CASE WHEN status='1' THEN '1' ELSE '0' END as tp1,
+									   CASE WHEN status='2' THEN '1' ELSE '0' END as tp2,
+									   CASE WHEN status='3' THEN '1' ELSE '0' END as tp3
+								FROM approval_employee
+								WHERE doc_no = #{docNo}
+								AND gubun='1'								
+							)	
+						)	   		
+	   		) ,
+	   		mod_date	= sysdate ,
+	   		mod_employee_no	= #{modEmployeeNo:VARCHAR} 
+	   	</set>
+	   	WHERE doc_no = #{docNo}
+	 </update>	 
+	 
+	 <!-- SQL : DELETE -->
+	 <delete	id="deleteApproval"	parameterType="approval" >
+	   	DELETE FROM approval WHERE doc_no = #{docNo}
+	 </delete>
+	 	 
+		 
+	<!-- SQL : SELECT LIST -->
+	<select  id="getApprovalList"  parameterType="search"	resultMap="approvalSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	SELECT 
+												a.doc_no as doc_no, 
+												a.doc_type as doc_type, 
+												a.approval_order as approval_order, 
+												a.status as status, 
+												a.start_date as start_date, 
+												a.end_date as end_date, 
+												a.use_day as use_day, 
+												a.title as title, 
+												a.content as content, 
+												a.memo as memo, 
+												a.filename1 as filename1, 
+												a.filename2 as filename2, 
+												a.filename3 as filename3, 
+												a.reg_date as reg_date,  
+												a.reg_employee_no as reg_employee_no, 
+												a.mod_date as mod_date, 
+												a.mod_employee_no as mod_employee_no,	
+												e.employee_name as employee_name,
+												d.department_name as department_name,
+												p.position_name as position_name 					
+											FROM approval a, employee e, department d, position p
+											WHERE
+												  a.reg_employee_no = e.employee_no
+											      and d.department_no = e.department_no  
+												  and p.position_no = e.position_no											
+											<if test="searchCondition != null">
+												<!-- <where>	 -->
+													<if test="searchCondition == 0 and searchKeyword !='' ">
+											 			and a.title like '%'||#{searchKeyword}||'%'
+													</if>													
+													<if test="searchCondition == 1 and searchKeyword !='' ">
+										 				and e.employee_name like '%'||#{searchKeyword}||'%'
+													</if>
+												<!-- </where> -->
+											</if>
+											ORDER BY a.reg_date	desc, a.doc_no desc) inner_table
+						WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	 </select>
+	 	<!--  위 두번째 subQuery 의  
+	 			WHERE ROWNUM &lt;= #{endRowNum} ) 는
+	 			WHERE ROWNUM <= #{endRowNum} ) 의미이며..
+	 			< 는 keyword 로 &lt; 를	사용.
+	 			
+	 			<![CDATA[  ~~~  ]]> 를 이용하여 아래와 같이 사용  할 수 있다.
+	 			CDATA ==> Character Data 의 의미 Java 에서 \n 같은 특수문자 처리  
+
+				WHERE ROWNUM <![CDATA[ <=]]> #{endRowNum} )
+		-->
+	
+	<!-- SQL : SELECT ROW Count -->	 
+	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT
+							a.doc_no as doc_no, 
+							a.doc_type as doc_type, 
+							a.approval_order as approval_order, 
+							a.status as status, 
+							a.start_date as start_date, 
+							a.end_date as end_date, 
+							a.use_day as use_day, 
+							a.title as title, 
+							a.content as content, 
+							a.memo as memo, 
+							a.filename1 as filename1, 
+							a.filename2 as filename2, 
+							a.filename3 as filename3, 
+							a.reg_date as reg_date,  
+							a.reg_employee_no as reg_employee_no, 
+							a.mod_date as mod_date, 
+							a.mod_employee_no as mod_employee_no,
+							e.employee_name as employee_name,
+							d.department_name as department_name,
+							p.position_name as position_name  	
+						FROM approval a, employee e, department d, position p
+						WHERE
+							  a.reg_employee_no = e.employee_no
+						      and d.department_no = e.department_no  
+							  and p.position_no = e.position_no							
+						<if test="searchCondition != null">
+							<!-- <where> -->
+								<if test="searchCondition == 0 and searchKeyword !='' ">
+						 			and a.title like '%'||#{searchKeyword}||'%'
+								</if>							
+								<if test="searchCondition == 1 and searchKeyword !='' ">
+						 			and e.employee_name like '%'||#{searchKeyword}||'%'
+								</if>
+
+							<!-- </where> -->
+						</if> ) countTable						
+	 </select>
+	 
+	<!-- SQL : SELECT ROW Count -->	 
+	 <select  id="getTotalCountStatus"  parameterType="search"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT doc_no
+				FROM approval
+				WHERE reg_employee_no=#{regEmployeeNo}
+				AND status =#{docStatus}
+					) countTable						
+	 </select>	 
+ 	 	 
+	 
+</mapper>
