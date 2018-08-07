@@ -4,10 +4,10 @@
 <!-- 프로필 영역  -->
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
 	<div class="app-sidebar__user">
-     <img class="app-sidebar__user-avatar" src="/profileFiles/${employee.profileImage}" alt="User Image" style="width: 80px; height: 80px;">
+     <img class="app-sidebar__user-avatar" src="../images/profileFiles/${sessionEmployee.profileImage}" alt="User Image" style="width: 80px; height: 80px;">
         <div>
-          <p class="app-sidebar__user-name">이름 : ${employee.employeeName}</p>
-          <p class="app-sidebar__user-designation">부서 : ${employee.departmentName}</p>
+          <p class="app-sidebar__user-name">이름 : ${sessionEmployee.employeeName}</p>
+          <p class="app-sidebar__user-designation">부서 : ${sessionEmployee.departmentName}</p>
         </div>
       </div>
 <!-- 프로필 영역  -->
@@ -18,12 +18,12 @@
         <li class="treeview"><a class="app-menu__item active" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">내 정보</span>
         <i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href="/employee/updateEmployee?employeeNo=${employee.employeeNo}"><i class="icon fa fa-circle-o"></i>내 정보 수정</a></li>
-            <li><a class="treeview-item" href="/employee/useAnnualLeave?employeeNo=${employee.employeeNo}"><i class="icon fa fa-circle-o"></i>연차 사용 내역</a></li>
+            <li><a class="treeview-item" href="/employee/updateEmployee?employeeNo=${sessionEmployee.employeeNo}"><i class="icon fa fa-circle-o"></i>내 정보 수정</a></li>
+            <li><a class="treeview-item" href="/employee/useAnnualLeave?employeeNo=${sessionEmployee.employeeNo}"><i class="icon fa fa-circle-o"></i>연차 사용 내역</a></li>
           </ul>
         </li>
         
-        <li><a class="app-menu__item" href="/employee/listEmployee"><i class="app-menu__icon fa fa-address-card"></i><span class="app-menu__label">임직원 목록</span></a></li>
+        <li><a class="app-menu__item" href="/employee/listEmployee?orderby="><i class="app-menu__icon fa fa-address-card"></i><span class="app-menu__label">임직원 목록</span></a></li>
 
         <li class="treeview"><a class="app-menu__item" href="" data-toggle="treeview"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">근태</span>
         <i class="treeview-indicator fa fa-angle-right"></i></a>

@@ -1,102 +1,74 @@
-	//=============    ê²€ìƒ‰ / page ë‘ê°€ì§€ ê²½ìš° ëª¨ë‘  Event  ì²˜ë¦¬ =============	
+	//=============    °Ë»ö / page µÎ°¡Áö °æ¿ì ¸ğµÎ  Event  Ã³¸® =============	
 	function fncGetList(currentPage) {
 		$("#currentPage").val(currentPage)
 		$("form").attr("method", "POST").attr("action",
 				"/position/listPosition").submit();
 	}
 
-	//============= "ê²€ìƒ‰"  Event  ì²˜ë¦¬ =============	
+	//============= "°Ë»ö ¹× Á÷±Ş Ãß°¡"  Event  Ã³¸® =============	
 	$(function() {
-		$("button.btn.btn-default:contains('ê²€ìƒ‰')").on("click", function() {
+		$("button.btn.btn-default:contains('°Ë»ö')").on("click", function() {
 			fncGetList(1);
 		});
-	});
-
-	$(function() {
-		var dialog, form, positionNo = $("#positionNo"), positionName = $("#positionName"), rankCode = $("#rankCode"), allFields = $(
-				[]).add(positionNo).add(positionName).add(rankCode), tips = $(".validateTips");
-
-		function updateTips(t) {
-			tips.text(t).addClass("ui-state-highlight");
-			setTimeout(function() {
-				tips.removeClass("ui-state-highlight", 1500);
-			}, 500);
-		}
-
-		function checkLength(o, n, min, max) {
-			if (o.val().length > max || o.val().length < min) {
-				o.addClass("ui-state-error");
-				updateTips("Length of " + n + " must be between " + min
-						+ " and " + max + ".");
-				return false;
-			} else {
-				return true;
+		
+		$("#clickAdd").on("click", function() {
+			$('#myModal').modal('show');
+		});
+		
+		$("#addPosition").on("click", function() {
+			var positionNo =$("input[name='positionNo']").val();
+			var positionName =$("input[name='positionName']").val();
+			var rankCode =$("input[name='rankCode']").val();
+			
+			if (positionNo == null || positionNo.length < 1) {
+				$('#chkMsg').html("<p style=\"COLOR: red\">Á÷±Ş¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.</p>"); 
+				return;
+			}if( positionName == null || positionName.length < 1){
+				$('#chkMsg').html("<p style=\"COLOR: red\">Á÷±Ş¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.</p>"); 
+				return;
 			}
-		}
-
-		function checkRegexp(o, regexp, n) {
-			if (!(regexp.test(o.val()))) {
-				o.addClass("ui-state-error");
-				updateTips(n);
-				return false;
-			} else {
-				return true;
-			}
-		}
-
-		function addPosition() {
-			self.location.href = '/position/addPosition?positionNo='
-					+ document.getElementById("positionNo").value
+				if( rankCode == null || rankCode.length < 1){
+					$('#chkMsg').html("<p style=\"COLOR: red\">Á÷±Ş¼øÂ÷¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.</p>"); 
+					return;
+				}else{
+	
+				self.location= '/position/addPosition?positionNo='
+					+ positionNo
 					+ "&positionName="
-					+ document.getElementById("positionName").value
-					+ "&rankCode=" + document.getElementById("rankCode").value
-		}
-
-		dialog = $("#dialog-form").dialog({
-			autoOpen : false,
-			show : {
-				effect : "blind",
-				duration : 1000
-			},
-			hide : {
-				// 		 		        effect: "explode",
-				effect : "drop",
-				duration : 1000
-			},
-			height : 400,
-			width : 350,
-			modal : true,
-			buttons : {
-				"Create an Possition" : addPosition,
-				Cancel : function() {
-					dialog.dialog("close");
-				}
-			},
-			close : function() {
-				form[0].reset();
-				allFields.removeClass("ui-state-error");
+					+ positionName
+					+"&rankCode="
+					+rankCode
 			}
-		});
-
-		form = dialog.find("form").on("submit", function(event) {
-			event.preventDefault();
-			addPosition();
-		});
-
-		$("#addPosition").button().on("click", function() {
-			dialog.dialog("open");
+			
 		});
 	});
 	
-	//=======ìˆ˜ì • Event ì²˜ë¦¬ ========================
+	//=======¼öÁ¤ Event Ã³¸® ========================
 	$(function() {
 
-		$("span:contains('ìˆ˜ì •')").on("click", function() {
-			self.location ="/position/updatePosition?positionNo="+$(this).attr("value")
+$('#updateModal').on('show.bs.modal', function(event){
 			
-		});
+			var button  = $(event.relatedTarget);
+	        var modal = $(this);
+	        
+	        var position = button.data('whatever').split(',');
+	        
+	        console.log(position[0])
+	        console.log(position[1])
+	        console.log(position[2])
+	        
+	        modal.find('#positionNo').val(position[0])
+	         modal.find('#positionName').val(position[1])
+	         modal.find('#rankCode').val(position[2])
+
+			
+		})
 		
-		$("span:contains('ì‚­ì œ')").on("click", function() {
+		$('#updatePosition').on("click", function(){
+			$("#updateForm").attr("method","POST").attr("action","/position/updatePosition").submit();
+		})
+		
+		$(".deletePosition").on("click", function() {
 			var positionNo=$(this).attr("value")
 		    $.ajax({
 		        url:'/employee/json/usePositionCheck',
@@ -106,11 +78,11 @@
 		            if(data==0){
 		            	self.location ="/position/deletePosition?positionNo="+positionNo;              
 		            }else{
-		            	alert("ê·¼ë¬´ì¤‘ì¸ ì„ì§ì›ì´ ì¡´ì¬í•˜ì—¬ ì‚­ì œê°€ ë¶ˆê°€ëŠ¥í•©ë‹ˆë‹¤.");  
+		            	alert("±Ù¹«ÁßÀÎ ÀÓÁ÷¿øÀÌ Á¸ÀçÇÏ¿© »èÁ¦°¡ ºÒ°¡´ÉÇÕ´Ï´Ù.");  
 		            }
 		        },
 		        error:function(){
-		                alert("ì—ëŸ¬ì…ë‹ˆë‹¤");
+		                alert("¿¡·¯ÀÔ´Ï´Ù");
 		        }
 		    });
 		});

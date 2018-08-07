@@ -29,14 +29,6 @@
 <!-- The javascript plugin to display page loading on top-->
 <script src="/js/plugins/pace.min.js"></script>
 
-   <!-- 부서 추가를 위한 modal 창 -->
-   <!-- jQuery UI toolTip 사용 CSS-->
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <!-- jQuery UI toolTip 사용 JS-->
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <!-- 부서 추가를 위한 modal 창 -->
-
 <!--리스트 사용을 위한 선언-->
 <script type="text/javascript" src="/js/plugins/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="/js/plugins/dataTables.bootstrap.min.js"></script>

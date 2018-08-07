@@ -13,7 +13,7 @@
 
 		<div class="row">
 				<img class="rounded-circle"
-				src="/profileFiles/${employee.profileImage}"
+				src="../images/profileFiles/${getEmployee.profileImage}"
 				alt="Generic placeholder image" width="140" height="140">
 		</div>
 
@@ -21,7 +21,7 @@
 			<div class="col-xs-4 col-md-2">
 				<strong>부서</strong>
 			</div>
-			<div class="col-xs-8 col-md-4">${employee.departmentName}</div>
+			<div class="col-xs-8 col-md-4">${getEmployee.departmentName}</div>
 		</div>
 
 		<hr />
@@ -30,7 +30,7 @@
 			<div class="col-xs-4 col-md-2">
 				<strong>직급</strong>
 			</div>
-			<div class="col-xs-8 col-md-4">${employee.positionName}</div>
+			<div class="col-xs-8 col-md-4">${getEmployee.positionName}</div>
 		</div>
 
 		<hr />
@@ -39,7 +39,7 @@
 			<div class="col-xs-4 col-md-2">
 				<strong>사번</strong>
 			</div>
-			<div class="col-xs-8 col-md-4">${employee.employeeNo}</div>
+			<div class="col-xs-8 col-md-4">${getEmployee.employeeNo}</div>
 		</div>
 
 		<hr />
@@ -48,7 +48,7 @@
 			<div class="col-xs-4 col-md-2">
 				<strong>입사일</strong>
 			</div>
-			<div class="col-xs-8 col-md-4">${employee.hireDate}</div>
+			<div class="col-xs-8 col-md-4">${getEmployee.hireDate}</div>
 		</div>
 
 		<hr />
@@ -57,7 +57,7 @@
 			<div class="col-xs-4 col-md-2">
 				<strong>사원명</strong>
 			</div>
-			<div class="col-xs-8 col-md-4">${employee.employeeName}</div>
+			<div class="col-xs-8 col-md-4">${getEmployee.employeeName}</div>
 		</div>
 
 		<hr />
@@ -66,7 +66,7 @@
 			<div class="col-xs-4 col-md-2 ">
 				<strong>전화번호</strong>
 			</div>
-			<div class="col-xs-8 col-md-4">${ !empty employee.phone ? employee.phone : ''}
+			<div class="col-xs-8 col-md-4">${ !empty getEmployee.phone ? getEmployee.phone : ''}
 			</div>
 		</div>
 
@@ -76,7 +76,7 @@
 			<div class="col-xs-4 col-md-2">
 				<strong>내선번호</strong>
 			</div>
-			<div class="col-xs-8 col-md-4">${employee.extension}</div>
+			<div class="col-xs-8 col-md-4">${getEmployee.extension}</div>
 		</div>
 
 		<hr />
@@ -85,7 +85,7 @@
 			<div class="col-xs-4 col-md-2 ">
 				<strong>주소</strong>
 			</div>
-			<div class="col-xs-8 col-md-4">${employee.address}</div>
+			<div class="col-xs-8 col-md-4">${getEmployee.address}</div>
 		</div>
 
 		<hr />
@@ -94,7 +94,7 @@
 			<div class="col-xs-4 col-md-2">
 				<strong>이 메 일</strong>
 			</div>
-			<div class="col-xs-8 col-md-4">${employee.email}</div>
+			<div class="col-xs-8 col-md-4">${getEmployee.email}</div>
 		</div>
 
 		<hr />
@@ -103,8 +103,12 @@
 <div class="row">
 <div class="col-md-12 text-center ">
 
-<c:if test="${sessionScope.employee.employeeNo == employee.employeeNo}">
-<button type="button" class="btn btn-primary" value="${employee.employeeNo}">정보수정</button> 
+<c:if test="${sessionScope.sessionEmployee.role=='admin'}">
+<button type="button" class="btn btn-primary" value="${getEmployee.employeeNo}">정보수정</button> 
+</c:if>
+
+<c:if test="${employee.employeeNo == getEmployee.employeeNo}">
+<button type="button" class="btn btn-primary" value="${getEmployee.employeeNo}">정보수정</button> 
 </c:if>
 <button type="button" class="btn btn-primary">확인</button>    
 </div>

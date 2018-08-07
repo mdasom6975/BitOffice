@@ -14,9 +14,6 @@
                       <label>비밀번호</label>
                       <input class="form-control" name="password" id="password" value="${len}" placeholder="비밀번호" >
                     </div>
-<!--                     <div class="col-sm-3"> -->
-<!-- 					<button type="button" class="btn btn-default">비밀번호생성</button> -->
-<!-- 				</div> -->
                     <div class="col-md-4">
                       <label>입사일</label>
                       <input class="form-control" type="text" id="hireDate"
@@ -73,6 +70,8 @@
                       <label>전자서명이미지</label>
                       <input class="form-control" type="file" id="fileName"
 						name="file" placeholder="전자서명이미지" onchange="readURL(this);" >
+<%-- 						<input class="form-control" type="hidden" name="profileImage" id="profileImage" value="${employee.profileImage}"> --%>
+<%-- 						<input class="form-control" type="hidden" name="signImage" id="signImage" value="${employee.signImage}"> --%>
                     </div>
                     <img id="LoadImg" class="img-thumbnail"
 					src="http://placehold.it/180" style="width: 100px; height: 100px;">

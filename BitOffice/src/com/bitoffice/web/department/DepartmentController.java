@@ -40,15 +40,11 @@ public class DepartmentController {
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 
-	@RequestMapping(value = "addDepartment", method = RequestMethod.GET)
+	@RequestMapping(value = "addDepartment")
 	public String addDepartment(@ModelAttribute("department") Department department) throws Exception {
 
-		System.out.println("/department/addDepartment : GET/");
-		
-		String reDepartment = department.getDepartmentName();
-		reDepartment=URLDecoder.decode(reDepartment,"UTF-8");
-		
-		department.setDepartmentName(reDepartment);
+		System.out.println("/department/addDepartment : GET");
+
 
 		// Business Logic
 		departmentService.addDepartment(department);
@@ -57,31 +53,20 @@ public class DepartmentController {
 
 	}
 
-	/*
-	 * @RequestMapping(value="addDepartment", method= RequestMethod.POST) public
-	 * String addDepartment(@ModelAttribute ("department")Department department)
-	 * throws Exception{
-	 * 
-	 * System.out.println("/department/addDepartment : POST");
-	 * 
-	 * // Business Logic departmentService.addDepartment(department);
-	 * 
-	 * return "forward:/department/listDepartment.jsp"; }
-	 */
 
-	@RequestMapping(value = "updateDepartment", method = RequestMethod.GET)
-	public String updateDepartment(@RequestParam("departmentNo") String departmentNo, Model model) throws Exception {
-
-		System.out.println("/department/updateDepartment : GET");
-
-		// Business Logic
-		Department department=departmentService.getDepartment(departmentNo);
-		// Model 과 View 연결
-		model.addAttribute("department", department);
-
-		return "forward:/department/updateDepartmentView.jsp";
-
-	}
+//	@RequestMapping(value = "updateDepartment", method = RequestMethod.GET)
+//	public String updateDepartment(@RequestParam("departmentNo") String departmentNo, Model model) throws Exception {
+//
+//		System.out.println("/department/updateDepartment : GET");
+//
+//		// Business Logic
+//		Department department=departmentService.getDepartment(departmentNo);
+//		// Model 과 View 연결
+//		model.addAttribute("getDepartment", department);
+//
+//		return "forward:/department/updateDepartmentView.jsp";
+//
+//	}
 
 	@RequestMapping(value = "updateDepartment", method = RequestMethod.POST)
 	public String updateDepartment(@ModelAttribute("department") Department department) throws Exception {
@@ -92,7 +77,7 @@ public class DepartmentController {
 
 		departmentService.updateDepartment(department);
 
-		return "redirect:/department/listDepartment";
+		return "forward:/department/listDepartment";
 
 	}
 	

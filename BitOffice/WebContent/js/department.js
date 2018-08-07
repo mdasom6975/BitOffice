@@ -1,101 +1,64 @@
-	//=============    ê²€ìƒ‰ / page ë‘ê°€ì§€ ê²½ìš° ëª¨ë‘  Event  ì²˜ë¦¬ =============	
+	//=============    °Ë»ö / page µÎ°¡Áö °æ¿ì ¸ğµÎ  Event  Ã³¸® =============	
 	function fncGetList(currentPage) {
 		$("#currentPage").val(currentPage)
 		$("form").attr("method", "POST").attr("action",
 				"/department/listDepartment").submit();
 	}
 
-	//============= "ê²€ìƒ‰"  Event  ì²˜ë¦¬ =============	
+	//============= "°Ë»ö ¹× ºÎ¼­Ãß°¡"  Event  Ã³¸® =============	
 	$(function() {
-		$("button.btn.btn-default:contains('ê²€ìƒ‰')").on("click", function() {
+		$("button.btn.btn-default:contains('°Ë»ö')").on("click", function() {
 			fncGetList(1);
 		});
-	});
-
-	$(function() {
-		var dialog, form, departmentNo = $("#departmentNo"), departmentName = $("#departmentName"), allFields = $(
-				[]).add(departmentNo).add(departmentName), tips = $(".validateTips");
-
-		function updateTips(t) {
-			tips.text(t).addClass("ui-state-highlight");
-			setTimeout(function() {
-				tips.removeClass("ui-state-highlight", 1500);
-			}, 500);
-		}
-
-		function checkLength(o, n, min, max) {
-			if (o.val().length > max || o.val().length < min) {
-				o.addClass("ui-state-error");
-				updateTips("Length of " + n + " must be between " + min
-						+ " and " + max + ".");
-				return false;
-			} else {
-				return true;
-			}
-		}
-
-		function checkRegexp(o, regexp, n) {
-			if (!(regexp.test(o.val()))) {
-				o.addClass("ui-state-error");
-				updateTips(n);
-				return false;
-			} else {
-				return true;
-			}
-		}
-
-		function addDepartment() {
-			self.location.href = '/department/addDepartment?departmentNo='
-					+ document.getElementById("departmentNo").value
+		
+		$("#clickAdd").on("click", function() {
+			$('#myModal').modal('show');
+		});
+		
+		$("#addDepartment").on("click", function() {
+			var departmentNo = $("input[name='departmentNo']").val();
+			var departmentName = $("input[name='departmentName']").val();
+			if(departmentNo == null || departmentNo.length<1 ){
+				$('#chkMsg').html("<p style=\"COLOR: red\">ºÎ¼­¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.</p>"); 
+				return;
+			} if(departmentName == null || departmentName.length<1){				
+				$('#chkMsg').html("<p style=\"COLOR: red\">ºÎ¼­¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.</p>"); 
+				return;
+			}else{
+				self.location= '/department/addDepartment?departmentNo='
+					+ departmentNo
 					+ "&departmentName="
-					+ document.getElementById("departmentName").value
-		}
-
-		dialog = $("#dialog-form").dialog({
-			autoOpen : false,
-			show : {
-				effect : "blind",
-				duration : 1000
-			},
-			hide : {
-				// 		 		        effect: "explode",
-				effect : "drop",
-				duration : 1000
-			},
-			height : 400,
-			width : 350,
-			modal : true,
-			buttons : {
-				"ë¶€ì„œìƒì„±" : addDepartment,
-				Cancel : function() {
-					dialog.dialog("close");
-				}
-			},
-			close : function() {
-				form[0].reset();
-				allFields.removeClass("ui-state-error");
+					+ departmentName
 			}
-		});
-
-		form = dialog.find("form").on("submit", function(event) {
-			event.preventDefault();
-			addDepartment();
-		});
-
-		$("#addDepartment").button().on("click", function() {
-			dialog.dialog("open");
-		});
-	});
-
-	//=======ìˆ˜ì •ì‚­ì œ Event ì²˜ë¦¬ ========================
-	$(function() {
-
-		$("span:contains('ìˆ˜ì •')").on("click", function() {
-			self.location ="/department/updateDepartment?departmentNo="+$(this).attr("value")
 			
 		});
+	});
 
-	$("span:contains('ì‚­ì œ')").on("click", function() {
+
+	//=======¼öÁ¤»èÁ¦ Event Ã³¸® ========================
+	$(function() {
+		
+		$('#updateModal').on('show.bs.modal', function(event){
+			
+			var button  = $(event.relatedTarget);
+	        var modal = $(this);
+	        
+	        var department = button.data('whatever').split(',');
+	        
+	        console.log(department[0])
+	        console.log(department[1])
+	        
+	        modal.find('#departmentNo').val(department[0])
+	         modal.find('#departmentName').val(department[1])
+
+			
+		})
+		
+		$('#updateDepartment').on("click", function(){
+			$("#updateForm").attr("method","POST").attr("action","/department/updateDepartment").submit();
+		})
+
+	$(".deleteDepartment").on("click", function() {
 			var departmentNo=$(this).attr("value")
 		    $.ajax({
 		        url:'/employee/json/useDepartmentCheck',
@@ -106,11 +69,11 @@
 		            if(data==0){
 		            	self.location ="/department/deleteDepartment?departmentNo="+departmentNo;              
 		            }else{
-		            	alert("ê·¼ë¬´ì¤‘ì¸ ì„ì§ì›ì´ ì¡´ì¬í•˜ì—¬ ì‚­ì œê°€ ë¶ˆê°€ëŠ¥í•©ë‹ˆë‹¤.");  
+		            	alert("±Ù¹«ÁßÀÎ ÀÓÁ÷¿øÀÌ Á¸ÀçÇÏ¿© »èÁ¦°¡ ºÒ°¡´ÉÇÕ´Ï´Ù.");  
 		            }
 		        },
 		        error:function(){
-		                alert("ì—ëŸ¬ì…ë‹ˆë‹¤");
+		                alert("¿¡·¯ÀÔ´Ï´Ù");
 		        }
 		    });
 		});

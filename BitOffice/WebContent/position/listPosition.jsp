@@ -1,64 +1,101 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=EUC-KR"%>
 
-	<div class="modal" style="position: relative; top: auto; right: auto; left: auto; bottom: auto; z-index: 1;" id="aaaa">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">등록하실 직급 정보를 입력하세요</h5>
-                      <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-	      <span aria-hidden="true">×</span></button>
-                    </div>
-                    <div class="modal-body">
-                      <label for="positionNo">직급 번호</label>
-				 <input type="text"
-					name="positionNo" id="positionNo"
-					value="${position.positionNo}"
-					class="text ui-widget-content ui-corner-all">
-					 <label
-					for="positionName">직 급 명</label> 
-					<input type="text"
-					name="positionName" id="positionName"
-					value="${position.positionName}"
-					class="text ui-widget-content ui-corner-all">
-					<label for="rankCode">직급 순차번호</label>
-				 <input type="text"
-					name="rankCode" id="rankCode"
-					value="${position.rankCode}"
-					class="text ui-widget-content ui-corner-all">
-                    </div>
-                    <div class="modal-footer">
-                      <button class="btn btn-primary" type="button">Save</button>
-                      <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
-	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
-
-		<div class="page-header text-info">
-			<h3>직급 관리</h3>
-		</div>
+	<!-- 부서등록 Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+        
+        <h4 class="modal-title">등록하실 직급정보를 입력하세요.</h4>
+          <button type="button" class="close" data-dismiss="modal">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">	
+			<label for="positionNo">직급 번호</label>
+				 <input  class="form-control"  type="text" name="positionNo" id="positionNo"  style="width: 270px;
+    height: 37px;" autofocus>
+			<label for="positionName">직 급 명</label> 
+				<input class="form-control" type="text" name="positionName" id="positionName" style="width: 270px;
+    height: 37px;">
+				<label for="rankCode">직급순차번호</label> 
+				<input class="form-control"type="text" name="rankCode" id="rankCode"  style="width: 270px;
+    height: 37px;">
+			<span id = "chkMsg"></span>
+			</div> 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="addPosition">등록</button>
+        </div>
+      </div>     
+    </div>
+  </div>
+	<!--  모달창 End /////////////////////////////////////-->
+	
+		<!-- 직급 수정 Modal -->
+  <div class="modal fade" id="updateModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+      <form id="updateForm">
+        <div class="modal-header">
+        <h4 class="modal-title">수정하실 직급정보를 입력하세요.</h4>
+          <button type="button" class="close" data-dismiss="modal">×</button>
+        </div>
+        <div class="modal-body">
+          <div  class="form-group" >					   
+			<label for="positionNo">직급 번호</label>
+				 <input  class="form-control"  type="text" name="positionNo" id="positionNo"  style="width: 270px;
+    height: 37px;" readonly>
+			<label for="positionName">직 급 명</label> 
+				<input class="form-control" type="text" name="positionName" id="positionName" style="width: 270px;
+    height: 37px;">
+				<label for="rankCode">직급순차번호</label> 
+				<input class="form-control"type="text" name="rankCode" id="rankCode"  style="width: 270px;
+    height: 37px;">
+			</div > 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="updatePosition">수정</button>
+        </div>
+        </form>
+      </div>     
+    </div>
+  </div>
+	<!--  모달창 End /////////////////////////////////////-->
+	
+	<div class="app-title">
+	<div>
+	<h1>
+	<i class="fa fa-list-alt"></i>
+		직급관리</h1>
+	</div>
+</div>
 
 		<!-- table 위쪽 검색 Start /////////////////////////////////////-->
-		<div class="row">
+	<div class="row">
+	
+	<div class="col-md-12">
+		<div class="tile">
+			<div class="tile-body">
+				<div id="sampleTable_wrapper"
+					class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+					<div class="row">
+						<div class="col-md-6 text-left">
+							<p class="text-primary">전체 ${resultPage.totalCount } 건수, 현재
+								${resultPage.currentPage} 페이지</p>
+						</div>
 
-			<div class="col-md-6 text-left">
-				<p class="text-primary">전체 ${resultPage.totalCount } 건수, 현재
-					${resultPage.currentPage} 페이지</p>
-			</div>
-
-			<div class="col-md-6 text-right">
-				<form class="form-inline" name="detailForm">
-
-					<div class="form-group">
+						<div class="col-md-6 text-right"
+							style="display: flex; justify-content: flex-end;">
+							<form class="form-inline" name="detailForm">
+								<div class="form-group">
 						<select class="form-control" name="searchCondition">
 							<option value="0"
-								${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>부서번호</option>
+								${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>직급번호</option>
 							<option value="1"
-								${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>부서명</option>
+								${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>직급명</option>
 						</select>
 					</div>
 
@@ -78,27 +115,22 @@
 			</div>
 
 		</div>
-		<!-- table 위쪽 검색 Start /////////////////////////////////////-->
+		<!-- table 위쪽 검색 End /////////////////////////////////////-->
 
 
 		<!--  table Start /////////////////////////////////////-->
 		<table class="table table-hover table-striped">
-
+				<div>
+				<button type="button" class="btn btn-outline-primary" id="clickAdd" >직급추가</button>
+				</div>
 			<thead>
 				<tr>
-					<th align="center"><button id="addPosition">직급 추가</button></th>
-				</tr>
-
-			</thead>
-
-			<thead>
-				<tr>
-					<th align="left">No</th>
-					<th align="left">직급 번호</th>
-					<th align="left">직 급 명</th>
-					<th align="left">직급순차번호</th>
-					<th align="left">수정</th>
-					<th align="left">삭제</th>
+					<th>번호</th>
+					<th>직급번호</th>
+					<th>직급명</th>
+					<th>직급순차번호</th>
+					<th>수정</th>
+					<th>삭제</th>
 				</tr>
 			</thead>
 
@@ -112,20 +144,21 @@
 						<td align="left">${position.positionNo}</td>
 						<td align="left">${position.positionName}</td>
 						<td align="left">${position.rankCode}</td>
-						<td align="left"><span value='${position.positionNo}'>수정</span></td>
+						<td data-toggle="modal" data-target="#updateModal"data-whatever="${position.positionNo},${position.positionName},${position.rankCode}" ><i class="fa fa-pencil" aria-hidden="true"></i>
 						<td align="left"><span value='${position.positionNo}' >삭제</span></td>
 					</tr>
 				</c:forEach>
-
 			</tbody>
-
 		</table>
 		<!--  table End /////////////////////////////////////-->
-
+		</div>
+		</div>
+	<!-- PageNavigation Start... -->
+	<jsp:include page="../common/pageNavigator_new.jsp" />
+	<!-- PageNavigation End... -->
+	</div>
+	</div>
 	</div>
 	<!--  화면구성 div End /////////////////////////////////////-->
 
 
-	<!-- PageNavigation Start... -->
-	<jsp:include page="../common/pageNavigator_new.jsp" />
-	<!-- PageNavigation End... -->

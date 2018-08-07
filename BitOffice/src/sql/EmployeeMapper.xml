@@ -45,14 +45,21 @@
 	<insert id="addEmployee" parameterType="employee">
 		INSERT
 		INTO
-		employee(employee_no, employee_name, password, department_no,
-		position_no, emp_hire_date, birth_date, email, annual_leave, role,
-		sign_image, log_code)
-		VALUES (#{employeeNo}, #{employeeName},
-		#{password}, #{departmentNo},
-		#{positionNo}, #{hireDate}, #{birthDate},
-		#{email}, #{annualLeave},
-		'employee', #{signImage}, 'N')
+		employee(employee_no, 
+		employee_name, 
+		password, 
+		department_no,
+		position_no, 
+		emp_hire_date, 
+		birth_date, 
+		email, 
+		annual_leave, 
+		role,
+		sign_image, 
+		log_code)
+		VALUES (#{employeeNo}, #{employeeName},#{password}, 
+		#{departmentNo},#{positionNo}, #{hireDate}, #{birthDate},
+		#{email}, #{annualLeave},'employee', #{signImage}, 'N')
 	</insert>
 	
 		<!-- SQL : SELECT ONE -->
@@ -64,7 +71,7 @@
 		e.log_code,
 		e.employee_no,
 		e.annual_leave,
-		e.role,
+		e.sign_image,
 		e.profile_image,
 		d.department_name as departmentName
 		FROM employee e, department d
@@ -79,6 +86,8 @@
 		e.password, 
 		d.department_name as departmentName,
 		p.position_name as positionName,
+		e.department_no,
+		e.position_no,
 		e.employee_no,
 		e.employee_name,
 		e.phone,
@@ -104,21 +113,36 @@
 	<update id="updateEmployee" parameterType="employee">
 		UPDATE employee
 		<set>
-			employee_name =#{employeeName},
 			password=#{password:VARCHAR},
-			birth_date=#{birthDate:DATE},
-			phone=#{phone:VARCHAR},
-			extension=#{extension:VARCHAR},
 			email=#{email:VARCHAR},
-			profile_image=#{profileImage:VARCHAR},
+			birth_date=#{birthDate:DATE},
+			extension=#{extension:VARCHAR},
+			phone=#{phone:VARCHAR},
 			address=#{address:VARCHAR},
+			profile_image=#{profileImage:VARCHAR},
 			log_code ='Y'
+		</set>
+		WHERE employee_no = #{employeeNo}
+	</update>
+	
+		<!-- SQL : UPDATE -->
+	<update id="updateByAdmin" parameterType="employee">
+		UPDATE employee
+		<set>
+			department_no=#{departmentNo},
+			position_no=#{positionNo},
+			emp_hire_date=#{hireDate:DATE},
+			annual_leave=#{annualLeave},
+			employee_no=#{employeeNo:VARCHAR},
+			employee_name=#{employeeName:VARCHAR},
+			email=#{email:VARCHAR},
+			sign_image=#{signImage:VARCHAR}
 		</set>
 		WHERE employee_no = #{employeeNo}
 	</update>
 
 	<!-- SQL : SELECT LIST -->
-	<select id="getEmployeeList" parameterType="search" resultMap="employeeSelectMap">
+	<select id="getEmployeeList" parameterType="map" resultMap="employeeSelectMap">
 		SELECT *
 		FROM ( SELECT inner_table.* , ROWNUM AS row_seq
 		FROM ( SELECT
@@ -150,9 +174,23 @@
 			<if test="searchCondition == 2 and searchKeyword !='' ">
 				AND e.employee_name LIKE '%${searchKeyword}%'
 			</if>
-
 		</if>
-		ORDER BY d.department_name) inner_table
+		<choose>
+			<when test="orderby=='' ">
+				ORDER BY d.department_no, p.rank_code
+			</when>
+			<otherwise>
+				<if test="orderby=='sDepartment' ">
+					ORDER BY d.department_name
+				</if>
+				<if test="orderby=='sPosition' ">
+					ORDER BY p.rank_code
+				</if>
+				<if test="orderby=='sHire' ">
+					ORDER BY e.emp_hire_date
+				</if>
+			</otherwise>
+		</choose>) inner_table
 		WHERE ROWNUM &lt;= #{endRowNum}
 		)
 		WHERE row_seq BETWEEN #{startRowNum} AND

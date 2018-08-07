@@ -16,10 +16,13 @@ public interface EmployeeDAO {
 	public Employee logIn(String employeeNo) throws Exception;
 
 	// SELECT LIST
-	public List<Employee> getEmployeeList(Search search) throws Exception;
+	public List<Employee> getEmployeeList(Search search, String orderby) throws Exception;
 
 	// UPDATE
 	public void updateEmployee(Employee employee) throws Exception;
+	
+	// UPDATE
+		public void updateByAdmin(Employee employee) throws Exception;
 
 	// Åð»çÃ³¸®
 	public void resignationEmp(String employeeNo) throws Exception;

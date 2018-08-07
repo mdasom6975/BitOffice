@@ -38,14 +38,19 @@
     <script type="text/javascript" src="/js/plugins/dataTables.bootstrap.min.js"></script>
     <script type="text/javascript">$('#sampleTable').DataTable();</script>
     
-    <!-- 달력 사용을 위한 CDN -->
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<!--  datepicker 사용을 위한 선언-->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+
+<!-- 간편주소 API 사용을 위한 선언 -->
+<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 
 <!--  justgage charts사용  -->
 <script src="/javascript/raphael-2.1.4.min.js"></script>
  <script src="/javascript/justgage.js"></script>
+
 
     
    <script src="/js/employee.js"></script>
@@ -93,22 +98,32 @@
     
     <main class="app-content">
     <c:choose>
-		<c:when test="${menu=='addEmployeeView' }">
-			<%@include file="/employee/addEmployeeView.jsp"%>
-		</c:when>
+    
 		<c:when test="${menu=='getEmployee' }">
 			<%@include file="/employee/getEmployee.jsp"%>
 		</c:when>
-		<c:when test="${menu=='updateEmployeeView' }">
-			<%@include file="/employee/updateEmployeeView.jsp"%>
-		</c:when>
+				
 		<c:when test="${menu=='useAnnualLeave' }">
 			<%@include file="/employee/useAnnualLeave.jsp"%>
 		</c:when>
+		
+		<c:when test="${menu=='updateEmployeeView' }">
+		<c:if test="${sessionScope.sessionEmployee.role=='employee' }">
+			<%@include file="/employee/updateEmployeeView.jsp"%>
+			</c:if>
+			<c:if test="${sessionScope.sessionEmployee.role=='admin' }">
+			<%@include file="/employee/updateByAdmin.jsp"%>
+			</c:if>
+		</c:when>
+		
 		<c:when test="${menu=='listEmployee' }">
 			<%@include file="/employee/listEmployee.jsp"%>
 		</c:when>
-    </c:choose>
+	<c:otherwise>
+	<%@include file="/employee/listEmployee.jsp"%>
+	</c:otherwise>
+	</c:choose> 
+
     
 	
     </main>

@@ -2,11 +2,14 @@
 	pageEncoding="EUC-KR"%>
 
 
-	<div class="col-md-10">
+	<div class="col-md-10" >
 		 <div class="tile">
-		 <h3 class="tile-title">공지사항 상세보기</h3>
+		 <h3 class="tile-title" >공지사항 상세보기</h3>
+		 <!-- START PrinArea -->
+		 <div id="printArea">
 			<table class="table" >
 				<thead>
+				
 					<tr>
 						<th>글제목</th>
 						<th>${board.boardTitle}</th>
@@ -29,11 +32,14 @@
 					
 				</tbody>
 			</table>
+			</div>
+			<!-- END PrinArea -->
 			<div class="col-md-12 text-center">
 			<c:if test="${employee.employeeNo == board.employeeNo}">
 			<button type="button" class="btn btn-primary " value="${board.boardNo }">수정</button>
 			</c:if>
 			<button type="button" class="btn btn-primary ">목록으로</button>
+			<button type="button"  class="btn btn-primary" OnClick="print(document.getElementById('printArea').innerHTML)" ><i class="fa fa-print"></i> Print</button>
 			</div>
 		</div>
 	</div>

@@ -69,7 +69,8 @@ $('#sampleTable').DataTable();
 		<!-- sidebar 메뉴 모음 -->
 	</aside>
 
-	<main class="app-content"> <c:choose>
+	<main class="app-content"> 
+	<c:choose>
 		<c:when test="${menu=='addBoard'}">
 			<%@include file="/board/boardView.jsp"%>
 		</c:when>

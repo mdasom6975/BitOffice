@@ -1,6 +1,8 @@
 package com.bitoffice.service.employee.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,9 +49,15 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	}
 
 	@Override
-	public List<Employee> getEmployeeList(Search search) throws Exception {
+	public List<Employee> getEmployeeList(Search search,String orderby) throws Exception {
+		Map<String, String > map = new HashMap<String, String>();
+		map.put("searchCondition", search.getSearchCondition());
+		map.put("searchKeyword", search.getSearchKeyword());
+		map.put("endRowNum", search.getEndRowNum()+"");
+		map.put("startRowNum", search.getStartRowNum()+"");		
+		map.put("orderby", orderby);
 		
-		return sqlSession.selectList("EmployeeMapper.getEmployeeList", search);
+		return sqlSession.selectList("EmployeeMapper.getEmployeeList", map);
 	}
 
 	@Override
@@ -118,6 +126,12 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	public List<Employee> useAnnualLeave(String employeeNo) throws Exception {
 		
 		return sqlSession.selectList("EmployeeMapper.useAnnualLeave", employeeNo);
+	}
+
+	@Override
+	public void updateByAdmin(Employee employee) throws Exception {
+		sqlSession.update("EmployeeMapper.updateByAdmin", employee);
+		
 	}
 
 }

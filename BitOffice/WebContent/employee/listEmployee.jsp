@@ -29,6 +29,8 @@
 							style="display: flex; justify-content: flex-end;">
 							<form class="form-inline" name="detailForm">
 								<div class="form-group">
+								<span class="sDepartment">부서별</span> |<span class="sPosition">직급별</span>
+									|<span class="sHire">입사년도별</span>
 									<select class="form-control" name="searchCondition">
 										<option value="0"
 											${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>부서</option>
@@ -67,6 +69,7 @@
 								<th>부서</th>
 								<th>직위</th>
 								<th>이름</th>
+								<th>사번</th>
 								<th>입사년도</th>
 								<th>이메일</th>
 								<th>내선번호</th>
@@ -85,10 +88,11 @@
 									<td>${employee.positionName}</td>
 									<td class="getEmployee" title="Click : 임직원 정보 상세보기"
 										value='${employee.employeeNo}'>${employee.employeeName}</td>
+										<td>${employee.employeeNo}</td>
 									<td>${employee.hireDate}</td>
 									<td>${employee.email}</td>
 									<td>${employee.extension}</td>
-									<c:if test="${sessionScope.employee.role == 'admin'}">
+									<c:if test="${sessionScope.sessionEmployee.role == 'admin'}">
 										<td class="resignationEmp" value='${employee.employeeNo }'>퇴사처리</td>
 									</c:if>
 								</tr>

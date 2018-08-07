@@ -7,12 +7,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -110,7 +112,7 @@ public class EmployeeRestController {
 	
 	@RequestMapping(value="json/listEmployee")
 	@ResponseBody
-	public JSONObject listEmployee(@ModelAttribute("search") Search search) throws Exception{
+	public JSONObject listEmployee(@ModelAttribute("search") Search search,HttpServletRequest request,String orderby) throws Exception{
 		
 		System.out.println("json/listEmployee");
 		
@@ -119,13 +121,16 @@ public class EmployeeRestController {
 		}
 		search.setPageSize(pageSize);
 		
+		orderby="";
 		// Business logic ผ๖วเ
-				Map<String, Object> map =employeeService.getEmployeeList(search);
+				Map<String, Object> map =employeeService.getEmployeeList(search,orderby);
 				Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 						pageSize);
 				JSONObject jsonObject =new JSONObject();
 				jsonObject.put("list", map);
 				jsonObject.put("resultPage", resultPage);
+				
+				request.setAttribute("resultPage",resultPage);
 				
 				return jsonObject;
 	}

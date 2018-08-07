@@ -10,6 +10,7 @@
 	</div>
 </div>
 
+<!-- table 위쪽 검색 Start /////////////////////////////////////-->
 <div class="row">
 	<div class="col-md-12">
 		<div class="tile">
@@ -45,7 +46,7 @@
 										value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
 								</div>
 
-								<button type="button" class="btn btn-default">검색</button>
+								<button type="button" class="btn btn-secondary">검색</button>
 
 
 								<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
@@ -54,6 +55,9 @@
 							</form>
 						</div>
 					</div>
+					<!-- table 위쪽 검색 End /////////////////////////////////////-->
+					
+					<!--  table Start /////////////////////////////////////-->
 					<table class="table" style="margin-top: 10px;">
 						<thead>
 							<tr>
@@ -84,6 +88,7 @@
 							</c:forEach>
 						</tbody>
 					</table>
+					<button type="button" class="btn btn-default pull-right">글쓰기</button>
 				</div>
 			</div>
 			<!-- <!-- PageNavigation Start... -->

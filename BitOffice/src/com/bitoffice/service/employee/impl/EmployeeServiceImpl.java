@@ -52,9 +52,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public Map<String, Object> getEmployeeList(Search search) throws Exception {
+	public Map<String, Object> getEmployeeList(Search search,String orderby) throws Exception {
 		
-		List<Employee> list = employeeDAO.getEmployeeList(search);
+		List<Employee> list = employeeDAO.getEmployeeList(search,orderby);
 		int totalCount = employeeDAO.getTotalCount(search);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -127,6 +127,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public List<Employee> useAnnualLeave(String employeeNo) throws Exception {	
 		return employeeDAO.useAnnualLeave(employeeNo);
+	}
+
+	@Override
+	public void updateByAdmin(Employee employee) throws Exception {
+		employeeDAO.updateByAdmin(employee);
+		
 	}
 
 }

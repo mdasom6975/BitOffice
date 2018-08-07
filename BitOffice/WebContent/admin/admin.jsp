@@ -33,9 +33,13 @@
      <!-- The javascript plugin to display page loading on top-->
     <script src="/js/plugins/pace.min.js"></script>
 
-
+<!--  datepicker 사용을 위한 선언-->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
     
-   <script src="/js/resignEmployee.js.js"></script>
+   <script src="/js/resignEmployee.js"></script>
+   <script src="/js/addEmployee.js"></script>
   
    
   </head>
@@ -53,19 +57,19 @@
      <%@include file="/layout/side.jsp"%>
  <!-- sidebar 메뉴 모음 -->    
     </aside>
-    
-    <main class="app-content">
-    <c:choose>
+
+	<main class="app-content"> 
+	<c:choose>
 		<c:when test="${menu=='resignList' }">
 			<%@include file="/employee/resignList.jsp"%>
 		</c:when>
-		
-    </c:choose>
-    
-	
-    </main>
-    
-    <!-- Essential javascripts for application to work-->
+		<c:when test="${menu=='addEmployeeView' }">
+			<%@include file="/employee/addEmployeeView.jsp"%>
+		</c:when>
+	</c:choose>
+	 </main>
+
+	<!-- Essential javascripts for application to work-->
     <script src="/js/main.js"></script>
 
   </body>

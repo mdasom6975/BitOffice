@@ -65,4 +65,11 @@ public class DepartmentRestController {
 	}
 	
 	
+	@RequestMapping(value="json/updateDepartment")
+	
+	public Department updateDepartment(@RequestParam(value="departmentNo")String departmentNo) throws Exception{
+		Department updateDepartment = departmentService.getDepartment(departmentNo);
+		
+		return updateDepartment;
+	}
 }

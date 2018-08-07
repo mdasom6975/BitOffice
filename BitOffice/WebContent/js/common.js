@@ -1,4 +1,13 @@
 //=========게시판 목록 구성 ===================================
+$(function() {
+	$("#moreEmployee").on("click", function() {
+		self.location ="/employee/listEmployee?orderby="
+	});
+	$("#moreBoard").on("click", function() {
+		self.location ="/board/listBoard?orderby="
+	});
+});
+
 $(document).ready(function(){
         $.ajax({
            url:"/board/json/listBoard",
@@ -62,14 +71,16 @@ $(document).ready(function(){
                  
                  $("#listEmployee").append(
                     
-                          '<tr><td>'+
+                          	'<tr><td>'+
                              (i+1)+
-	    '</td><td>'+
+                             '</td><td>'+
                              data.list.list[i].departmentName+
-	    '</td><td>'+
+                             '</td><td>'+
                              data.list.list[i].positionName+
                              '</td><td id="getEmployee" value="'+data.list.list[i].employeeNo+'">'+
                              data.list.list[i].employeeName+
+                             '</td><td>'+
+                             data.list.list[i].employeeNo+
                              '</td><td>'+
                              data.list.list[i].email+
                              '</td><td>'+
@@ -101,16 +112,16 @@ $(document).ready(function(){
 					contentType : "application/x-www-form-urlencoded; charset=UTF-8",
 					dataType : "text" ,
 					success : function(resultValue, status) {
-						alert("returnValue:"+resultValue);
+						//alert("returnValue:"+resultValue);
 						if (resultValue.indexOf(1)>=0){ 							
-							alert("전자결재 상태(1)조회되었습니다.");										
+							//alert("전자결재 상태(1)조회되었습니다.");										
 						}else{
-							alert("전자결재 상태(1)조회실패! 관리자에게 문의!");									
+							//alert("전자결재 상태(1)조회실패! 관리자에게 문의!");									
 						}
 					},
 					error : function(request, status,error) {
-				        alert("전자결재 상태 조회 접속 error");
-				        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				       // alert("전자결재 상태 조회 접속 error");
+				       // alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 				    }							
 			}); ////ajax 
 	    });	

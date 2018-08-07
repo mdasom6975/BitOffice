@@ -18,13 +18,16 @@ public interface EmployeeService {
 	public Employee logIn(String employeeNo) throws Exception;
 
 	// 임직원 리스트
-	public Map<String, Object> getEmployeeList(Search search) throws Exception;
+	public Map<String, Object> getEmployeeList(Search search,String orderby) throws Exception;
 
 	// 퇴사자 리스트
 	public Map<String, Object> getResignList(Search search) throws Exception;
 
 	// 임직원 정보 수정
 	public void updateEmployee(Employee employee) throws Exception;
+	
+	// 임직원 정보 수정
+		public void updateByAdmin(Employee employee) throws Exception;
 
 	// 퇴사처리
 	public void resignationEmp(String employeeNo) throws Exception;

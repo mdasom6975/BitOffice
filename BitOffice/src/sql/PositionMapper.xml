@@ -35,6 +35,8 @@
 		SELECT
 		position_no, position_name
 		FROM position
+		WHERE position_no >00
+		ORDER BY rank_code
 	</select>
 
 	<!-- SQL : UPDATE -->
@@ -62,7 +64,7 @@
 		position_no, position_name, rank_code
 		FROM position
 		ORDER BY
-		position_no) inner_table
+		rank_code) inner_table
 		WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq
 		BETWEEN #{startRowNum} AND

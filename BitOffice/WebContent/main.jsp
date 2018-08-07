@@ -98,6 +98,7 @@
 <div class="col-md-6">
           <div class="tile">
             <h3 class="tile-title">임직원</h3>
+            <h5 class="tile-subtitle" style="text-align: right;"id="moreEmployee">more▶</h5>
             <table class="table" >
 						<thead>
 							<tr>
@@ -105,6 +106,7 @@
 								<th>부서</th>
 								<th>직급</th>
 								<th>이름</th>
+								<th>사번</th>
 								<th>이메일</th>
 								<th>내선번호</th>
 							</tr>
@@ -120,6 +122,7 @@
         <div class="col-md-6">
           <div class="tile">
             <h3 class="tile-title">최근 업데이트 공지사항</h3>
+            <h5 class="tile-subtitle" style="text-align: right;" id="moreBoard">more▶</h5>
             <table class="table" >
 						<thead>
 							<tr>

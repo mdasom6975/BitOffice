@@ -35,6 +35,7 @@
 		SELECT
 		department_no, department_name
 		FROM department
+		ORDER BY department_name
 	</select>
 
 	<!-- SQL : UPDATE -->
@@ -65,10 +66,10 @@
 		<if test="searchCondition != null">
 			<where>
 				<if test="searchCondition == 0 and searchKeyword !='' ">
-					department_no like '%${searchKeyword}%'
+				department_no like '%${searchKeyword}%'
 				</if>
 				<if test="searchCondition == 1 and searchKeyword !='' ">
-					department_name like '%${searchKeyword}%'
+				department_name like '%${searchKeyword}%'
 				</if>
 			</where>
 		</if>
@@ -87,10 +88,10 @@
 		<if test="searchCondition != null">
 			<where>
 				<if test="searchCondition == 0 and searchKeyword !='' ">
-					department_no like '%${searchKeyword}%'
+				department_no like '%${searchKeyword}%'
 				</if>
 				<if test="searchCondition == 1 and searchKeyword !='' ">
-					department_name like '%${searchKeyword}%'
+				department_name like '%${searchKeyword}%'
 				</if>
 			</where>
 		</if>

@@ -44,9 +44,6 @@ public class PositionController {
 	public String addPosition(@ModelAttribute("position") Position position) throws Exception {
 		System.out.println("/position/addPosition : GET");
 		
-		String rePosition = position.getPositionName();
-		rePosition=URLDecoder.decode(rePosition, "UTF-8");
-		position.setPositionName(rePosition);
 
 		// Business Logic
 		positionService.addPosition(position);
