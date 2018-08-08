@@ -13,7 +13,7 @@ public interface ApprovalService {
 	public Approval getApproval(String approvalId) throws Exception;
 	
 	// 결재상태별건수
-	public int getTotalCountStatus(String employeeNo) throws Exception;
+	public int getTotalCountStatus(Approval approval) throws Exception;
 	
 	// 전자결재정보리스트 
 	public Map<String , Object> getApprovalList(Search search) throws Exception;

@@ -6,7 +6,7 @@
 		
 		//summernote
 		$('#content').summernote({
-			placeholder : 'Write contents',
+			//placeholder : 'Write contents',			
 			height : 300,
 			callbacks : {
 				onImageUpload : function(files, editor, welEditable) {
@@ -143,11 +143,12 @@
 
            	var approvalEmployeeNo = $('#SimpleJSTree').jstree('get_selected');      	               	
          
-            if (approvalEmployeeNo.length >7){
+/*            if (approvalEmployeeNo.length >7){
             	alert("결재자는 최대 7명 등록 가능합니다");
             	return;
-            }           	
-          
+            }     */      	
+
+           	
           	for (var i=0;i<approvalEmployeeNo.length;i++) {   		
           		
           		
@@ -155,10 +156,9 @@
           			
           			var approvalEmployeeName = $("#SimpleJSTree").jstree('get_selected', true)[i].text;	
           			var li_span ="";
-          				li_span +="<li style='background-color:#ffffff;width:160px;height:30px;' id='auth_"+approvalEmployeeNo[i]+"' employInfo='"+approvalEmployeeName+"'>";
+          				li_span +="<li style='background-color:##99CCFF;width:160px;height:30px;' id='auth_"+approvalEmployeeNo[i]+"' employInfo='"+approvalEmployeeName+"'>";
           				li_span +=" <h6>↕ "+approvalEmployeeName+" <a onclick=del('auth_"+approvalEmployeeNo[i]+"')>삭제</a></h6></li>";
          			$("#authorizationPerson").append(li_span);
-         		
          			
           		}
          	}  
@@ -169,22 +169,24 @@
          
          $("#sel2").click(function(){
 
-          	var approvalEmployeeNo = $('#SimpleJSTree').jstree('get_selected');
-               	
-            if (approvalEmployeeNo.length >7){
+          	var approvalEmployeeNo = $('#SimpleJSTree').jstree('get_selected');     
+           
+            
+/*            if (approvalEmployeeNo.length >7){
             	alert("참조인은 최대 7명 등록 가능합니다");
             	return;
-            }          	
+            }    */         
+
           
            	for (var i=0;i<approvalEmployeeNo.length;i++) {           		
-           		if (approvalEmployeeNo[i].length>2){           			
+           		if (approvalEmployeeNo[i].length>4){           			
            			
-          			var approvalEmployeeName = $("#SimpleJSTree").jstree('get_selected', true)[i].text;	
+          			var approvalEmployeeName = $("#SimpleJSTree").jstree('get_selected', true)[i].text;
+          			
           			var li_span ="";
-          				li_span +="<li style='background-color:#ffffff;width:180px;height:30px;' id='ref_"+approvalEmployeeNo[i]+"'>";
-          				li_span +="<h6>"+approvalEmployeeName+" <a onclick=del('ref_"+approvalEmployeeNo[i]+"')>삭제</a></h6></li>";
-         			$("#referencePerson").append(li_span); 
-     			
+          				li_span +="<li style='background-color:#CCCCCC;width:130px;height:30px;' id='ref_"+approvalEmployeeNo[i]+"' employInfo='"+approvalEmployeeName+"'>";
+          				li_span +=" <h6>↕ "+approvalEmployeeName.trim()+" <a onclick=del('ref_"+approvalEmployeeNo[i]+"')>삭제</a></h6></li>";
+         			$("#referencePerson").append(li_span);
            		}
           	}  
 
@@ -204,7 +206,7 @@
        	    $('#seungin').remove();
        	 	
        	    var middleTdWidth=50;
-       	 	
+	       	 
        	 	//승인 결재자  선택 역순으로 가져오기 
        	        $($('#authorizationPerson li').get().reverse()).each(function(i){       	       
        	         
@@ -214,20 +216,20 @@
        	         var employInfo = $(this).attr('employInfo').split(' ');
 	       	     var thisPosion = employInfo[0];
 	       	   	 var thisName = employInfo[1];
-       	       
+       	        
 	       	     middleTdWidth-=(i*10);
 	       	   	 
 	       	     if( i==0){
-	       	    	approvalTable+="<td id='seungin' style='width:5%;vertical-align:middle;background-color:#D5D5D5;'>승<br><br><br>인</td>";
+	       	    	approvalTable+="<td id='seungin' style='width:30px;vertical-align:middle;background-color:#D5D5D5;'>승<br><br><br>인</td>";
 	       	     }
 	       	     
-       	         if (thisId.trim().length>5){  
+       	         if (thisId.trim().length>4){  
        	        	
-       	      		 approvalTable+="<td style='width:13%' name='eachApprovalPerson'><table class='table table-bordered' style='text-align: center; boder: 1px solid #dddddd'>";
-        		 	 approvalTable+="<tr><td>"+thisPosion+"</td></tr>";											
-        		 	 approvalTable+="<tr><td>"+thisName+"</td></tr>";
-        		 	 approvalTable+="<tr height='30px'><td></td></tr>";	
-        		 	 approvalTable+="<tr height='30px'><td></td></tr>";        		 	
+       	      		 approvalTable+="<td name='eachApprovalPerson'><table style='width:100%;height:100%;text-align:center; boder: 1px solid #dddddd' cellspacing=0 cellpadding=0>";
+        		 	 approvalTable+="<tr><td style='width:100px;height:46px'>"+thisPosion+"</td></tr>";											
+        		 	 approvalTable+="<tr><td style='width:100px;height:46px'>"+thisName+"</td></tr>";
+        		 	 approvalTable+="<tr><td style='width:100px;height:46px'></td></tr>";	
+        		 	 approvalTable+="<tr><td style='width:100px;height:46px;color:#FF0000;'></td></tr>";        		 	
         		 	 approvalTable+="</table></td>";  
         		 	 
         		 	$("#middleTd").css('width',middleTdWidth+'%'); 
@@ -257,7 +259,7 @@
          $("#allsee").click(function(){           	 
         	 if ($('#allsee').text() == '[조직도펼치기]'){      
         		$('#SimpleJSTree').jstree('open_all');					
-				$('#allsee').text('[조직도접기]');             	 	
+				$('#allsee').text("[조직도접기]");             	 	
         	 }else{       
         		$('#SimpleJSTree').jstree('close_all');    
         		$('#allsee').text('[조직도펼치기]');
@@ -335,6 +337,8 @@
 				$("#end_date").focus();
 				return;
 			}				
+
+			
 		}
 		
 		if(content.length<1){
@@ -472,7 +476,7 @@
 				 		}else{	 	
 				 			//등록후 nav
 				 			alert("등록되었습니다");
-							location.href = "/approval/listApproval";
+							location.href = "/approval/listApproval?searchType=1";
 				 		}
 					}else{
 						alert("기안등록 실패! 관리자에게 문의!");									
@@ -728,7 +732,7 @@
     	var date1 = $("#start_date").val();  
     	var date2 = $("#end_date").val();
     	
-    	if (date1.length>0 && date1.length>0){
+    	if (date1.length>0 && date2.length>0){
     	
         var arrDate1 = date1.split("-");
         var getDate1 = new Date(parseInt(arrDate1[0]),parseInt(arrDate1[1])-1,parseInt(arrDate1[2]));

@@ -11,17 +11,17 @@
 
 
 
- <link href='https://use.fontawesome.com/releases/v5.0.6/css/all.css' rel='stylesheet'> 
+<!--  <link href='https://use.fontawesome.com/releases/v5.0.6/css/all.css' rel='stylesheet'>  -->
  <link type="text/css" href='/css/fullcalendar.min.css' rel='stylesheet' /> 
  <link href='/css/fullcalendar.print.min.css' rel='stylesheet' media='print' />
- <script type="text/javascript" src='/javascript/moment.min.js'></script> 
-  <!-- //주석해야 조직도가 나옴 <script type="text/javascript" src='/javascript/jquery.min.js'></script>  --> 
- <script type="text/javascript" src='/javascript/fullcalendar.min.js'></script>  
+ <script type="text/javascript" src='/js/moment.min.js'></script> 
+  <!-- //주석해야 조직도가 나옴 <script type="text/javascript" src='/js/jquery.min.js'></script>  --> 
+ <script type="text/javascript" src='/js/fullcalendar.min.js'></script>  
  
-  <script type="text/javascript" src='/javascript/theme-chooser.js'></script>   
+  <script type="text/javascript" src='/js/theme-chooser.js'></script>   
  
-  <script type="text/javascript" src='/javascript/gcal.js'></script>   
-  <script type="text/javascript" src='/javascript/locale-all.js'></script>  
+  <script type="text/javascript" src='/js/gcal.js'></script>   
+  <script type="text/javascript" src='/js/locale-all.js'></script>  
 
 
 <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -51,8 +51,8 @@
         /*******************/	
         
         
-       	//local: 'ko',			
-		//lang: 'ko',			
+       	local: 'ko',			
+		lang: 'ko',			
 		firstDay: '0',  
 		//nowIndicator: true,
 	    //now: '2018-06-20T09:25:00', // just for demo
@@ -95,7 +95,7 @@
           ,events: 	 '/schedule/json/listSchedule/'+$('#employeeNo').val()       
           
   
-       	//  ,eventTextColor: 'yellow'
+       	  ,eventTextColor: '#000000'
 		//, eventColor: '#378006'	
 		//, eventBackgroundColor: '#378006'
 		//, eventBorderColor: '#378006'          
@@ -430,7 +430,7 @@
    
 
       change: function(themeSystem) {
-        $('#calendar').fullCalendar('option', 'themeSystem', 'bootstrap3');
+        $('#calendar').fullCalendar('option', 'themeSystem', 'bootstrap4');
       }  
 
     });  //initThemeChooser({

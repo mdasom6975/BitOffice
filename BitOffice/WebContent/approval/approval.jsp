@@ -17,12 +17,20 @@
 	<meta charset="EUC-KR">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
 	<!-- Main CSS-->
 	<link rel="stylesheet" type="text/css" href="/css/main.css">
 	<!-- Font-icon css-->
 	<link rel="stylesheet" type="text/css"
 		href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+ 	
+	   <!-- 결재순서 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	
+		  	
 	<!-- Essential javascripts for application to work-->
 	<script src="/js/jquery-3.2.1.min.js"></script>
 	<script src="/js/popper.min.js"></script>
@@ -34,17 +42,10 @@
 	<!--리스트 사용을 위한 선언-->
 	<script type="text/javascript" src="/js/plugins/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="/js/plugins/dataTables.bootstrap.min.js"></script>
-   
-	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>  -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>	 <!-- tree -->
-	<!-- <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+ 
 
-   <!-- 결재순서 -->
-   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-	
+	   	
 	<!-- tree -->
-	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script> 
    
     <!-- bootstrap datetimepicker -->
@@ -65,16 +66,15 @@
 	
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" /> 
 
-
    <!-- jQuery UI toolTip 사용 CSS-->
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <!-- jQuery UI toolTip 사용 JS-->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
   
-  
-  
   <!-- jstree css -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+	  
+
 	  
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
@@ -87,8 +87,6 @@
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 
 
-
-	
 </head>
 
 <body class="app sidebar-mini rtl">
@@ -113,6 +111,15 @@
 		<c:when test="${menu=='listApproval'}">
 			<%@include file="/approval/listApproval.jsp"%>
 		</c:when>
+		<c:when test="${menu=='listRefApproval'}">
+			<%@include file="/approval/listApproval.jsp"%>
+		</c:when>
+		<c:when test="${menu=='listCompleteApproval'}">
+			<%@include file="/approval/listApproval.jsp"%>
+		</c:when>
+		<c:when test="${menu=='listRefCompleteApproval'}">
+			<%@include file="/approval/listApproval.jsp"%>
+		</c:when>						
 		<c:when test="${menu=='updateApproval'}">
 			<%@include file="/approval/addApproval.jsp"%>
 		</c:when>

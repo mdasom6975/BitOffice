@@ -41,7 +41,7 @@
 						return;
 					}              
 
-					$("#modalForm").attr("method" , "POST").attr("action" , "/approval/addApprovalView").submit();
+					$("#modalForm").attr("method" , "POST").attr("action" , "/approval/addApprovalView?searchType="+$("#searchType").val()).submit();
 				});
 
 						 
@@ -49,7 +49,7 @@
 			
 		 $(function() {
 				$( "td:nth-child(3)" ).on("click" , function() {
-					 self.location ="/approval/getApproval?approvalNo="+$(this).text().replace(/-/g,'');
+					 self.location ="/approval/getApproval?searchType="+$("#searchType").val()+"&approvalNo="+$(this).text().replace(/-/g,'');
 				});			
 		 }); 			
 			

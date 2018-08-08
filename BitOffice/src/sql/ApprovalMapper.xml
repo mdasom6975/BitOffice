@@ -150,18 +150,54 @@
 												d.department_name as department_name,
 												p.position_name as position_name 					
 											FROM approval a, employee e, department d, position p
-											WHERE
-												  a.reg_employee_no = e.employee_no
+											WHERE												  
+												  a.reg_employee_no = e.employee_no	
+												  <if test="searchEmployeeNo !=null">
+												  	<if test="searchType==1">and (a.reg_employee_no = #{searchEmployeeNo} 
+												  									or a.reg_employee_no in 
+												  							(SELECT ae.employee_no 
+												  									FROM approval_employee ae
+												  									WHERE 
+												  										 ae.doc_no = a.doc_no
+												  										 and ae.gubun = '2'
+												  										 and ae.employee_no = #{searchEmployeeNo}))</if>												  
+												  	<if test="searchType==2">and a.reg_employee_no in 
+												  							(SELECT ae.employee_no 
+												  									FROM approval_employee ae
+												  									WHERE 
+												  										 ae.doc_no = a.doc_no
+												  										 and ae.gubun = '2'
+												  										 and ae.employee_no = #{searchEmployeeNo})</if>
+												  	<if test="searchType==3">and (a.reg_employee_no = #{searchEmployeeNo} 
+												  									or a.reg_employee_no in 
+												  							(SELECT ae.employee_no 
+												  									FROM approval_employee ae
+												  									WHERE 
+												  										 ae.doc_no = a.doc_no
+												  										 and ae.gubun = '1'
+												  										 and ae.employee_no = #{searchEmployeeNo}))</if>	
+												  	<if test="searchType==4">and a.reg_employee_no in 
+												  							(SELECT ae.employee_no 
+												  									FROM approval_employee ae
+												  									WHERE 
+												  										 ae.doc_no = a.doc_no
+												  										 and ae.gubun = '2'												  										
+												  										 and ae.employee_no = #{searchEmployeeNo})</if>													  										 											  										 
+												  </if>
+												  <if test="searchType !=null and (searchType==1 or searchType==2)">
+												  	and a.status in ('1','2')
+												  </if>	
+												  <if test="searchType !=null and (searchType==3 or searchType==4)">
+												  	and a.status in ('3','9')
+												  </if>														  											  
 											      and d.department_no = e.department_no  
 												  and p.position_no = e.position_no											
 											<if test="searchCondition != null">
 												<!-- <where>	 -->
 													<if test="searchCondition == 0 and searchKeyword !='' ">
 											 			and a.title like '%'||#{searchKeyword}||'%'
-													</if>													
-													<if test="searchCondition == 1 and searchKeyword !='' ">
-										 				and e.employee_name like '%'||#{searchKeyword}||'%'
 													</if>
+
 												<!-- </where> -->
 											</if>
 											ORDER BY a.reg_date	desc, a.doc_no desc) inner_table
@@ -206,23 +242,58 @@
 						FROM approval a, employee e, department d, position p
 						WHERE
 							  a.reg_employee_no = e.employee_no
+						  <if test="searchEmployeeNo !=null">
+						  	<if test="searchType==1">and (a.reg_employee_no = #{searchEmployeeNo} 
+						  									or a.reg_employee_no in 
+						  							(SELECT ae.employee_no 
+						  									FROM approval_employee ae
+						  									WHERE 
+						  										 ae.doc_no = a.doc_no
+						  										 and ae.gubun = '2'
+						  										 and ae.employee_no = #{searchEmployeeNo}))</if>												  
+						  	<if test="searchType==2">and a.reg_employee_no in 
+						  							(SELECT ae.employee_no 
+						  									FROM approval_employee ae
+						  									WHERE 
+						  										 ae.doc_no = a.doc_no
+						  										 and ae.gubun = '2'
+						  										 and ae.employee_no = #{searchEmployeeNo})</if>
+						  	<if test="searchType==3">and (a.reg_employee_no = #{searchEmployeeNo} 
+						  									or a.reg_employee_no in 
+						  							(SELECT ae.employee_no 
+						  									FROM approval_employee ae
+						  									WHERE 
+						  										 ae.doc_no = a.doc_no
+						  										 and ae.gubun = '1'
+						  										 and ae.employee_no = #{searchEmployeeNo}))</if>	
+						  	<if test="searchType==4">and a.reg_employee_no in 
+						  							(SELECT ae.employee_no 
+						  									FROM approval_employee ae
+						  									WHERE 
+						  										 ae.doc_no = a.doc_no
+						  										 and ae.gubun = '2'												  										
+						  										 and ae.employee_no = #{searchEmployeeNo})</if>													  										 											  										 
+						  </if>
+						  <if test="searchType !=null and (searchType==1 or searchType==2)">
+						  	and a.status in ('1','2')
+						  </if>	
+						  <if test="searchType !=null and (searchType==3 or searchType==4)">
+						  	and a.status in ('3','9')
+						  </if>								  
 						      and d.department_no = e.department_no  
 							  and p.position_no = e.position_no							
 						<if test="searchCondition != null">
 							<!-- <where> -->
 								<if test="searchCondition == 0 and searchKeyword !='' ">
 						 			and a.title like '%'||#{searchKeyword}||'%'
-								</if>							
-								<if test="searchCondition == 1 and searchKeyword !='' ">
-						 			and e.employee_name like '%'||#{searchKeyword}||'%'
-								</if>
+								</if>			
 
 							<!-- </where> -->
 						</if> ) countTable						
 	 </select>
 	 
 	<!-- SQL : SELECT ROW Count -->	 
-	 <select  id="getTotalCountStatus"  parameterType="search"	 resultType="int">
+	 <select  id="getTotalCountStatus"  parameterType="approval"	 resultType="int">
 	  	SELECT COUNT(*)
 	  	FROM(	SELECT doc_no
 				FROM approval

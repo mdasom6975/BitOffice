@@ -5,9 +5,8 @@
 
 	<div class="app-title">
 		<div>
-			<h1>일정관리</h1>		
-			<p><span class="label label-primary"">내일정</span>
-			   <span class="label label-warning"">전체공유</span>
+			<h1><i class="app-menu__icon fa fa-calendar"></i>일정관리</h1>		
+			<p><span class="label label-warning" style="background-color:#FFBB00">전체공유</span> <span class="label label-primary" style="background-color:#0099ff"> 내일정</span> 
 				공유된 임직원의 일정 색상 변경가능합니다</p>
 		</div>
 	</div>
@@ -35,11 +34,10 @@
 	</div>
 	<!--//Modal -->
 
-	<div class="container">   
-		
+	<div class="row">   
 			<div class="container-fluid">
 				<div class="row content">	    		
-					<div class="col-sm-3">	
+					<div class="col-sm-2">	
 							<input type="hidden" name="employeeNo" id="employeeNo" value="${sessionScope.employee.employeeNo}">	
 				      <!--  table Start /////////////////////////////////////-->
 				      <table class="table table-hover table-striped" >
@@ -64,14 +62,14 @@
 				      
 				      </table>
 		  <!--  table End /////////////////////////////////////-->												
-						    <div id="allsee">[공유신청펼치기]</div>
-						    <div id="SimpleJSTree"></div>   
+						    <div style="cursor:pointer;color:#0000FF"><span id="allsee" class="badge badge-pill badge-info" style="font-size:13px;">[공유신청펼치기]<span></div>
+						    <div id="SimpleJSTree" style="overflow-y: auto; height:600px;"></div>   
 							<div id="dvTreeStructure"></div>
 	
 						    
 					</div>
-					<div class="col-sm-9" style="background-color:#F6F6F6">
-						  <jsp:include page='/schedule/listSchedule.jsp' flush="false"></jsp:include>   
+					<div class="col-sm-7" style="background-color:#F6F6F6">
+						  <jsp:include page='/schedule/listSchedule.jsp' flush="true"></jsp:include>   
 		  			</div>
 		  		</div>
 			</div>		

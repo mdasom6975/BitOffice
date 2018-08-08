@@ -39,8 +39,8 @@ public class ApprovalDAOImpl implements ApprovalDAO{
 		return sqlSession.selectOne("ApprovalMapper.getApproval", approvalId);
 	}
 	
-	public int getTotalCountStatus(String employeeNo) throws Exception {
-		int resultvalue = sqlSession.selectOne("ApprovalMapper.getTotalCountStatus", employeeNo);
+	public int getTotalCountStatus(Approval approval) throws Exception {
+		int resultvalue = sqlSession.selectOne("ApprovalMapper.getTotalCountStatus", approval);
 		return resultvalue;
 	}	
 	

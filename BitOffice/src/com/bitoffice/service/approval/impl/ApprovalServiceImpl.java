@@ -52,8 +52,8 @@ public class ApprovalServiceImpl implements ApprovalService{
 		return map;
 	}
 	
-	public int getTotalCountStatus(String EmployeeNo) throws Exception {
-		int resultValue = approvalDao.getTotalCountStatus(EmployeeNo);
+	public int getTotalCountStatus(Approval approval) throws Exception {
+		int resultValue = approvalDao.getTotalCountStatus(approval);
 		return resultValue;
 	}	
 

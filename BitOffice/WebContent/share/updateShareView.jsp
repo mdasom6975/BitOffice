@@ -3,7 +3,8 @@
 
 	<div class="app-title">
 		<div>
-			<h1>공유신청자조회</h1>			
+			<h1><i class="app-menu__icon fa fa-calendar"></i>공유신청자조회</h1>
+			<p>수락 선택시, 내일정이 공유됩니다</p>			
 		</div>
 	</div>
 	
@@ -30,17 +31,17 @@
 	</div>
 	
 	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="tab-pane fade active show">
+	<div class="tile">
 	        
 	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->	
-		<div class="row">	    		    
+<%-- 		<div class="row">	    		    
 		    <div class="col-md-6 text-left">
 		    	<p class="text-primary">
 		    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
 		    	</p>
 		    </div>
 		    
-		    <div class="col-md-6 text-right">
+		    <div class="col-md-6 text-right" style="display: flex; justify-content: flex-end;">
 			    <form class="form-inline" name="detailForm">
 			    
 				  <div class="form-group">
@@ -55,7 +56,7 @@
 				    <input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="검색어"
 				    			 value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
 				  </div>
-				  
+				  &nbsp;
 				  <button type="button" class="btn btn-default">검색</button>
 				  
 				  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
@@ -65,20 +66,20 @@
 				</form>
 	    	</div>
 	    	
-		</div>
+		</div> --%>
 		<!-- table 위쪽 검색 Start /////////////////////////////////////-->
 		
 		
       <!--  table Start /////////////////////////////////////-->
-      <table class="table table-hover table-striped" >
+      <table class="table table-hover table-striped" id="myTable2" style="margin-top: 10px;" >
       
         <thead>
           <tr>
-            <th align="center">NO</th>
-            <th align="center">신청일자</th>
-            <th align="left">부서</th>
-            <th align="left">직급</th>
-            <th align="left">공유요청자</th>
+            <th align="left">NO</th>
+            <th align="right" onclick="sortTable(1);" style="cursor:pointer">신청일자</th>
+            <th align="left" onclick="sortTable(2);" style="cursor:pointer">부서</th>
+            <th align="left" onclick="sortTable(3);" style="cursor:pointer">직급</th>
+            <th align="left" onclick="sortTable(4);" style="cursor:pointer">공유요청자</th>
             <th align="left">수락여부</th>
             <th align="left">삭제</th>
           </tr>
@@ -93,7 +94,7 @@
 				 <c:if test="${employ_No eq share.acceptEmployeeNo}"> 
 					<c:set var="i" value="${ i+1 }" />
 					<tr>
-					  <td align="center">${i}</td>
+					  <td align="left">${i}</td>
 					   <td align="left">${share.regDate}</td>
 					  <td align="left">${share.requestDepartmentName}</td>
 					  <td align="left">${share.requestPostionName}</td> 
@@ -113,11 +114,6 @@
       
       </table>
 	  <!--  table End /////////////////////////////////////-->
-	  
- 	<!-- PageNavigation Start... -->
-	<jsp:include page="../common/pageNavigator_new.jsp"/>
-	<!-- PageNavigation End... -->
-	
 		  
  	</div>
  	<!--  화면구성 div End /////////////////////////////////////-->

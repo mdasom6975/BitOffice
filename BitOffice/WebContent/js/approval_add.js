@@ -103,9 +103,11 @@
 							$.each(jsonInfo,function(key,value) {
 								var approvalDate="";
 								var signImage="";
-								middleTdWidth-=(key*5);
+								
 								
 								if (value.gubun==1){//결재라인
+									middleTdWidth-=(key*10);
+									
 									 if (value.approvalDate!=null){
 									 	approvalDate = value.approvalDate;
 									 }
@@ -118,14 +120,14 @@
 									 }
 									 
 					       	        if (key==0){
-						       	    	approvalTable+="<td id='seungin' style='width:5%;vertical-align:middle;background-color:#D5D5D5;'>승<br><br><br>인</td>";					       	    	
+						       	    	approvalTable+="<td id='seungin' style='width:30px;vertical-align:middle;background-color:#D5D5D5;'>승<br><br><br>인</td>";					       	    	
 					       	        }										 
 									 
-				       	      		 approvalTable+="<td style='width:13%;' name='eachApprovalPerson'><table class='table table-bordered' style='text-align: center; vertical-align:middle;boder: 1px solid #dddddd'>";
-				        		 	 approvalTable+="<tr><td'>"+value.positionName+"</td></tr>";											
-				        		 	 approvalTable+="<tr><td>"+value.employeeName+"</td></tr>";
-				        		 	 approvalTable+="<tr height='20px'><td>"+approvalDate+"</td></tr>";	
-				        		 	 approvalTable+="<tr height='20px'><td style='color:#FF0000;'>"+status+"</td></tr>";        		 	
+				       	      		 approvalTable+="<td name='eachApprovalPerson'><table style='width:100%;height:100%;text-align: center; boder: 1px solid #dddddd'>";
+				        		 	 approvalTable+="<tr><td style='width:100px;height:46px'>"+value.positionName+"</td></tr>";											
+				        		 	 approvalTable+="<tr><td style='width:100px;height:46px'>"+value.employeeName+"</td></tr>";
+				        		 	 approvalTable+="<tr><td style='width:100px;height:46px'>"+approvalDate+"</td></tr>";	
+				        		 	 approvalTable+="<tr><td style='width:100px;height:46px;color:#FF0000;'>"+status+"</td></tr>";        		 	
 				        		 	 approvalTable+="</table></td>"; 
 				        		 	 
 				        		 	 app_member+="<input type='hidden' name='approvalArray' value='"+value.employeeNo+"'>";
@@ -226,55 +228,61 @@
    		//============= "결재자 선택"  Event  처리 =============	
          $("#sel1").click(function(){
 
-           	var approvalEmployeeNo = $('#SimpleJSTree').jstree('get_selected');      	               	
-         
-            if (approvalEmployeeNo.length >7){
-            	alert("결재자는 최대 7명 등록 가능합니다");
-            	return;
-            }
-          	for (var i=0;i<approvalEmployeeNo.length;i++) {
-          		if (approvalEmployeeNo[i].length>2){
-          			
-          			var approvalEmployeeName = $("#SimpleJSTree").jstree('get_selected', true)[i].text;	
-          			var li_span ="";
-          			li_span +="<li style='background-color:#ffffff;width:160px;height:30px;' id='auth_"+approvalEmployeeNo[i]+"' employInfo='"+approvalEmployeeName+"'>";
-      				li_span +="<span class='ui-icon ui-icon-arrowthick-2-n-s'></span><h6>"+approvalEmployeeName+" <a onclick=del('auth_"+approvalEmployeeNo[i]+"')>삭제</a></h6></li>";
-      				$("#authorizationPerson").append(li_span);
-         		
-         			
-          		}
-         	}  
+            	var approvalEmployeeNo = $('#SimpleJSTree').jstree('get_selected');      	               	
+          
+ /*            if (approvalEmployeeNo.length >7){
+             	alert("결재자는 최대 7명 등록 가능합니다");
+             	return;
+             }     */      	
 
-         	$('#SimpleJSTree').jstree(true).deselect_all();
-         		
-		}); 
-   		
-   		
-       //============= "참조인 선택"  Event  처리 =============	 
-         $("#sel2").click(function(){
-
-          	var approvalEmployeeNo = $('#SimpleJSTree').jstree('get_selected');
-               	
-            if (approvalEmployeeNo.length >7){
-            	alert("참조인은 최대 7명 등록 가능합니다");
-            	return;
-            }
-            
-           	for (var i=0;i<approvalEmployeeNo.length;i++) {           		
-           		if (approvalEmployeeNo[i].length>2){           			
+            	
+           	for (var i=0;i<approvalEmployeeNo.length;i++) {   		
+           		
+           		
+           		if (approvalEmployeeNo[i].length>4){
            			
-          			var approvalEmployeeName = $("#SimpleJSTree").jstree('get_selected', true)[i].text;	
-          			var li_span ="";
-	          			li_span +="<li style='background-color:#ffffff;width:180px;height:30px;' id='ref_"+approvalEmployeeNo[i]+"'>";
-	      				li_span +="<h6>"+approvalEmployeeName+" <a onclick=del('ref_"+approvalEmployeeNo[i]+"')>삭제</a></h6></li>";
-     			$("#referencePerson").append(li_span); 
-     			
+           			var approvalEmployeeName = $("#SimpleJSTree").jstree('get_selected', true)[i].text;	
+           			var li_span ="";
+           				li_span +="<li style='background-color:##99CCFF;width:160px;height:30px;' id='auth_"+approvalEmployeeNo[i]+"' employInfo='"+approvalEmployeeName+"'>";
+           				li_span +=" <h6>↕ "+approvalEmployeeName+" <a onclick=del('auth_"+approvalEmployeeNo[i]+"')>삭제</a></h6></li>";
+          			$("#authorizationPerson").append(li_span);
+          			
            		}
           	}  
 
           	$('#SimpleJSTree').jstree(true).deselect_all();
           		
- 		});   
+ 		}); 
+   		
+   		
+       //============= "참조인 선택"  Event  처리 =============	 
+         $("#sel2").click(function(){
+
+           	var approvalEmployeeNo = $('#SimpleJSTree').jstree('get_selected');     
+            
+             
+ /*            if (approvalEmployeeNo.length >7){
+             	alert("참조인은 최대 7명 등록 가능합니다");
+             	return;
+             }    */         
+
+           
+            	for (var i=0;i<approvalEmployeeNo.length;i++) {           		
+            		if (approvalEmployeeNo[i].length>4){           			
+            			
+           			var approvalEmployeeName = $("#SimpleJSTree").jstree('get_selected', true)[i].text;
+           			
+           			var li_span ="";
+           				li_span +="<li style='background-color:#CCCCCC;width:130px;height:30px;' id='ref_"+approvalEmployeeNo[i]+"' employInfo='"+approvalEmployeeName+"'>";
+           				li_span +=" <h6>↕ "+approvalEmployeeName.trim()+" <a onclick=del('ref_"+approvalEmployeeNo[i]+"')>삭제</a></h6></li>";
+          			$("#referencePerson").append(li_span);
+            		}
+           	}  
+
+           	$('#SimpleJSTree').jstree(true).deselect_all();
+           		
+  		});	
+   
          
         //모달창에서 선택된 결재자, 참조인 기안폼으로 보내기 
          $("#personSubmit").click(function(){
@@ -304,15 +312,15 @@
 	       	  	 middleTdWidth-=(i*10);
 	       	  	 
 	       	     if( i==0){
-		       	   	approvalTable+="<td id='seungin' style='width:5%;vertical-align:middle;background-color:#D5D5D5;'>승<br><br><br>인</td>";
+		       	   	approvalTable+="<td id='seungin' style='width:30px;vertical-align:middle;background-color:#D5D5D5;'>승<br><br><br>인</td>";
 		       	 }	       	  	 
        	         
-       	         if (thisId.trim().length>5){           	    
-       	      		 approvalTable+="<td style='width:13%' name='eachApprovalPerson'><table class='table table-bordered' style='text-align: center; boder: 1px solid #dddddd'>";
+       	         if (thisId.trim().length>4){           	    
+       	      		 approvalTable+="<td style='width:70px;text-align:center' name='eachApprovalPerson'><table class='table table-bordered' style='width:100%;text-align: center; boder: 1px solid #dddddd'>";
         		 	 approvalTable+="<tr><td>"+thisPosion+"</td></tr>";											
         		 	 approvalTable+="<tr><td>"+thisName+"</td></tr>";
-        		 	 approvalTable+="<tr height='20px'><td></td></tr>";	
-        		 	 approvalTable+="<tr height='20px'><td></td></tr>";        		 	
+        		 	 approvalTable+="<tr height='30px'><td></td></tr>";	
+        		 	 approvalTable+="<tr height='30px'><td></td></tr>";        		 	
         		 	 approvalTable+="</table></td>";        		 	
         		 	 
         		 	$("#middleTd").css('width',middleTdWidth+'%'); 

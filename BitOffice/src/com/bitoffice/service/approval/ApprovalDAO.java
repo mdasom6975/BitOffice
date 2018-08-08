@@ -14,7 +14,7 @@ public interface ApprovalDAO {
 	public Approval getApproval(String approvalId) throws Exception ;
 
 	// SELECT ONE
-	public int getTotalCountStatus(String employeeNo) throws Exception ;	
+	public int getTotalCountStatus(Approval approval) throws Exception ;	
 	
 	// SELECT LIST
 	public List<Approval> getApprovalList(Search search) throws Exception ;
