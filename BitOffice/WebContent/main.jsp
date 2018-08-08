@@ -58,9 +58,7 @@
     </aside>
 
     <main class="app-content">
-    <!-- 접속자 ID -->
-	<input type="hidden" id="employeeNo" value="${sessionScope.employee.employeeNo }">
-	
+
       <div class="row">
         <div class="col-md-6 col-lg-3">
           <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
@@ -81,17 +79,17 @@
         </div>
         <div class="col-md-6 col-lg-3">
           <div class="widget-small danger coloured-icon"><i class="icon fa fa-star fa-3x"></i>
-            <div class="info" id="countGetApprovalWait">
-<!--               <h4>결재 대기건</h4>
-              <p><b>500</b></p>-->
-            </div> 
+            <div class="info">
+              <h4>결재 대기건</h4>
+              <p><b>500</b></p>
+            </div>
           </div>
         </div>
           <div class="col-md-6 col-lg-3">
           <div class="widget-small info coloured-icon"><i class="icon fa fa-thumbs-o-up fa-3x"></i>
-            <div class="info" id="countGetApprovalComplete">
-<!--               <h4>결재 완료건</h4>
-              <p><b>25</b></p> -->
+            <div class="info">
+              <h4>결재 완료건</h4>
+              <p><b>25</b></p>
             </div>
           </div>
         </div>
@@ -100,6 +98,7 @@
 <div class="col-md-6">
           <div class="tile">
             <h3 class="tile-title">임직원</h3>
+            <h5 class="tile-subtitle" style="text-align: right;"id="moreEmployee">more▶</h5>
             <table class="table" >
 						<thead>
 							<tr>
@@ -107,6 +106,7 @@
 								<th>부서</th>
 								<th>직급</th>
 								<th>이름</th>
+								<th>사번</th>
 								<th>이메일</th>
 								<th>내선번호</th>
 							</tr>
@@ -122,6 +122,7 @@
         <div class="col-md-6">
           <div class="tile">
             <h3 class="tile-title">최근 업데이트 공지사항</h3>
+            <h5 class="tile-subtitle" style="text-align: right;" id="moreBoard">more▶</h5>
             <table class="table" >
 						<thead>
 							<tr>
@@ -146,14 +147,15 @@
         <div class="col-md-6">
           <div class="tile">
             <h3 class="tile-title">일정관리</h3>
-            <p id="shareList"><span class="label label-warning" style="background-color:#FFBB00">전체공유</span> <span class="label label-primary" style="background-color:#0099ff"> 내일정</span></p>
-				<div><jsp:include page='/schedule/listSchedule.jsp' flush="false"></jsp:include></div>	
-           </div>
+            <ul>
+              <li>Built with Bootstrap 4, SASS and PUG.js</li>
+            </ul>
+            <p>Vali is a free and responsive admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.</p>
+            <p class="mt-4 mb-4"><a class="btn btn-primary mr-2 mb-2" href="http://pratikborsadiya.in/blog/vali-admin" target="_blank"><i class="fa fa-file"></i>Docs</a>
+            <a class="btn btn-info mr-2 mb-2" href="https://github.com/pratikborsadiya/vali-admin" target="_blank"><i class="fa fa-github"></i>GitHub</a>
+            <a class="btn btn-success mr-2 mb-2" href="https://github.com/pratikborsadiya/vali-admin/archive/master.zip" target="_blank"><i class="fa fa-download"></i>Download</a></p>
+          </div>
         </div>
-        
-        
-        
-        
         <div class="col-md-6">
           <div class="tile">
             <h3 class="tile-title">금일 회의실 예약 현황</h3>

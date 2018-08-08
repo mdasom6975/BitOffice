@@ -1,7 +1,8 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=refs/remotes/origin/master
 eclipse.preferences.version=1
-<<<<<<< HEAD
-encoding//WebContent/js/addEmployee.js=EUC-KR
-=======
+encoding//WebContent/common/pageNavigator_new.jsp=UTF-8
 encoding//WebContent/javascript/calendar.js=EUC-KR
 encoding//WebContent/javascript/fullcalendar.js=EUC-KR
 encoding//WebContent/javascript/fullcalendar.min.js=EUC-KR
@@ -9,7 +10,7 @@ encoding//WebContent/javascript/gcal.js=EUC-KR
 encoding//WebContent/javascript/locale-all.js=UTF-8
 encoding//WebContent/javascript/moment.min.js=EUC-KR
 encoding//WebContent/javascript/theme-chooser.js=EUC-KR
->>>>>>> refs/remotes/origin/master
+encoding//WebContent/js/addEmployee.js=EUC-KR
 encoding//WebContent/js/approval_add.js=EUC-KR
 encoding//WebContent/js/approval_addView.js=EUC-KR
 encoding//WebContent/js/approval_get.js=EUC-KR

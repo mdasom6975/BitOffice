@@ -77,13 +77,13 @@ public class BoardRestController {
 		
 		file.transferTo(f);
 		
-		Thread.sleep(3000);
 		
+		Thread.sleep(3000);	
 		JSONObject jsonObject =new JSONObject();
 		jsonObject.put("url","../images/boardFile/"+str_filename);
 
 		System.out.println(jsonObject);
-			
+		
 		return jsonObject;
 	}
 	

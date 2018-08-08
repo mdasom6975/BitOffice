@@ -5,7 +5,7 @@
               <div class="tile user-settings">
                 <h4 class="line-head">
                 <i class="fa fa-pencil "></i>
-                내 정보 수정</h4>
+                임직원 정보 수정</h4>
                 <form enctype="multipart/form-data">
 			
 			<div class="row mb-4">

@@ -83,7 +83,7 @@
 							<c:forEach var="employee" items="${list}">
 								<c:set var="i" value="${ i+1 }" />
 								<tr>
-									<td>${ i }</td>
+									<td>${i}</td>
 									<td>${employee.departmentName}</td>
 									<td>${employee.positionName}</td>
 									<td class="getEmployee" title="Click : 임직원 정보 상세보기"
