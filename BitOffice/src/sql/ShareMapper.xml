@@ -102,9 +102,8 @@
 									  s2.accept_employee_no = e2.employee_no
 									  and e2.department_no = d2.department_no
 									  and e2.position_no = p2.position_no	  					
-									  ORDER BY s2.reg_Date DESC) inner_table
-						WHERE ROWNUM &lt;= #{endRowNum} )
-		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+									  ORDER BY s2.reg_Date DESC) inner_table)
+
 	 </select>
 	 	<!--  위 두번째 subQuery 의  
 	 			WHERE ROWNUM &lt;= #{endRowNum} ) 는

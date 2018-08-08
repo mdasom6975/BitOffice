@@ -89,29 +89,85 @@ $(document).ready(function(){
 	});
 	
 	//=========전자결재 상태별 건수 docStatus: 1 대기 2 진행 3 완료  9 반려 목록 구성 ====================================
-	$(document).ready(function(){      
-		      
+	$(document).ready(function(){     
+		        
 		    	$.ajax({
 		    		url : "/approval/json/getTotalCountStatus",
 					method : "POST" ,
 					data : { 
-						"docStatus": 		'1' ,			
-						"regEmployeeNo":	'333333'			
+						"docStatus": 	 '1',			
+						"regEmployeeNo": $("#employeeNo").val()			
 								} ,	
 					contentType : "application/x-www-form-urlencoded; charset=UTF-8",
 					dataType : "text" ,
-					success : function(resultValue, status) {
-						alert("returnValue:"+resultValue);
-						if (resultValue.indexOf(1)>=0){ 							
-							alert("전자결재 상태(1)조회되었습니다.");										
-						}else{
-							alert("전자결재 상태(1)조회실패! 관리자에게 문의!");									
-						}
-					},
-					error : function(request, status,error) {
-				        alert("전자결재 상태 조회 접속 error");
-				        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-				    }							
+					success : function(resultValue, status) {						
+			              $("#countGetApprovalWait").append(
+			            		  '<h4>결재대기건</h4><p><b>'+
+			            		  resultValue+
+			            		  '</b></p>'
+			              
+			              );			              
+					}
+						
 			}); ////ajax 
 	    });	
-
+	
+	$(document).ready(function(){     
+        
+    	$.ajax({
+    		url : "/approval/json/getTotalCountStatus",
+			method : "POST" ,
+			data : { 
+				"docStatus": 	 '2',			
+				"regEmployeeNo": $("#employeeNo").val()			
+						} ,	
+			contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+			dataType : "text" ,
+			success : function(resultValue, status) {						
+	              $("#countGetApprovalComplete").append(
+	            		  '<h4>결재진행건</h4><p><b>'+
+	            		  resultValue+
+	            		  '</b></p>'
+	              
+	              );			              
+			}
+				
+	}); ////ajax 
+});	
+	
+	
+//=========일정공유 ====================================
+	$(document).ready(function(){     	
+		    //공유 수락자 조회
+		    $.ajax( 
+					{
+						
+						url : "/share/json/listShare2/"+$("#employeeNo").val()	,
+						method : "GET" ,
+						dataType : "json" ,
+						headers : {
+							"Accept" : "application/json",
+							"Content-Type" : "application/json"
+						},
+						success : function(jsonInfo , status) {
+							
+								if (jsonInfo){
+									
+							    	var displayValue="";
+		
+							    	 
+									$.each(jsonInfo,function(key,value) {								
+										displayValue += " <span class='label label-warning' style='background-color:"+value.shareColor+"'>"+value.acceptDepartmentName+" "+value.acceptPositionName+" "+value.acceptEmployeeName+"</span>";						
+									});									
+									
+									$('#shareList').append(displayValue);
+									
+								}
+								//alert('key:'+key+', acceptDepartmentName:'+value.acceptDepartmentName+',acceptEmployeeName:'+value.acceptEmployeeName);									
+		
+						},error : function(error) {
+					        //alert("공유자조회실패!");
+					    }
+		
+				});  //////////공유 수락자 조회			
+	});

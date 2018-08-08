@@ -69,10 +69,13 @@
 							
 							$.each(jsonInfo,function(key,value) {
 								var approvalDate="";
-								var signImage="";
-								middleTdWidth-=(key*10);
+								var signImage="";			
+								
 								
 								if (value.gubun==1){//결재라인
+									
+									 middleTdWidth-=(key*10);
+									
 									 if (value.approvalDate!=null){
 									 	approvalDate = value.approvalDate;
 									 }
@@ -94,15 +97,15 @@
 									 }
 									 
 					       	        if (key==0){
-						       	    	approvalTable+="<td style='width:5%;vertical-align:middle;background-color:#D5D5D5;'>승<br><br><br>인</td>";					       	    	
+						       	    	approvalTable+="<td style='width:30px;vertical-align:middle;background-color:#D5D5D5;'>승<br><br><br>인</td>";					       	    	
 					       	        }	
 					       	        
 						       	        
-				       	      		 approvalTable+="<td style='width:100px;' name='eachApprovalPerson'><table class='table table-bordered' style='text-align: center; vertical-align:middle;boder: 1px solid #dddddd'>";
-				        		 	 approvalTable+="<tr><td>"+value.positionName+"</td></tr>";											
-				        		 	 approvalTable+="<tr><td>"+value.employeeName+"</td></tr>";
-				        		 	 approvalTable+="<tr height='50px'><td>"+approvalDate+"</td></tr>";	
-				        		 	 approvalTable+="<tr height='50px'><td style='color:#FF0000;'>"+status+"</td></tr>";        		 	
+				       	      		 approvalTable+="<td name='eachApprovalPerson'><table style='width:100%;height:100%;text-align:center; boder: 1px solid #dddddd' cellspacing=0 cellpadding=0>";
+				        		 	 approvalTable+="<tr><td style='width:100px;height:46px'>"+value.positionName+"</td></tr>";											
+				        		 	 approvalTable+="<tr><td style='width:100px;height:46px'>"+value.employeeName+"</td></tr>";
+				        		 	 approvalTable+="<tr><td style='width:100px;height:46px'>"+approvalDate+"</td></tr>";	
+				        		 	 approvalTable+="<tr><td style='width:100px;height:46px;color:#FF0000;'>"+status+"</td></tr>";        		 	
 				        		 	 approvalTable+="</table></td>"; 
 				        		 	 
 				        		 	 app_member+="<input type='hidden' name='approvalArray' value='"+value.employeeNo+"'>";
@@ -113,7 +116,8 @@
 				        		 	 }
 				        		 	 
 								}else{//참조라인
-									 ref_member+="<input type='hidden' name='referenceArray' value='"+value.employeeNo+"'>";
+									 //ref_member+="<input type='hidden' name='referenceArray' value='"+value.employeeNo+"'>";
+									ref_member+="<span class='badge badge-pill badge-info'>"+value.departmentName+" "+value.positionName+" "+value.employeeName+"</span> ";
 								}
 								
 							});							
@@ -315,12 +319,12 @@
 	       	   	 var thisName = employInfo[1];
 
        	        
-       	         if (thisId.trim().length>5){           	    
-       	      		 approvalTable+="<td name='eachApprovalPerson'><table class='table table-bordered' style='text-align: center; boder: 1px solid #dddddd'>";
-        		 	 approvalTable+="<tr><td >1111"+thisPosion+"</td></tr>";											
-        		 	 approvalTable+="<tr><td >"+thisName+"</td></tr>";
-        		 	 approvalTable+="<tr height='25px'><td ></td></tr>";	
-        		 	 approvalTable+="<tr height='25px' style='height:70%'><td></td></tr>";        		 	
+       	         if (thisId.trim().length>4){           	    
+       	      		 approvalTable+="<td name='eachApprovalPerson'><table style='width:100%;height:100%;text-align:center; boder: 1px solid #dddddd' cellspacing=0 cellpadding=0>";
+        		 	 approvalTable+="<tr><td style='width:100px;height:46px'>"+thisPosion+"</td></tr>";											
+        		 	 approvalTable+="<tr><td style='width:100px;height:46px'>"+thisName+"</td></tr>";
+        		 	 approvalTable+="<tr><td style='width:100px;height:46px'></td></tr>";	
+        		 	 approvalTable+="<tr><td style='width:100px;height:46px;color:#FF0000;'></td></tr>";        		 	
         		 	 approvalTable+="</table></td>";  
         		 	 
         		 	$("#approvalLine").append(approvalTable); 
@@ -479,11 +483,11 @@
 			$('#permit_modal').modal('show');
 			
 			if ($(this).attr('id')=="permitApproval"){
-			   $("#headerTitle").css("color","#0099FF")
+			   $("#headerTitle").css("color","#0033CC")
 			   $("#headerTitle").text('승인');
 			   $("#say").val("Y");
 			}else{
-			   $("#headerTitle").css("color","#CC3333")
+			   $("#headerTitle").css("color","#FF0000")
 			   $("#headerTitle").text('반려');
 			   $("#say").val("N");
 			}
@@ -872,3 +876,6 @@
 		         $(this).val($(this).val().replace(/[^0-9]/g,""));
 		    }); 
 		}  
+	 
+ 
+ 

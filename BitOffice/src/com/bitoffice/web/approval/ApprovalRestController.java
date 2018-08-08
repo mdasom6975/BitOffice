@@ -161,8 +161,8 @@ public class ApprovalRestController {
 		//Approval approval = approvalService.getApproval(serialNo);
 		// Model 과 View 연결
 		//model.addAttribute("approval", approval);
-		
-		return approvalService.getTotalCountStatus(approval.getRegEmployeeNo());
+		System.out.println("값:"+approvalService.getTotalCountStatus(approval));
+		return approvalService.getTotalCountStatus(approval);
 
 	}	
 	

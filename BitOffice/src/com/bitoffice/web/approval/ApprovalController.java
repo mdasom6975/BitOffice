@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.bitoffice.common.Page;
 import com.bitoffice.common.Search;
 import com.bitoffice.service.domain.Approval;
+import com.bitoffice.service.domain.Employee;
 import com.bitoffice.service.approval.ApprovalService;
 
 
@@ -150,24 +151,41 @@ public class ApprovalController {
 	}
 
 	
-	@RequestMapping( value="listApproval" )
-	public String listApproval( @ModelAttribute("search") Search search , Model model , HttpServletRequest request) throws Exception{
+	@RequestMapping( value= "listApproval" )
+	public String listApproval( @ModelAttribute("search") Search search,  
+			Model model , HttpServletRequest request, HttpSession session) throws Exception{
 		
-		System.out.println("/approval/listApproval : GET / POST");
+		System.out.println("/approval/listApproval : GET / POST:"+search.getSearchType());
 		
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);
 		}
 		search.setPageSize(pageSize);
 		
-		// Business logic 수행
+		String EmployeeNo = ((Employee) session.getAttribute("employee")).getEmployeeNo();
+		
+		search.setSearchEmployeeNo(EmployeeNo);
+		search.setSearchType(search.getSearchType());
+		
+		// Business logic 수행		
+		String menu="";
+		
+		if (search.getSearchType().equals("1")){//결재대기문서
+			menu ="listApproval"; 
+		}else if(search.getSearchType().equals("2")) {//참조대기문서
+			menu ="listRefApproval";
+		}else if(search.getSearchType().equals("3")) {//기안완료함
+			menu ="listCompleteApproval";
+		}else if(search.getSearchType().equals("4")) {//참조완료함
+			menu ="listRefCompleteApproval";
+		}
+		
 		Map<String , Object> map=approvalService.getApprovalList(search);
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println(resultPage);
 
-		String menu="";
-		menu ="listApproval";
+
 		
 		// Model 과 View 연결
 		model.addAttribute("menu",menu);		

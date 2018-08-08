@@ -82,6 +82,7 @@
 		FROM schedule s1, employee e, department d, position p
 		WHERE
 			s1.employee_no = #{searchKeyword}
+			AND s1.share_range not in ('3')
 			AND s1.employee_no = e.employee_no
 		    AND d.department_no = e.department_no  
 			AND p.position_no = e.position_no					
@@ -125,7 +126,7 @@
 			e.employee_name as employeeName	
 		FROM schedule s3, employee e, department d, position p
 		WHERE s3.share_range in ('3')
-		AND s3.employee_no != #{searchKeyword}
+		<!--AND s3.employee_no != #{searchKeyword}-->
 		AND s3.employee_no = e.employee_no
 		AND d.department_no = e.department_no  
 		AND p.position_no = e.position_no	

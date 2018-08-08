@@ -8,6 +8,7 @@
         <div>
           <p class="app-sidebar__user-name">이름 : ${employee.employeeName}</p>
           <p class="app-sidebar__user-designation">부서 : ${employee.departmentName}</p>
+
         </div>
       </div>
 <!-- 프로필 영역  -->
@@ -23,7 +24,7 @@
           </ul>
         </li>
         
-        <li><a class="app-menu__item" href="/employee/listEmployee"><i class="app-menu__icon fa fa-address-card"></i><span class="app-menu__label">임직원 목록</span></a></li>
+		<li><a class="app-menu__item" href="/employee/listEmployee?orderby="><i class="app-menu__icon fa fa-address-card"></i><span class="app-menu__label">임직원 목록</span></a></li>
 
         <li class="treeview"><a class="app-menu__item" href="" data-toggle="treeview"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">근태</span>
         <i class="treeview-indicator fa fa-angle-right"></i></a>
@@ -52,10 +53,10 @@
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-exchange"></i><span class="app-menu__label">전자결재</span>
         <i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-            <li><a class="treeview-item" href="/approval/listApproval"><i class="icon fa fa-circle-o"></i>결재대기문서</a></li>
-            <li><a class="treeview-item" href="table-data-table.html"><i class="icon fa fa-circle-o"></i>참조대기문서</a></li>
-          <li><a class="treeview-item" href="table-data-table.html"><i class="icon fa fa-circle-o"></i>기안완료함</a></li>
-          <li><a class="treeview-item" href="table-data-table.html"><i class="icon fa fa-circle-o"></i>참조완료함</a></li>
+            <li><a class="treeview-item" href="/approval/listApproval?searchType=1"><i class="icon fa fa-circle-o"></i>결재대기문서</a></li>
+            <li><a class="treeview-item" href="/approval/listApproval?searchType=2"><i class="icon fa fa-circle-o"></i>참조대기문서</a></li>
+          <li><a class="treeview-item" href="/approval/listApproval?searchType=3"><i class="icon fa fa-circle-o"></i>기안완료함</a></li>
+          <li><a class="treeview-item" href="/approval/listApproval?searchType=4"><i class="icon fa fa-circle-o"></i>참조완료함</a></li>
           </ul>
         </li>
         

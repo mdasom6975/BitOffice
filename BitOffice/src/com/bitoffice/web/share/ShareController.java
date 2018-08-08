@@ -130,7 +130,8 @@ public class ShareController {
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);
 		}
-		search.setPageSize(pageSize);		
+		search.setPageSize(pageSize);	
+		search.setPageSize(1000);
 		
 		//세션 임직원번호 가져오기
 		//Employee employee = (Employee)session.getAttribute("employee");

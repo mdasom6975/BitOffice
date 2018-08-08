@@ -8,7 +8,7 @@
 
 	<div class="app-title">
 		<div>
-			<h1>결재대기문서</h1>			
+			<h1><i class="app-menu__icon fa fa-exchange"></i>결재대기문서</h1>			
 		</div>
 	</div>
 	    
@@ -76,7 +76,7 @@
 	</div>	
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="tab-pane fade active show">
+	<div class="tile">
 	    
 	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
 	    <div class="row" style="padding-left:30px">
@@ -94,13 +94,12 @@
 		    	</p>
 		    </div>
 		    
-		    <div class="col-md-6 text-right">
+		    <div class="col-md-6 text-right" style="display: flex; justify-content: flex-end;">
 			    <form class="form-inline" name="detailForm">	    			      
 			      
 				  <div class="form-group">
 				    <select class="form-control" name="searchCondition" >
-						<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>제목</option>
-						<option value="1"  ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>이름</option>
+						<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>제목</option>						
 					</select>
 				  </div>
 				  
@@ -109,11 +108,12 @@
 				    <input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="검색어"
 				    			 value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
 				  </div>
-				  
+				  &nbsp;
 				  <button type="button" class="btn btn-default">검색</button>
 				  
 				  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
-				  <input type="hidden" id="currentPage" name="currentPage" value=""/>				  
+				  <input type="hidden" id="currentPage" name="currentPage" value=""/>	
+				  <input type="hidden" id="searchType" name="searchType" value="${param.searchType}"/>			  
 				  <input type="hidden" id="employeeNo" name="employeeNo" value="${sessionScope.employee.employeeNo}"/>
 				</form>
 	    	</div>
@@ -123,7 +123,7 @@
 		
 		
       <!--  table Start /////////////////////////////////////-->
-      <table class="table table-hover table-striped" id="myTable2">
+      <table class="table table-hover table-striped" id="myTable2" style="margin-top: 10px;">
       
         <thead>
           <tr>
