@@ -49,6 +49,10 @@
           box-sizing: border-box;
 }
 
+.disabled{
+	point-events:none;
+}
+
 html {
   font-family: sans-serif;
   line-height: 1.15;

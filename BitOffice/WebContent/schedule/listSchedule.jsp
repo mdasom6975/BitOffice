@@ -1,8 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ page pageEncoding="EUC-KR"%>
 
-    
-      <div id='top' style="display:none;">
+
+
+  <div id='top' style="display:none;">
 
     <div class='left'>
 
@@ -114,3 +115,4 @@
 			    </div><!-- /.modal-dialog -->
 		</form>		
 	</div><!-- /.modal -->
+

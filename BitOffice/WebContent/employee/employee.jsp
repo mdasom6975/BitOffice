@@ -14,10 +14,11 @@
     <meta charset="EUC-KR">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<meta name="description" content="">
-<meta name="author" content="">
-<link rel="icon" href="../../favicon.ico">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="../../favicon.ico">
 
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="/css/main.css">
@@ -39,45 +40,45 @@
     <script type="text/javascript">$('#sampleTable').DataTable();</script>
     
 
-<!--  datepicker 사용을 위한 선언-->
-<link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+	<!--  datepicker 사용을 위한 선언-->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 
-<!-- 간편주소 API 사용을 위한 선언 -->
-<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
-
-<!--  justgage charts사용  -->
-<script src="/javascript/raphael-2.1.4.min.js"></script>
- <script src="/javascript/justgage.js"></script>
-
-
-    
-   <script src="/js/employee.js"></script>
-   <script type="text/javascript">
+	<!-- 간편주소 API 사용을 위한 선언 -->
+	<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+	
+	<!--  justgage charts사용  -->
+	 <script src="/javascript/raphael-2.1.4.min.js"></script>
+	 <script src="/javascript/justgage.js"></script>
+	
+	
+	    
+	   <script src="/js/employee.js"></script>
+	   <script type="text/javascript">
    
-   var g1;
-	var result = ${returnList}
-
-	if(result != null){
-		
-
-	    document.addEventListener("DOMContentLoaded", function(event) {
-	        g1 = new JustGage({
-	            id: "g1",
-	            value: result[0],
-	            min: 0,
-	            max: result[0]+result[1],
-	            title: "잔여연차 : "+result[1]+"일",
-	            label: "bitOffice"
-	        });
-
-	    });
-		
-	} else {
-		alert("현재 등록된 연차가 없습니다.");
-		
-	}
+	   var g1;
+		var result = ${returnList}
+	
+		if(result != null){
+			
+	
+		    document.addEventListener("DOMContentLoaded", function(event) {
+		        g1 = new JustGage({
+		            id: "g1",
+		            value: result[0],
+		            min: 0,
+		            max: result[0]+result[1],
+		            title: "잔여연차 : "+result[1]+"일",
+		            label: "bitOffice"
+		        });
+	
+		    });
+			
+		} else {
+			alert("현재 등록된 연차가 없습니다.");
+			
+		}
    </script>
    
   </head>

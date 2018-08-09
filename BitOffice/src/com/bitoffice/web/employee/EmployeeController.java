@@ -127,7 +127,7 @@ public class EmployeeController {
 
 	@RequestMapping(value = "addEmployee", method = RequestMethod.POST)
 	public String addEmployee(@ModelAttribute("employee") Employee employee, @RequestParam("file") MultipartFile file,
-			HttpServletRequest request) throws Exception {
+			HttpServletRequest request,Model model) throws Exception {
 		System.out.println("/employee/addEmployee : POST");
 
 		// 업로드할 폴더 경로
@@ -159,7 +159,15 @@ public class EmployeeController {
 		// Business Logic
 		employeeService.addEmployee(employee);
 		
-		return "forward:/employee/listEmployee?orderby=";
+		Employee dbEmployee=employeeService.getEmployee(employee.getEmployeeNo());
+		
+		Thread.sleep(3000);
+		String menu ="";
+		menu="addEmployee";
+		model.addAttribute("menu", menu);
+		model.addAttribute("employee", dbEmployee);
+		
+		return "forward:/admin/admin.jsp";
 	}
 
 	@RequestMapping(value = "updateEmployee", method = RequestMethod.GET)

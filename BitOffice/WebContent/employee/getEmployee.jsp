@@ -14,7 +14,7 @@
 		<div class="row">
 				<img class="rounded-circle"
 				src="../images/profileFiles/${getEmployee.profileImage}"
-				alt="Generic placeholder image" width="140" height="140">
+				alt="등록된 이미지가 없습니다." style="margin: 10px;" width="140" height="140">
 		</div>
 
 		<div class="row">
@@ -107,7 +107,7 @@
 <button type="button" class="btn btn-primary" value="${getEmployee.employeeNo}">정보수정</button> 
 </c:if>
 
-<c:if test="${employee.employeeNo == getEmployee.employeeNo}">
+<c:if test="${sessionEmployee.employeeNo == getEmployee.employeeNo}">
 <button type="button" class="btn btn-primary" value="${getEmployee.employeeNo}">정보수정</button> 
 </c:if>
 <button type="button" class="btn btn-primary">확인</button>    

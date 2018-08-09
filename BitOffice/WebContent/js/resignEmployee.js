@@ -11,25 +11,5 @@
 				fncGetList(1);
 			}); 
 		 });
-		
-		 $(function () {
-				
-				$.ajax({
-					url:"/employee/json/treeEmployee",
-					method:"GET",
-					datatype : "json",
-					headers:{
-						"Accept" : "application/json",
-						"Content-Type" : "application/json"
-						
-					},
-					success:function(data){
-						
-						console.log(data)
-						
-						
-						}
-					
-				});
-			});
+
 			 

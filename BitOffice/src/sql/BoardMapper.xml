@@ -11,8 +11,8 @@
 		<result property="boardTitle" column="board_title" jdbcType="VARCHAR" />
 		<result property="employeeNo" column="employee_no" jdbcType="VARCHAR" />
 		<result property="boardDate" column="board_date" jdbcType="DATE" />
-		<result property="boardContent" column="board_content"
-			jdbcType="VARCHAR" />
+		<result property="boardContent" column="board_contents"
+			jdbcType="CLOB" />
 		<result property="boardAvailable" column="board_available"
 			jdbcType="NUMERIC" />
 		<result property="employeeName" column="employee_name"
@@ -28,7 +28,7 @@
 		INTO board(board_no,
 		employee_no,
 		board_title,
-		board_content,
+		board_contents,
 		board_count,
 		board_available,
 		board_date)
@@ -60,7 +60,7 @@
 		b.employee_no,
 		b.board_title,
 		b.board_date,
-		b.board_content,
+		b.board_contents,
 		b.board_available,
 		e.employee_name as employee_name
 		FROM board b, employee e
@@ -89,7 +89,7 @@
 		b.employee_no,
 		b.board_title,
 		b.board_date,
-		b.board_content,
+		b.board_contents,
 		b.board_count,
 		b.board_available,
 		e.employee_name as employee_name
@@ -107,7 +107,7 @@
 				AND b.board_title LIKE '%${searchKeyword}%'
 			</if>
 			<if test="searchCondition == 2 and searchKeyword !='' ">
-				AND b.board_content LIKE '%${searchKeyword}%'
+				AND b.board_contents LIKE '%${searchKeyword}%'
 			</if>
 		</if>
 		<choose>
@@ -142,7 +142,7 @@
 		b.employee_no,
 		b.board_title,
 		b.board_date,
-		b.board_content,
+		b.board_contents,
 		b.board_count,
 		b.board_available,
 		e.employee_name as
@@ -160,7 +160,7 @@
 				AND b.board_title LIKE '%${searchKeyword}%'
 			</if>
 			<if test="searchCondition == 2 and searchKeyword !='' ">
-				AND b.board_content LIKE '%${searchKeyword}%'
+				AND b.board_contents LIKE '%${searchKeyword}%'
 			</if>
 		</if>
 		)countTable
@@ -171,7 +171,7 @@
 		UPDATE board
 		<set>
 			board_title= #{boardTitle},
-			board_content= #{boardContent}
+			board_contents= #{boardContent}
 		</set>
 		WHERE board_no= #{boardNo}
 	</update>

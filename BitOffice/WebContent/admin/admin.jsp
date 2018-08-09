@@ -66,6 +66,9 @@
 		<c:when test="${menu=='addEmployeeView' }">
 			<%@include file="/employee/addEmployeeView.jsp"%>
 		</c:when>
+		<c:when test="${menu=='addEmployee' }">
+			<%@include file="/employee/addEmployee.jsp"%>
+		</c:when>
 	</c:choose>
 	 </main>
 

@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	
-	// 부서
+	// 부서 select box 구성을 위한
 	$.ajax({
 		url : "/department/json/getAllDepartment",
 		method : "GET",
@@ -24,7 +24,7 @@ $(document).ready(function() {
 		}
 	});
 
-	// 직급
+	// 직급 select box 구성을 위한
 	$.ajax({
 		url : "/position/json/getAllPosition",
 		method : "GET",
@@ -124,18 +124,12 @@ function fncAddEmployee() {
 		alert("연차는  반드시 입력하셔야 합니다.");
 		return;
 	}
+	
+	$(".overlay").css("visibility", "visible");
 
 		$("form").attr("method", "POST")
 				.attr("action", "/employee/addEmployee").submit();
 	}
-
-	
-	$(function() {
-
-		$("button.btn.btn-default:contains('비밀번호생성')").on("click", function() {
-			self.location = "/employee/getRandomPassword"
-		});
-	});
 
 	$(function() {
 		$("button.btn.btn-primary:contains('제출')").on("click", function() {
@@ -147,6 +141,7 @@ function fncAddEmployee() {
 		});
 	});
 
+	//==========datepicker 사용을 위한 선언===================
 		$(function() {
 			$("#hireDate").datepicker({
 				dateFormat : "yy-mm-dd"
@@ -172,7 +167,7 @@ function fncAddEmployee() {
 			yearSuffix : '년'
 		});
 
-
+//===========이미지 미리보기를 위한 선언==================
 	function readURL(input) {
 		if (input.files && input.files[0]) {
 			var reader = new FileReader();
@@ -183,3 +178,17 @@ function fncAddEmployee() {
 		}
 
 	}
+	
+//=========임직원 등록 확인 페이지  event====================
+	$(function() {
+		
+		$("button.btn.btn-primary:contains('확인')").on("click",function(){
+			self.location ="/employee/listEmployee?orderby="
+		});
+		
+		$("button.btn.btn-primary:contains('추가등록')").on("click",function(){
+			self.location ="/employee/addEmployee"
+		});
+		
+	});	
+	

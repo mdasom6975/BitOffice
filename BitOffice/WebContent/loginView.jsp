@@ -148,7 +148,7 @@
 		});
 
 	});
-	
+	//임시비밀번호 메일로 발송을 위한 사번 유효성 체크
 	function checkId(){
 	    var employeeNo = $('#employeeNo2').val();
 	    $.ajax({
