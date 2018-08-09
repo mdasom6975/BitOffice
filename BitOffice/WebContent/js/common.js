@@ -1,3 +1,12 @@
+$(function() {
+	$("#moreEmployee").on("click", function() {
+		self.location ="/employee/listEmployee?orderby="
+	});
+	$("#moreBoard").on("click", function() {
+		self.location ="/board/listBoard?orderby="
+	});
+});
+
 //=========게시판 목록 구성 ===================================
 $(document).ready(function(){
         $.ajax({
@@ -70,6 +79,8 @@ $(document).ready(function(){
                              data.list.list[i].positionName+
                              '</td><td id="getEmployee" value="'+data.list.list[i].employeeNo+'">'+
                              data.list.list[i].employeeName+
+                             '</td><td>'+
+                             data.list.list[i].employeeNo+
                              '</td><td>'+
                              data.list.list[i].email+
                              '</td><td>'+

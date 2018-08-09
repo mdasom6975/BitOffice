@@ -61,7 +61,7 @@
 				  
 				  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
-				  <input type="hidden" id="employeeNo" name="employeeNo" value="${sessionScope.employee.employeeNo}"/>
+				  <input type="hidden" id="employeeNo" name="employeeNo" value="${sessionScope.sessionEmployee.employeeNo}"/>
 				  
 				</form>
 	    	</div>
@@ -90,7 +90,7 @@
 		  <c:set var="i" value="0" />
 		  <c:forEach var="share" items="${list}"> 
 					
-			<c:set var="employ_No" value="${sessionScope.employee.employeeNo}" />
+			<c:set var="employ_No" value="${sessionScope.sessionEmployee.employeeNo}" />
 				 <c:if test="${employ_No eq share.acceptEmployeeNo}"> 
 					<c:set var="i" value="${ i+1 }" />
 					<tr>
@@ -104,7 +104,7 @@
 										<option value="N" ${share.acceptStatus== 'N' ? 'selected="selected"' : '' }>NO</option>
 										<option value="Y" ${share.acceptStatus== 'Y' ? 'selected="selected"' : '' }>YES</option>				
 									</select></td>					 	  
-					  <td align="left"><a onclick="delShare('${share.shareNo}')"><button type="button" class=”btn”>삭제</button></a>
+					  <td align="left"><a onclick="delShare('${share.shareNo}')"><button type="button" class=”btn” style="cursor:pointer">삭제</button></a>
 					  	</td> 			  	
 					</tr>
 				 </c:if>				 

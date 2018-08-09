@@ -164,6 +164,8 @@ public class ApprovalController {
 		
 		String EmployeeNo = ((Employee) session.getAttribute("employee")).getEmployeeNo();
 		
+		System.out.println("/approval/listApproval : GET / POST EmployeeNo:"+EmployeeNo);
+		
 		search.setSearchEmployeeNo(EmployeeNo);
 		search.setSearchType(search.getSearchType());
 		

@@ -38,11 +38,11 @@
 			<div class="container-fluid">
 				<div class="row content">	    		
 					<div class="col-sm-2">	
-							<input type="hidden" name="employeeNo" id="employeeNo" value="${sessionScope.employee.employeeNo}">	
+							<input type="hidden" name="employeeNo" id="employeeNo" value="${sessionScope.sessionEmployee.employeeNo}">	
 				      <!--  table Start /////////////////////////////////////-->
 				      <table class="table table-hover table-striped" >
 				      
-				        <thead>
+				        <thead>			        
 				          <tr>      
 				            <th align="left" colspan="2">내가보고싶은일정 / 수락여부</th>           
 				          </tr>

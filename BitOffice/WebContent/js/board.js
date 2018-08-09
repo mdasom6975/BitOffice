@@ -21,7 +21,7 @@ $(document).ready(function() {
 function sendFile(file, editor) {
 	var form_data = new FormData();
 	form_data.append('file', file);
-
+	$(".overlay").css("visibility", "visible");
 	$.ajax({
 		data : form_data,
 		type : "POST",
@@ -33,6 +33,7 @@ function sendFile(file, editor) {
 		success : function(url) {
 			console.log(JSON.stringify(url));
 			console.log(url.url);
+			$(".overlay").css("visibility", "hidden");
 			$('#boardContent').summernote('editor.insertImage', url.url);
 
 		}
@@ -127,6 +128,28 @@ $(function() {
 	$("button.btn.btn-primary:contains('수정')").on("click", function() {
 		self.location = "/board/updateBoard?boardNo="+ $(this).attr("value")
 	});
+	
+	$("#getEmployee").on("mouseover",function() {
+		var employeeNo= $(this).attr("value")
+		$.ajax(
+				{
+					url:"/employee/json/getEmployee/",
+					method:"POST",
+					data:{"employeeNo":employeeNo},
+					success : function(data) {
+						console.log(data)
+						console.log(data.employee)
+						var displayValue=
+						"부서 : "+data.employee.departmentName
+						+" 직급 : "+data.employee.positionName
+						+" 사번 : "+data.employee.employeeNo
+						+" 이름 : "+data.employee.employeeName
+						+" 내선번호 : "+data.employee.extension;
+						$("#getEmployee").attr("title",displayValue);
+//						$("#getEmployee").tooltip()
+					}
+				});
+	})
 
 	
 });
@@ -154,5 +177,6 @@ function print(printArea)
 		win.print();
 		win.close();
 }
+
 
 

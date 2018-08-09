@@ -65,16 +65,16 @@
 							//
 							var memoApproval="";
 
-							var middleTdWidth=50;
+							var middleTdWidth=0;
 							
 							$.each(jsonInfo,function(key,value) {
 								var approvalDate="";
 								var signImage="";			
 								
 								
-								if (value.gubun==1){//결재라인
-									
-									 middleTdWidth-=(key*10);
+								if (value.gubun==1){//결재라인								
+								
+									 middleTdWidth+=170;								 
 									
 									 if (value.approvalDate!=null){
 									 	approvalDate = value.approvalDate;
@@ -82,9 +82,9 @@
 									 if (value.status=="1"){
 										 status = "";
 									 }else if(value.status=="2"){
-										 status = "승인";
+										 status = "<img src='/images/signFiles/signimage.jpg' alt='승인' style='width:20px;height:20px'>";
 									 }else if(value.status=="3"){
-										 status = "반려";
+										 status = "<img src='/images/signFiles/rejectImage1.jpg' alt='반려' style='width:26px;height:22px'>";
 									 }									 
 
 									 
@@ -102,10 +102,10 @@
 					       	        
 						       	        
 				       	      		 approvalTable+="<td name='eachApprovalPerson'><table style='width:100%;height:100%;text-align:center; boder: 1px solid #dddddd' cellspacing=0 cellpadding=0>";
-				        		 	 approvalTable+="<tr><td style='width:100px;height:46px'>"+value.positionName+"</td></tr>";											
-				        		 	 approvalTable+="<tr><td style='width:100px;height:46px'>"+value.employeeName+"</td></tr>";
-				        		 	 approvalTable+="<tr><td style='width:100px;height:46px'>"+approvalDate+"</td></tr>";	
-				        		 	 approvalTable+="<tr><td style='width:100px;height:46px;color:#FF0000;'>"+status+"</td></tr>";        		 	
+				        		 	 approvalTable+="<tr><td style='width:80px;height:46px'>"+value.positionName+"</td></tr>";											
+				        		 	 approvalTable+="<tr><td style='width:80px;height:46px'>"+value.employeeName+"</td></tr>";
+				        		 	 approvalTable+="<tr><td style='width:80px;height:46px'>"+approvalDate+"</td></tr>";	
+				        		 	 approvalTable+="<tr><td style='width:80px;height:46px;color:#FF0000;'>"+status+"</td></tr>";        		 	
 				        		 	 approvalTable+="</table></td>"; 
 				        		 	 
 				        		 	 app_member+="<input type='hidden' name='approvalArray' value='"+value.employeeNo+"'>";
@@ -122,7 +122,7 @@
 								
 							});							
 						    
-						    $("#middleTd").css('width',middleTdWidth+'%');
+						    $("#rightTd").css('width',middleTdWidth+'px');
 							
 							$("#approvalLine").append(approvalTable);
 							$("#approval_member").append(app_member);
@@ -877,5 +877,5 @@
 		    }); 
 		}  
 	 
- 
- 
+
+	

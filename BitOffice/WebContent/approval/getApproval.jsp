@@ -9,9 +9,7 @@
 <script src="/js/approval_get.js"></script>
 
 <!-- 인쇄하기 -->
-<script src=" https://printjs-4de6.kxcdn.com/print.min.js"></script>
-<script src="https://printjs-4de6.kxcdn.com/print.min.css"></script>
-
+<script src="/js/printThis.js"></script>
 <style>
   
 .table01 {
@@ -67,21 +65,20 @@
 				<form class="form-horizontal" enctype="multipart/form-data">
 					<input type="hidden" id="docType" value="${approval.docType}">
 					<input type="hidden" id="approvalOrder" value="${approval.docApprovalOrder}">
-					<input type="hidden" id="employeeNo" name="employeeNo" value="${sessionScope.employee.employeeNo}">
+					<input type="hidden" id="employeeNo" name="employeeNo" value="${sessionScope.sessionEmployee.employeeNo}">
 					<input type="hidden" id="approvalNo" name="approvalNo" value="${approval.docNo}">
 					<input type="hidden" id="searchType" name="searchType" value="${param.searchType}">
 					<div id="approval_member"></div>					
 	
 					<!-- 		<input type="submit"  class="btn btn-primary pull-right" value="글쓰기"> -->
-					<button type="button" class="btn btn-default">목록</button>				
-				
+					<button type="button" class="btn btn-default" >목록</button>				
+					<button type="button" class="btn btn" OnClick="$('#mySelector').printThis();">프린트</button>	
 					
 					<c:if test = "${fn:trim(sessionScope.employee.employeeNo) == fn:trim(approval.regEmployeeNo) }">
 						<c:if test = "${fn:trim(approval.docStatus)=='1' }"> 	
 						    <button type="button" id="updateApproval" class="btn btn" >수정</button>
 							<button type="button" id="deleteApproval" class="btn btn" >삭제</button>		
-							<button type="button" class="btn btn" OnClick="printJS('mySelector', 'html')">인쇄</button>
-							<button type="button" class="btn btn" OnClick="printJS('docs/printjs.pdf')">PDF변환</button>				
+																
 						</c:if>	
 					</c:if>
 					<c:if test = "${fn:trim(approval.docStatus)<='2' }"> 	
@@ -106,7 +103,7 @@
 							<table class="table01" style="text-align: center; boder: 1px solid #dddddd;background-color:#FFFFFF;">						
 								<tbody >
 									<tr><td colspan="3" style="height:20px;">&nbsp;</td></tr>
-								    <tr><td colspan="3" style="width;30px;"><h1>${approval.title}</h1></td></tr>
+								    <tr><td colspan="3" class="text-center"><h1>${approval.title}</h1></td></tr>
 									<tr>
 										<td style="width:25%">
 											<table width="100%" height="100%" class="table table-bordered" style="text-align: center; boder: 1px solid #dddddd;" cellpadding=0 cellspacing=0>						
@@ -132,7 +129,7 @@
 										</td>
 										<td id="middleTd">
 										</td>
-										<td >
+										<td id="rightTd">
 											<table class="table table-bordered" style="text-align: center; boder: 1px solid #dddddd;">
 												<tr id="approvalLine" style="text-align:center">																														
 												</tr>											
@@ -155,14 +152,16 @@
 										</tr>
 									</c:if>							
 									<tr>
-										<td width="10%" style="background-color:#D5D5D5;">내 용</td>						
+										<td width="10%" style="background-color:#D5D5D5;vertical-align: middle;">내 용</td>						
 										<td height="250px" class="text-left">${approval.content}</td>
-									</tr>						
-									<tr>
-										<td  style="background-color:#D5D5D5;">첨부파일</td>
-									    <td  id="dropZone" class="text-left">
-										    ${approval.fileName1} ${approval.fileName2} ${approval.fileName3}</td>
 									</tr>
+									<c:if test = "${fn:trim(approval.fileName1) !=''}">						
+										<tr>
+											<td  style="background-color:#D5D5D5;">첨부파일</td>
+										    <td  id="dropZone" class="text-left">
+											    ${approval.fileName1} ${approval.fileName2} ${approval.fileName3}</td>
+										</tr>
+									</c:if>
 								</tbody>
 								
 							</table>

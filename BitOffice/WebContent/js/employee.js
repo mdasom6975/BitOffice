@@ -94,8 +94,6 @@
 	
 	function fncUpdateByAdmin() {
 		
-		$(".overlay").css("visibility", "visible");
-
 
 		$("form").attr("method", "POST").attr("action",
 				"/employee/updateByAdmin").submit();
