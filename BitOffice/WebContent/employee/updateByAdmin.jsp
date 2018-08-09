@@ -95,14 +95,17 @@
 				<div class="col-md-4">
 					<label>집 주소</label> <input class="form-control" type="text"
 						name="address" id="address" value="${getEmployee.address}"  readonly="readonly"/><br />
-					<div id="postcodify"></div>
+<!-- 					<div id="postcodify"></div> -->
 				</div>
 				<div class="col-md-4">
-					<label>전자서명 이미지</label> <input class="form-control" type="file"
-						id="fileName" name="file" onchange="readURL(this);"> <input
-						class="form-control" type="text" name="profileImage"
-						id="profileImage" value="${getEmployee.profileImage}"> <input
-						class="form-control" type="text" name="signImage" id="signImage"
+					<label>전자서명 이미지</label> 
+					<input class="form-control" type="file"
+						id="fileName" name="file" onchange="readURL(this);"> 
+						<input
+						class="form-control" type="hidden" name="profileImage"
+						id="profileImage" value="${getEmployee.profileImage}"> 
+						<input
+						class="form-control" type="hidden" name="signImage" id="signImage"
 						value="${getEmployee.signImage}">
 				</div>
 				<img id="LoadImg" class="img-thumbnail"

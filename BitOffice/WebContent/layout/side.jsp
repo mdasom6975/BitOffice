@@ -76,6 +76,8 @@
           </ul>
         </li>
         
+  
+        <c:if test="${sessionEmployee.role=='admin'}">
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-cogs"></i><span class="app-menu__label">관리자</span>
         <i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
@@ -87,4 +89,5 @@
            <li><a class="treeview-item" href="/employee/resignList"><i class="icon fa fa-circle-o"></i>퇴사자 목록</a></li>
           </ul>
         </li>
+        </c:if>
       </ul>

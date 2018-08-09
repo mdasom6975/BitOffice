@@ -19,7 +19,7 @@
 
 					<tr>
 						<td>작성자</td>
-						<td>${board.employeeName}</td>
+						<td  id= "getEmployee" value="${board.employeeNo}">${board.employeeName}</td>
 					</tr>
 					<tr>
 						<td>작성일자</td>

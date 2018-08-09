@@ -99,7 +99,7 @@ public class EmployeeRestController {
 	}
 
 	// 직급 삭제 시 직급 사용여부 확인
-	@RequestMapping(value = "json/usePositionCheck")
+	@RequestMapping(value = "json/usePositionCheck" )
 	@ResponseBody
 	public int usePositionCheck(@RequestParam(value = "positionNo") String positionNo) throws Exception {
 		int count = 0;
@@ -108,6 +108,18 @@ public class EmployeeRestController {
 		count = employeeService.usePositionCheck(positionNo);
 
 		return count;
+	}
+	
+	@RequestMapping(value="json/getEmployee")
+	@ResponseBody
+	public JSONObject getEmployee(@RequestParam(value="employeeNo") String employeeNo) throws Exception{
+		
+		System.out.println("json/getEmployee");
+		Employee employee = employeeService.getEmployee(employeeNo);
+		
+		JSONObject jsonObject =new JSONObject();
+		jsonObject.put("employee", employee);
+		return jsonObject;
 	}
 	
 	@RequestMapping(value="json/listEmployee")

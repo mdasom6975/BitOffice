@@ -73,7 +73,7 @@
 								<th>입사년도</th>
 								<th>이메일</th>
 								<th>내선번호</th>
-								<c:if test="${employee.role=='admin'}">
+								<c:if test="${sessionEmployee.role=='admin'}">
 									<th>퇴사처리</th>
 								</c:if>
 							</tr>
@@ -92,7 +92,7 @@
 									<td>${employee.hireDate}</td>
 									<td>${employee.email}</td>
 									<td>${employee.extension}</td>
-									<c:if test="${sessionScope.sessionEmployee.role == 'admin'}">
+									<c:if test="${sessionEmployee.role == 'admin'}">
 										<td class="resignationEmp" value='${employee.employeeNo }'>퇴사처리</td>
 									</c:if>
 								</tr>

@@ -20,7 +20,7 @@
 
 					<!--  <<== 좌측 nav -->
 					<c:if test="${ resultPage.currentPage <= resultPage.pageUnit }">
-						<li class="page-item disabled">
+						<li class="disabled">
 					</c:if>
 					<c:if test="${ resultPage.currentPage > resultPage.pageUnit }">
 						<li>
