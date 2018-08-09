@@ -154,34 +154,34 @@
 												  a.reg_employee_no = e.employee_no	
 												  <if test="searchEmployeeNo !=null">
 												  	<if test="searchType==1">and (a.reg_employee_no = #{searchEmployeeNo} 
-												  									or a.reg_employee_no in 
-												  							(SELECT ae.employee_no 
+												  									or a.doc_no in 
+												  							(SELECT ae.doc_no 
 												  									FROM approval_employee ae
 												  									WHERE 
 												  										 ae.doc_no = a.doc_no
-												  										 and ae.gubun = '2'
+												  										 and ae.gubun = '1' 
 												  										 and ae.employee_no = #{searchEmployeeNo}))</if>												  
-												  	<if test="searchType==2">and a.reg_employee_no in 
-												  							(SELECT ae.employee_no 
+												  	<if test="searchType==2">and a.doc_no in 
+												  							(SELECT ae.doc_no 
 												  									FROM approval_employee ae
 												  									WHERE 
 												  										 ae.doc_no = a.doc_no
-												  										 and ae.gubun = '2'
+												  										 and ae.gubun = '2' 
 												  										 and ae.employee_no = #{searchEmployeeNo})</if>
 												  	<if test="searchType==3">and (a.reg_employee_no = #{searchEmployeeNo} 
-												  									or a.reg_employee_no in 
-												  							(SELECT ae.employee_no 
+												  									or a.doc_no in 
+												  							(SELECT ae.doc_no 
 												  									FROM approval_employee ae
 												  									WHERE 
 												  										 ae.doc_no = a.doc_no
 												  										 and ae.gubun = '1'
 												  										 and ae.employee_no = #{searchEmployeeNo}))</if>	
-												  	<if test="searchType==4">and a.reg_employee_no in 
-												  							(SELECT ae.employee_no 
+												  	<if test="searchType==4">and a.doc_no in 
+												  							(SELECT ae.doc_no 
 												  									FROM approval_employee ae
 												  									WHERE 
 												  										 ae.doc_no = a.doc_no
-												  										 and ae.gubun = '2'												  										
+												  										 and ae.gubun = '2' 											  										
 												  										 and ae.employee_no = #{searchEmployeeNo})</if>													  										 											  										 
 												  </if>
 												  <if test="searchType !=null and (searchType==1 or searchType==2)">

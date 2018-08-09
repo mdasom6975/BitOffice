@@ -34,8 +34,8 @@
 
 			
 	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="tab-pane fade active show">
-		<c:if test="${sessionScope.employee.role=='admin'}">         
+	<div class="tile">
+		<c:if test="${sessionScope.sessionEmployee.role=='admin'}">         
 		    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
 		    <div class="row">
 	
@@ -59,7 +59,7 @@
 			  
 					    <input type="text" class="col-lg-1" id="endip4" name="endip4" maxlength="3" onkeydown="onlyNumber(this)" placeholder="">
 	
-			    		<button type="button" id="ipsubmit" class="btn btn-primary"  >등 록</button>
+			    		<button type="button" id="ipsubmit" class="btn btn-primary" style="background-color:#B4E5FF;" >등 록</button>
 			    	  </div>	
 					</div>
 				
@@ -92,7 +92,7 @@
 				  
 				  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
-				  <input type="hidden" id="employeeNo" name="employeeNo" value="${sessionScope.employee.employeeNo}"/>
+				  <input type="hidden" id="employeeNo" name="employeeNo" value="${sessionScope.sessionEmployee.employeeNo}"/>
 				  
 				</form>
 	    	</div>
@@ -124,7 +124,10 @@
 			   <td align="left">${ip.startIp}</td>
 			  <td align="left">${ip.endIp}</td>
 			  <td align="left">${ip.regDate}</td> 
-			  <td align="left"><a onclick="delIp('${ip.serialNo}')"><button type="button" class=”btn”>삭제</button></a>
+			  <td align="left"><a onclick="delIp('${ip.serialNo}')">
+			 	 	<c:if test="${sessionScope.sessionEmployee.role=='admin'}"> 
+			  		<button type="button" class=”btn” style="cursor:pointer">삭제</button></a>
+			  		</c:if>
 			  	</td> 			  	
 			</tr>
           </c:forEach>

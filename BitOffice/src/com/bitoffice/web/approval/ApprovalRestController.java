@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.bitoffice.common.Page;
 import com.bitoffice.common.Search;
@@ -64,77 +66,61 @@ public class ApprovalRestController {
 	}
 
 	
-	@RequestMapping( value="json/addApproval", method=RequestMethod.POST )
+	@RequestMapping( value="json/addApproval", method=RequestMethod.POST)
 	public @ResponseBody int addApproval( @ModelAttribute("approval") Approval approval, Model model) throws Exception {
 
 		System.out.println("json/approval/addApproval : POST");
+	
 		//Business Logic
-		
-		//파일 선언  
-/*		if (approval.getFileName1() !=null ||approval.getFileName2() !=null || approval.getFileName3() !=null) {
-	        FTPUpLoader upLoader = new FTPUpLoader();
-	        ArrayList<String> list = new ArrayList<String>();       
-	       
-	        if (approval.getFileName1().length()!=0) {
-	        	list.add(approval.getFileName1());
-	        }
 
-	        if (approval.getFileName2().length()!=0) {
-	        	list.add(approval.getFileName2());
-	        }
-	        
-	        if (approval.getFileName3().length()!=0) {
-	        	list.add(approval.getFileName3());
-	        }       
-	        
-	        boolean re = upLoader.sendFtpServer("192.168.0.48", 21, "myftp", "myftp", approval.getRegEmployeeNo(),"C:\\test\\", list);
-	        
-	        if(re){
-	            System.out.println("FTPUpLoaderMain.java :: 업로드 성공");
-	        }else{
-	            System.out.println("FTPUpLoaderMain.java :: 업로드 실패");
-	        }
-        
-		}*/
-		
-/*		String saveDir = "C:\\Upload\\Approval\\";
+		String saveDir ="C:\\Users\\Bit\\git\\BitOffice\\BitOffice\\WebContent\\uploadFile\\";
 		//String saveDir = "../images/uploadFiles/";
 		
 		System.out.println("/addProduct");
 		
 		int i=1;
-				for(MultipartFile file : approval.getMultiFile()){
+		
+		try {
+				for(MultipartFile file : approval.getFile1()){
 			
-			//long t = System.currentTimeMillis(); 
-			//int r = (int)(Math.random()*1000000); 
-			//String fileId =""+t+"::::"+r ;
+					//long t = System.currentTimeMillis(); 
+					//int r = (int)(Math.random()*1000000); 
+					//String fileId =""+t+"::::"+r ;
+					System.out.println("file.getOriginalFilename:"+file.getOriginalFilename());
+					System.out.println("file.getContentType:"+file.getContentType());
+					System.out.println("getContentType:"+file.getContentType());
+					//파일 업로드 최대3개
+					
+					// 중복 되지 않는 파일 객체를 만든다.
+					System.out.println("서버파일명:"+file.getName());
+					
+					//if (file.getContentType().contains("image")) {
+						File f = new File(saveDir+file.getOriginalFilename());
+						file.transferTo(f);
+						System.out.println("/addApproval:file");
+						
+						if(i==1) {
+							System.out.println("/addApproval:file="+file.getOriginalFilename());
+							approval.setFileName1(file.getOriginalFilename());
+						}
+						if(i==2) {
+							approval.setFileName2(file.getOriginalFilename());
+						}				
+						if(i==3) {
+							approval.setFileName3(file.getOriginalFilename());
+						}		
+		
+						i++;
+					//}//if
 			
-			//System.out.println(file.getOriginalFilename()+fileId);
-			System.out.println("getContentType:"+file.getContentType());
-			//파일 업로드 최대3개
-			if (file.getContentType().contains("image")) {
-				File f = new File(saveDir+file.getOriginalFilename());
-				file.transferTo(f);
-				System.out.println("/addApproval:file");
+				}//for
 				
-				if(i==1) {
-					System.out.println("/addApproval:file="+file.getOriginalFilename());
-					approval.setFileName1(file.getOriginalFilename());
-				}
-				if(i==2) {
-					approval.setFileName2(file.getOriginalFilename());
-				}				
-				if(i==3) {
-					approval.setFileName3(file.getOriginalFilename());
-				}		
-
-				i++;
-			}
-			
-		}		*/
+		}catch(Exception e){
+			 e.printStackTrace();
+		}
 			
 		int resultValue = approvalService.addApproval(approval);
-		System.out.println("resultValue:"+resultValue);
+		System.out.println("resultValueeee:"+resultValue);
 		return resultValue;
 
 	}

@@ -1,0 +1,35 @@
+7월 11, 2018 9:02:38 오전 com.mongodb.diagnostics.logging.JULLogger log
+정보: Cluster created with settings {hosts=[192.168.0.40:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+MongoDB 연결 성공
+7월 11, 2018 9:02:38 오전 com.mongodb.diagnostics.logging.JULLogger log
+정보: Cluster description not yet available. Waiting for 30000 ms before timing out
+7월 11, 2018 9:02:39 오전 com.mongodb.diagnostics.logging.JULLogger log
+정보: Exception in monitor thread while connecting to server 192.168.0.40:27017
+com.mongodb.MongoSocketOpenException: Exception opening socket
+	at com.mongodb.connection.SocketStream.open(SocketStream.java:62)
+	at com.mongodb.connection.InternalStreamConnection.open(InternalStreamConnection.java:126)
+	at com.mongodb.connection.DefaultServerMonitor$ServerMonitorRunnable.run(DefaultServerMonitor.java:114)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.connection.SocketStreamHelper.initialize(SocketStreamHelper.java:59)
+	at com.mongodb.connection.SocketStream.open(SocketStream.java:57)
+	... 3 more
+
+com.mongodb.MongoTimeoutException: Timed out after 30000 ms while waiting to connect. Client view of cluster state is {type=UNKNOWN, servers=[{address=192.168.0.40:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.ConnectException: Connection refused: connect}}]
+	at com.mongodb.connection.BaseCluster.getDescription(BaseCluster.java:167)
+	at com.mongodb.Mongo.getConnectedClusterDescription(Mongo.java:885)
+	at com.mongodb.Mongo.createClientSession(Mongo.java:877)
+	at com.mongodb.Mongo$3.getClientSession(Mongo.java:866)
+	at com.mongodb.Mongo$3.execute(Mongo.java:823)
+	at com.mongodb.Mongo$3.execute(Mongo.java:813)
+	at com.mongodb.DBCursor.initializeCursor(DBCursor.java:877)
+	at com.mongodb.DBCursor.hasNext(DBCursor.java:144)
+	at com.bitoffice.service.ip.MongoDB.main(MongoDB.java:47)

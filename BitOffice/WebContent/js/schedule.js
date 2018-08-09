@@ -55,7 +55,7 @@
 												}
 												//displayValue += "<td>"+value.acceptStatus+"</td></tr>";
 												displayValue += "<tr><td style='background-color:#e5e5e5;'><div class='input-group' id='cp"+key+"'>";
-												displayValue += "<input type='text' class='form-control' name='colorpick"+key+"' id='colorpick"+key+"' style='background-color:"+value.shareColor+"' value='"+value.shareColor+"' onClick='fun_colorPicker("+key+","+value.shareNo+");'>";
+												displayValue += "<input type='text' readonly class='form-control' name='colorpick"+key+"' id='colorpick"+key+"' style='cursor:pointer;background-color:"+value.shareColor+"' value='"+value.shareColor+"' onClick='fun_colorPicker("+key+","+value.shareNo+");'>";
 												displayValue += "<span class='input-group-addon colorpicker-component'><i id='cp-icon"+key+"' onClick='fun_colorPicker("+key+","+value.shareNo+")'></i></span>";											
 												displayValue += "</div></td></tr>";
 												displayValue += "<tr><td style='background-color:#e5e5e5;border: 0;heigh:0'>";
@@ -375,3 +375,14 @@
 				});   //ajax   */
              //} //if
 	    }     
+	  	  
+	    
+	    $( "#showExplain" ).click(function() {
+	    		if ( $( "div:first" ).is( ":hidden" ) ) {
+	    		    $( "div" ).slideDown( "slow" );
+	    		  } else {
+	    		    $( "div" ).hide();
+	    		  }
+	    	});
+	    
+	    
