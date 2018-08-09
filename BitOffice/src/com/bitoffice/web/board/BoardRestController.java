@@ -53,7 +53,8 @@ public class BoardRestController {
 		//한글처리를 위한
 		response.setContentType("text/html;charset=utf-8");
 		// 업로드할 폴더 경로 
-		String realFolder ="C:\\Users\\Bit\\git\\BitOffice\\BitOffice\\WebContent\\images\\boardFile"; 
+		String realFolder =request.getSession().getServletContext().getRealPath("/boardFile");
+				//"C:\\Users\\Bit\\git\\BitOffice\\BitOffice\\WebContent\\images\\boardFile"; 
 				//request.getSession().getServletContext().getRealPath("/boardFile");
 
 		//폴더가 없을 경우 폴더 생성
@@ -78,9 +79,9 @@ public class BoardRestController {
 		file.transferTo(f);
 		
 		
-		Thread.sleep(3000);	
+//		Thread.sleep(3000);	
 		JSONObject jsonObject =new JSONObject();
-		jsonObject.put("url","../images/boardFile/"+str_filename);
+		jsonObject.put("url","/boardFile/"+str_filename);
 
 		System.out.println(jsonObject);
 		

@@ -190,7 +190,7 @@ public class EmployeeController {
 		System.out.println("/employee/updateEmployee : POST");
 		
 		session.removeAttribute(((Employee) session.getAttribute("sessionEmployee")).getProfileImage());
-		
+	
 		Employee oldEmployee = employeeService.getEmployee(employee.getEmployeeNo());
 		
 		if(file.getOriginalFilename()==null || file.getOriginalFilename().length()<1) {
@@ -198,7 +198,7 @@ public class EmployeeController {
 			employee.setProfileImage(oldEmployee.getProfileImage());
 			
 		}else {
-			// 업로드할 폴더 경로
+			// 업로드할 폴더 경로(동영상제작 시 경로 변경하기)
 						String realFolder ="C:\\Users\\Bit\\git\\BitOffice\\BitOffice\\WebContent\\images\\profileFiles"; 
 								//"C:\\Users\\Bit\\git\\BitOffice\\BitOffice\\WebContent\\images\\profileFiles"; 
 								//request.getRealPath("/profileFiles");
@@ -242,11 +242,12 @@ public class EmployeeController {
 		employee.setDepartmentNo(oldEmployee.getDepartmentNo());
 		employee.setPositionNo(oldEmployee.getPositionNo());
 		session.setAttribute("sessionEmployee", employee);
-		
-		System.out.println("세션에 무엇이 담기나"+employee);
 		Thread.sleep(3000);
+		System.out.println("세션에 무엇이 담기나"+employee);
+		
 
-		return "redirect:/employee/listEmployee?orderby=";
+		return "forward:/employee/getEmployee?employeeNo=" + employee.getEmployeeNo();
+				//"redirect:/employee/listEmployee?orderby=";
 				//"forward:/employee/getEmployee?employeeNo=" + employee.getEmployeeNo();
 
 	}

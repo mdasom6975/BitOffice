@@ -73,7 +73,7 @@
 	--> 
 	<mvc:resources mapping="/css/**" location="/css/" />
    	<mvc:resources mapping="/images/**" location="/images/" />
-   	<mvc:resources mapping="/boardFile/" location="../images/boardFile/" />
+   	<mvc:resources mapping="/boardFile/**" location="/boardFile/" />
    	<mvc:resources mapping="/signFiles/**" location="../images/signFiles/" />
    	<mvc:resources mapping="/profileFiles/**" location="../images/profileFiles/" />
    	<mvc:resources mapping="/javascript/**" location="/javascript/" />

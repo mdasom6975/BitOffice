@@ -14,13 +14,15 @@
     <meta charset="EUC-KR">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="/css/main.css">
+    
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
    
-       <!-- Essential javascripts for application to work-->
+    <!-- Essential javascripts for application to work-->
     <script src="/js/jquery-3.2.1.min.js"></script>
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
@@ -147,13 +149,10 @@
         <div class="col-md-6">
           <div class="tile">
             <h3 class="tile-title">일정관리</h3>
-            <ul>
-              <li>Built with Bootstrap 4, SASS and PUG.js</li>
-            </ul>
-            <p>Vali is a free and responsive admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.</p>
-            <p class="mt-4 mb-4"><a class="btn btn-primary mr-2 mb-2" href="http://pratikborsadiya.in/blog/vali-admin" target="_blank"><i class="fa fa-file"></i>Docs</a>
-            <a class="btn btn-info mr-2 mb-2" href="https://github.com/pratikborsadiya/vali-admin" target="_blank"><i class="fa fa-github"></i>GitHub</a>
-            <a class="btn btn-success mr-2 mb-2" href="https://github.com/pratikborsadiya/vali-admin/archive/master.zip" target="_blank"><i class="fa fa-download"></i>Download</a></p>
+            <p id="shareList">
+            <span class="label label-warning" style="background-color:#FFBB00">전체공유</span>
+             <span class="label label-primary" style="background-color:#0099ff"> 내일정</span></p>
+			<div><jsp:include page='/schedule/listSchedule.jsp' flush="false"></jsp:include></div>
           </div>
         </div>
         <div class="col-md-6">
