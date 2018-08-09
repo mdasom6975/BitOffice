@@ -98,7 +98,7 @@
 							
 							$('#seungin').remove();
 							 
-							var middleTdWidth=50;
+							var middleTdWidth=0;
 							
 							$.each(jsonInfo,function(key,value) {
 								var approvalDate="";
@@ -106,7 +106,7 @@
 								
 								
 								if (value.gubun==1){//결재라인
-									middleTdWidth-=(key*10);
+									 middleTdWidth+=160;
 									
 									 if (value.approvalDate!=null){
 									 	approvalDate = value.approvalDate;
@@ -138,7 +138,7 @@
 								
 							});		
 							
-							$("#middleTd").css('width',middleTdWidth+'%');
+							$("#rightTd").css('width',middleTdWidth+'px');
 							
 							$("#approvalLine").append(approvalTable);
 							$("#approval_member").append(app_member);

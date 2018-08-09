@@ -27,7 +27,7 @@ public class Approval {
 	private String modEmployeeName;	
 	private String departmentName;
 	private String positionName;
-	private MultipartFile[] multiFile;	
+	private MultipartFile[] file1;	
 	
 	public Approval() {
 		
@@ -204,12 +204,12 @@ public class Approval {
 		this.modEmployeeName = modEmployeeName;
 	}
 	
-	public MultipartFile[] getMultiFile() {
-		return multiFile;
+	public MultipartFile[] getFile1() {
+		return file1;
 	}
 
-	public void setMultiFile(MultipartFile[] multiFile) {
-		this.multiFile = multiFile;
+	public void setFile1(MultipartFile[] file1) {
+		this.file1 = file1;
 	}	
 	
 	@Override
@@ -222,6 +222,8 @@ public class Approval {
 				+ ", modEmployeeNo=" + modEmployeeNo+ ", modEmployeeName=" + modEmployeeName
 				+ ", departmentName=" + departmentName+", positionName=" + positionName+"]";
 	}
+
+
 
 
 

@@ -85,7 +85,7 @@
 			AND s1.share_range not in ('3')
 			AND s1.employee_no = e.employee_no
 		    AND d.department_no = e.department_no  
-			AND p.position_no = e.position_no					
+			AND p.position_no = e.position_no			
 	UNION
 		SELECT s2.sche_serial_no as scheSerialNo, 
 			s2.start_date as startDate, 
@@ -108,7 +108,7 @@
 		      AND d.department_no = e.department_no  
 			  AND p.position_no = e.position_no	
 			  AND h.request_employee_no = #{searchKeyword}
-			  AND h.accept_status ='Y'			  		
+			  AND h.accept_status ='Y'		
 	UNION
 		SELECT s3.sche_serial_no as scheSerialNo, 
 			s3.start_date as startDate, 
@@ -126,11 +126,34 @@
 			e.employee_name as employeeName	
 		FROM schedule s3, employee e, department d, position p
 		WHERE s3.share_range in ('3')
-		<!--AND s3.employee_no != #{searchKeyword}-->
 		AND s3.employee_no = e.employee_no
 		AND d.department_no = e.department_no  
-		AND p.position_no = e.position_no	
-			
+		AND p.position_no = e.position_no
+	UNION	
+		SELECT 1 as scheSerialNo, 
+			substr(a.start_date,0,4)||'-'||substr(a.start_date,5,2)||'-'||substr(a.start_date,7,2) as startDate, 
+			substr(a.end_date,0,4)||'-'||substr(a.end_date,5,2)||'-'||substr(a.end_date,7,2) as endDate, 
+			'00:00' as startTime, 
+			'24:00' as endTime, 
+			'1' as shareRange, 
+			a.title as title, 
+			to_char('전자결재에서작성') as content, 
+			a.reg_date as regDate, 
+			'approval' as employeeNo, 
+			'#0099ff' as color,
+			d.department_name as departmentName,
+			p.position_name as positionName,	
+			e.employee_name as employeeName	
+		FROM approval a, employee e, department d, position p
+		WHERE
+		    a.reg_employee_no = #{searchKeyword}
+			and a.doc_type='1'
+			and a.status ='3'			
+			AND a.reg_employee_no = e.employee_no
+		    AND d.department_no = e.department_no  
+			AND p.position_no = e.position_no	
+
+
 	 </select>
 	 	<!--  위 두번째 subQuery 의  
 	 			WHERE ROWNUM &lt;= #{endRowNum} ) 는

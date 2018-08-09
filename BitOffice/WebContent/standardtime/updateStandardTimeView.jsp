@@ -42,7 +42,7 @@
 			
 		    <div class="row">   			
 				<div >
-			     		<input type="hidden" id="regEmployeeNo" name="regEmployeeNo" value="${sessionScope.employee.employeeNo}"/>	
+			     		<input type="hidden" id="regEmployeeNo" name="regEmployeeNo" value="${sessionScope.sessionEmployee.employeeNo}"/>	
 						 <c:if test = "${!empty list[0].stdStartTime}"><input type="hidden" id="serialNo" name="serialNo" value ="${list[0].serialNo }"/></c:if> 
 				    	
 				    		<label>출근시간</label>     	

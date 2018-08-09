@@ -3,6 +3,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
+
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
 
@@ -80,19 +81,19 @@
 	<div class="tab-pane fade active show">	
 		
 		<div class="row">
-			<form class="form-horizontal" enctype="multipart/form-data">
-				<input type="hidden" id="docType" value="${docType}">
-				<input type="hidden" id="approvalOrder" value="${approvalOrder}">
-				<input type="hidden" id="employeeNo" name="employeeNo" value="${sessionScope.employee.employeeNo}">
+			<form id="form" class="form-horizontal" enctype="multipart/form-data">
+				<input type="hidden" id="docType" name="docType" value="${docType}">
+				<input type="hidden" id="approvalOrder" name="approvalOrder" value="${approvalOrder}">
+				<input type="hidden" id="employeeNo" name="employeeNo" value="${sessionScope.sessionEmployee.employeeNo}">
 				<input type="hidden" class="border-0" id=reqDate name="reqDate" value="${nowDate}">
 				<input type="hidden" id="searchType" name="searchType" value="${param.searchType}">				
 				<div id="approval_member"></div>
 				<div id="reference_member"></div>
 
 				<!-- 		<input type="submit"  class="btn btn-primary pull-right" value="글쓰기"> -->
-				<button type="button" id="listApproval" class="btn btn">목록</button>
+				<button type="button" id="listApproval" class="btn btn" >목록</button>
 				<button type="button" id="writeApproval" class="btn btn" >등록</button>
-				<button type="button" id="myFormSubmit" class="btn btn">결재라인</button>				
+				<button type="button" id="myFormSubmit" class="btn btn" >결재라인</button>				
 				<br>
 				<table class="table01" style="text-align: center; boder: 1px solid #000000">
 					<thead>
@@ -109,11 +110,11 @@
 
 									<tr>	
 										<td style="background-color:#D5D5D5;">기안자</td>
-										<td class="text-left">${sessionScope.employee.employeeName}</td>	
+										<td class="text-left">${sessionScope.sessionEmployee.employeeName}</td>	
 								    </tr>
 								    <tr>								
 										<td style="background-color:#D5D5D5;">소 속</td>
-										<td class="text-left">${sessionScope.employee.departmentNo}</td>							
+										<td class="text-left">${sessionScope.sessionEmployee.departmentName}</td>							
 									</tr>	
 									<tr>
 										<td style="background-color:#D5D5D5;">기안일</td>
@@ -128,7 +129,7 @@
 							</td>
 							<td id="middleTd">
 							</td>
-							<td>
+							<td id="rightTd">
 								<table class="table table-bordered" style="text-align: center; boder: 1px solid #dddddd">
 									<tr id="approvalLine">
 																					
@@ -158,15 +159,15 @@
 							</tr>
 						</c:if>							
 						<tr>
-							<td style="background-color:#D5D5D5;">내 용</td>						
+							<td style="background-color:#D5D5D5;vertical-align: middle;">내 용</td>						
 							<td><textarea class="form-control" id="content" name="content" maxlength="2048" style="height: 250px;"></textarea></td>
 						</tr>	
 						<tr>
 							<td style="background-color:#D5D5D5;">첨부파일</td>
 						    <td  id="dropZone">
-							    <input type="file" id="fileName1" name="fileName1" />
-							    <input type="file" id="fileName2" name="fileName2" />
-							    <input type="file" id="fileName3" name="fileName3" /></td>
+							    <input type="file" id="fileName1" name="file1" />
+							    <input type="file" id="fileName2" name="file1" />
+							    <input type="file" id="fileName3" name="file1" /></td>
 						</tr>
 						<tr>
 							<td width="10%" style="background-color:#D5D5D5;">메 모</td>						

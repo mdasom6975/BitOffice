@@ -15,10 +15,10 @@
 			id="sampleTable_paginate">
 
 			<nav>
-				<!-- í¬ê¸°ì¡°ì ˆ :  pagination-lg pagination-sm-->
+				<!-- Å©±âÁ¶Àý :  pagination-lg pagination-sm-->
 				<ul class="pagination">
 
-					<!--  <<== ì¢Œì¸¡ nav -->
+					<!--  <<== ÁÂÃø nav -->
 					<c:if test="${ resultPage.currentPage <= resultPage.pageUnit }">
 						<li class="disabled">
 					</c:if>
@@ -29,12 +29,12 @@
 						<a class="page-link"  href="javascript:fncGetList('${ resultPage.currentPage-1}')" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 					</a></li>
 
-					<!--  ì¤‘ì•™  -->
+					<!--  Áß¾Ó  -->
 					<c:forEach var="i" begin="${resultPage.beginUnitPage}"
 						end="${resultPage.endUnitPage}" step="1">
 
 						<c:if test="${ resultPage.currentPage == i }">
-							<!--  í˜„ìž¬ page ê°€ë¥´í‚¬ê²½ìš° : active -->
+							<!--  ÇöÀç page °¡¸£Å³°æ¿ì : active -->
 							<li class="page-item active">
 							<a class="page-link" href="javascript:fncGetList('${ i }');">${ i }
 							<span class="sr-only">(current)</span></a></li>
@@ -46,7 +46,7 @@
 						</c:if>
 					</c:forEach>
 
-					<!--  ìš°ì¸¡ nav==>> -->
+					<!--  ¿ìÃø nav==>> -->
 					<c:if test="${ resultPage.endUnitPage >= resultPage.maxPage }">
 						<li class="disabled">
 					</c:if>

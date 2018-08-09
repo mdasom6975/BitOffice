@@ -114,7 +114,7 @@
 				  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 				  <input type="hidden" id="currentPage" name="currentPage" value=""/>	
 				  <input type="hidden" id="searchType" name="searchType" value="${param.searchType}"/>			  
-				  <input type="hidden" id="employeeNo" name="employeeNo" value="${sessionScope.employee.employeeNo}"/>
+				  <input type="hidden" id="employeeNo" name="employeeNo" value="${sessionScope.sessionEmployee.employeeNo}"/>
 				</form>
 	    	</div>
 	    	

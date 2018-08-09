@@ -67,17 +67,17 @@
 
 	
 	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="tab-pane fade active show">
+	<div class="tile">
     
 	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
 	    <div class="row" style="padding-left:40px;">
 	    	<div class="form-group row"> 
 			  <div class="col-xs-1">
-	    		<button type="button" id="checkin" class="btn btn"  >출석</button>
+	    		<button type="button" id="checkin" class="btn btn" style="background-color:#D2E1FF;" >출석</button>
 	    	  </div>
 				&nbsp;&nbsp;&nbsp;&nbsp;		    	  
 			  <div class="col-xs-1">
-	    		<button type="button" id="checkout" class="btn btn">퇴근</button>
+	    		<button type="button" id="checkout" class="btn btn" style="background-color:#74D19D;">퇴근</button>
 	    	  </div>		    	  	
 			</div>			
 		</div>
@@ -109,7 +109,7 @@
 				  
 				  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 				  <input type="hidden" id="currentPage" name="currentPage" value=""/>				  
-				  <input type="hidden" id="employeeNo" name="employeeNo" value="${sessionScope.employee.employeeNo}"/>
+				  <input type="hidden" id="employeeNo" name="employeeNo" value="${sessionScope.sessionEmployee.employeeNo}"/>
 				</form>
 	    	</div>
 	    	
@@ -160,11 +160,11 @@
       
       </table>
 	  <!--  table End /////////////////////////////////////-->
-	  
+	 	<!-- PageNavigation Start... -->
+		<jsp:include page="../common/pageNavigator_new.jsp"/>
+		<!-- PageNavigation End... -->	  
  	</div>
  	<!--  화면구성 div End /////////////////////////////////////-->
  	
  	
- 	<!-- PageNavigation Start... -->
-	<jsp:include page="../common/pageNavigator_new.jsp"/>
-	<!-- PageNavigation End... -->
+

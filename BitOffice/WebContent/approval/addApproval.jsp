@@ -91,7 +91,7 @@
 			<form class="form-horizontal" enctype="multipart/form-data">
 				<input type="hidden" id="docType" value="${approval.docType}">
 				<input type="hidden" id="approvalOrder" value="${approval.docApprovalOrder}">
-				<input type="hidden" id="employeeNo" name="employeeNo" value="${sessionScope.employee.employeeNo}">
+				<input type="hidden" id="employeeNo" name="employeeNo" value="${sessionScope.sessionEmployee.employeeNo}">
 				<input type="hidden" id="approvalNo" name="approvalNo" value="${approval.docNo}">
 				<input type="hidden" class="border-0" id=reqDate name="reqDate" value="${nowDate}">
 				<input type="hidden" id="searchType" name="searchType" value="${param.searchType}">
@@ -99,10 +99,10 @@
 				<div id="reference_member"></div>
 
 				<!-- 		<input type="submit"  class="btn btn-primary pull-right" value="글쓰기"> -->
-				<button type="button" class="btn btn-default">목록</button>
-				<c:if test = "${fn:trim(sessionScope.employee.employeeNo) == fn:trim(approval.regEmployeeNo) }">
+				<button type="button" class="btn btn-default" >목록</button>
+				<c:if test = "${fn:trim(sessionScope.sessionEmployee.employeeNo) == fn:trim(approval.regEmployeeNo) }">
 				    <button type="button" id="updateApproval" class="btn btn" >수정</button>
-				    <button type="button" id="myFormSubmit" class="btn btn">결재라인</button></c:if>
+				    <button type="button" id="myFormSubmit" class="btn btn"  >결재라인</button></c:if>
 				<table class="table table-bordered" style="text-align: center; boder: 1px solid #dddddd">
 					<thead>
 						<tr>
@@ -111,6 +111,7 @@
 								<c:if test="${fn:trim(approval.docType)=='2'}">일반기안</c:if>
 								</th>
 						</tr>
+						
 					</thead>
 				</table>				
 				<table class="table01" style="text-align: center; boder: 1px solid #dddddd;background-color:#FFFFFF;">						
@@ -138,7 +139,7 @@
 							</td>
 							<td id="middleTd">
 							</td>
-							<td>
+							<td id="rightTd">
 								<table class="table table-bordered" style="text-align: center; boder: 1px solid #dddddd">
 									<tr id="approvalLine">
 																													
@@ -168,15 +169,15 @@
 							</tr>
 						</c:if>							
 						<tr>
-							<td style="background-color:#D5D5D5;">내 용</td>						
+							<td style="background-color:#D5D5D5;vertical-align: middle;">내 용</td>						
 							<td height="250px"><textarea class="form-control" id="content" name="content" maxlength="2048" style="height: 250px;">${approval.content}</textarea></td>
 						</tr>						
 						<tr>
 							<td style="background-color:#D5D5D5;">첨부파일</td>
-						    <td  id="dropZone">
-							    <input type="file" id="fileName1" name="fileName1" />${approval.fileName1}
-							    <input type="file" id="fileName2" name="fileName2" />${approval.fileName2}
-							    <input type="file" id="fileName3" name="fileName3" />${approval.fileName3}</td>
+						    <td  id="dropZone" class="text-left">
+							    <input type="file" id="fileName1" name="fileName1" /> ${approval.fileName1}<br>
+							    <input type="file" id="fileName2" name="fileName2" /> ${approval.fileName2}<br>
+							    <input type="file" id="fileName3" name="fileName3" /> ${approval.fileName3}</td>
 						</tr>
 						<tr>
 							<td width="10%" style="background-color:#D5D5D5;">메 모</td>						

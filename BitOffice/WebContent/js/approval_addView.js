@@ -205,7 +205,7 @@
        	 	
        	    $('#seungin').remove();
        	 	
-       	    var middleTdWidth=50;
+       	    var middleTdWidth=0;
 	       	 
        	 	//승인 결재자  선택 역순으로 가져오기 
        	        $($('#authorizationPerson li').get().reverse()).each(function(i){       	       
@@ -217,7 +217,7 @@
 	       	     var thisPosion = employInfo[0];
 	       	   	 var thisName = employInfo[1];
        	        
-	       	     middleTdWidth-=(i*10);
+	       	   	 middleTdWidth+=160;
 	       	   	 
 	       	     if( i==0){
 	       	    	approvalTable+="<td id='seungin' style='width:30px;vertical-align:middle;background-color:#D5D5D5;'>승<br><br><br>인</td>";
@@ -232,7 +232,7 @@
         		 	 approvalTable+="<tr><td style='width:100px;height:46px;color:#FF0000;'></td></tr>";        		 	
         		 	 approvalTable+="</table></td>";  
         		 	 
-        		 	$("#middleTd").css('width',middleTdWidth+'%'); 
+        		 	$("#rightTd").css('width',middleTdWidth+'px'); 
         		 	
         		 	$("#approvalLine").append(approvalTable); 
         		 	$("#approval_member").append("<input type='hidden' name='approvalArray' value='"+thisId+"'>");
@@ -347,6 +347,8 @@
 			return;
 		}
 
+		
+		var formData = new FormData();		
 
 		if(docType.indexOf("1")>=0){ 
 			var data1={ 	
@@ -364,7 +366,8 @@
 					"memo": 			$("#memo").val().trim(),
 					"fileName1": 		$("#fileName1").val().trim().replace(/.*(\/|\\)/, ''),
 					"fileName2": 		$("#fileName2").val().trim().replace(/.*(\/|\\)/, ''),
-					"fileName3": 		$("#fileName3").val().trim().replace(/.*(\/|\\)/, '')				
+					"fileName3": 		$("#fileName3").val().trim().replace(/.*(\/|\\)/, '')
+					
 						}
 		}else{
 			var data1={ 	
@@ -379,17 +382,31 @@
 					"memo": 			$("#memo").val().trim(),
 					"fileName1": 		$("#fileName1").val().trim().replace(/.*(\/|\\)/, ''),
 					"fileName2": 		$("#fileName2").val().trim().replace(/.*(\/|\\)/, ''),
-					"fileName3": 		$("#fileName3").val().trim().replace(/.*(\/|\\)/, '')
+					"fileName3": 		$("#fileName3").val().trim().replace(/.*(\/|\\)/, '')				
 						}
 		}
 		
 			//기안 등록
+		
+		
+	
+		
+		//var file1 = $('input[name="file1"]').get(0).files[0];
+		//alert("file"+logoImg);
+
+		
+		//formData.append('file1', file1);
+		
  	    	$.ajax({
 	    		url : "/approval/json/addApproval",
+	    		enctype: 'multipart/form-data',
 				method : "POST" ,
 				data : data1 ,	
+				//data : formData,
+				//processData: false,  // Important!
 				contentType : "application/x-www-form-urlencoded; charset=UTF-8",
-				dataType : "text" ,
+				//contentType : false,
+				dataType : "text" ,				
 				success : function(resultValue, status) {
 					//alert("resultValue:"+resultValue);
 					if (resultValue.indexOf(1)>=0){ 
