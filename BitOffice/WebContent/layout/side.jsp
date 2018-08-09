@@ -34,7 +34,7 @@
           </ul>
         </li>
         
-        <li><a class="app-menu__item" href="/reservation/myReservation"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">내 예약 보기</span></a></li>
+        <li><a class="app-menu__item" href="/reservation/myReservation"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">회의실 예약</span></a></li>
             
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-calendar"></i><span class="app-menu__label">일정</span>
         <i class="treeview-indicator fa fa-angle-right"></i></a>

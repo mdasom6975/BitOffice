@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="FileMapper">
+ 	
+ 	
+	<resultMap id="fileselectMap" type="File">
+		<result property="id" 			column="id" 			jdbcType="INTEGER"/>
+		<result property="filename" 			column="filename" 			jdbcType="VARCHAR"/>
+		<result property="notes" 			column="notes" 			jdbcType="VARCHAR"/>
+		<result property="type" 			column="type" 			jdbcType="VARCHAR"/>
+		<result property="file" 			column="file" 			jdbcType="BLOB"/>
+	</resultMap>
+	
+	<select id="getFile" parameterType="String" resultMap="fileselectMap">
+		SELECT * 
+		FROM files
+		WHERE id = #{id} 
+	</select>
+	
+	<select id="listFile" resultMap="fileselectMap">
+		SELECT id, filename, notes, type 
+		FROM files
+	</select>
+	 
+	<insert id="uploadFile" parameterType="file">
+		INSERT INTO files (filename, notes, type, file) 
+		VALUES (#{filename}, #{notes}, #{type}, #{file})
+	</insert> 
+	
+	<delete id="deleteFile" parameterType="int">
+		DELETE
+		FROM files
+		WHERE id = #{id}
+	</delete>
+	
+	<select id="getFileForeign" parameterType="String" resultMap="fileselectMap">
+		SELECT * 
+		FROM Foreign
+		WHERE id = #{id} 
+	</select>
+	
+	<select id="listFileForeign" resultMap="fileselectMap">
+		SELECT id, filename, notes, type 
+		FROM Foreign
+	</select>
+	 
+	<insert id="uploadFileForeign" parameterType="file">
+		INSERT INTO Foreign (filename, notes, type, file) 
+		VALUES (#{filename}, #{notes}, #{type}, #{file})
+	</insert> 
+	
+	<delete id="deleteFilefiles" parameterType="int">
+		DELETE
+		FROM Foreign
+		WHERE id = #{id}
+	</delete>
+	
+		<select id="getFileQuality" parameterType="String" resultMap="fileselectMap">
+		SELECT * 
+		FROM Quality
+		WHERE id = #{id} 
+	</select>
+	
+	<select id="listFileQuality" resultMap="fileselectMap">
+		SELECT id, filename, notes, type 
+		FROM Quality
+	</select>
+	 
+	<insert id="uploadFileQuality" parameterType="file">
+		INSERT INTO Quality (filename, notes, type, file) 
+		VALUES (#{filename}, #{notes}, #{type}, #{file})
+	</insert> 
+	
+	<delete id="deleteFileQuality" parameterType="int">
+		DELETE
+		FROM Quality
+		WHERE id = #{id}
+	</delete>
+	
+			<select id="getFileFight" parameterType="String" resultMap="fileselectMap">
+		SELECT * 
+		FROM Fight
+		WHERE id = #{id} 
+	</select>
+	
+	<select id="listFileFight" resultMap="fileselectMap">
+		SELECT id, filename, notes, type 
+		FROM Fight
+	</select>
+	 
+	<insert id="uploadFileFight" parameterType="file">
+		INSERT INTO Fight (filename, notes, type, file) 
+		VALUES (#{filename}, #{notes}, #{type}, #{file})
+	</insert> 
+	
+	<delete id="deleteFileFight" parameterType="int">
+		DELETE
+		FROM Fight
+		WHERE id = #{id}
+	</delete>
+	
+	<select id="getFileEmp" parameterType="String" resultMap="fileselectMap">
+		SELECT * 
+		FROM Emp
+		WHERE id = #{id} 
+	</select>
+	
+	<select id="listFileEmp" resultMap="fileselectMap">
+		SELECT id, filename, notes, type 
+		FROM Emp
+	</select>
+	 
+	<insert id="uploadFileEmp" parameterType="file">
+		INSERT INTO Emp (filename, notes, type, file) 
+		VALUES (#{filename}, #{notes}, #{type}, #{file})
+	</insert> 
+	
+	<delete id="deleteFileEmp" parameterType="int">
+		DELETE
+		FROM Emp
+		WHERE id = #{id}
+	</delete>
+
+	<select id="getFileInternet" parameterType="String" resultMap="fileselectMap">
+		SELECT * 
+		FROM Internet
+		WHERE id = #{id} 
+	</select>
+	
+	<select id="listFileInternet" resultMap="fileselectMap">
+		SELECT id, filename, notes, type 
+		FROM Internet
+	</select>
+	 
+	<insert id="uploadFileInternet" parameterType="file">
+		INSERT INTO Internet (filename, notes, type, file) 
+		VALUES (#{filename}, #{notes}, #{type}, #{file})
+	</insert> 
+	
+	<delete id="deleteFileInternet" parameterType="int">
+		DELETE
+		FROM Internet
+		WHERE id = #{id}
+	</delete>	
+
+	<select id="getFileCouncle" parameterType="String" resultMap="fileselectMap">
+		SELECT * 
+		FROM Councle
+		WHERE id = #{id} 
+	</select>
+	
+	<select id="listFileCouncle" resultMap="fileselectMap">
+		SELECT id, filename, notes, type 
+		FROM Councle
+	</select>
+	 
+	<insert id="uploadFileCouncle" parameterType="file">
+		INSERT INTO Councle (filename, notes, type, file) 
+		VALUES (#{filename}, #{notes}, #{type}, #{file})
+	</insert> 
+	
+	<delete id="deleteFileCouncle" parameterType="int">
+		DELETE
+		FROM Councle
+		WHERE id = #{id}
+	</delete>
+
+	<select id="getFileMaking" parameterType="String" resultMap="fileselectMap">
+		SELECT * 
+		FROM Making
+		WHERE id = #{id} 
+	</select>
+	
+	<select id="listFileMaking" resultMap="fileselectMap">
+		SELECT id, filename, notes, type 
+		FROM Making
+	</select>
+	 
+	<insert id="uploadFileMaking" parameterType="file">
+		INSERT INTO Making (filename, notes, type, file) 
+		VALUES (#{filename}, #{notes}, #{type}, #{file})
+	</insert> 
+	
+	<delete id="deleteFileMaking" parameterType="int">
+		DELETE
+		FROM Making
+		WHERE id = #{id}
+	</delete>
+
+	<select id="getFileProduct" parameterType="String" resultMap="fileselectMap">
+		SELECT * 
+		FROM Product
+		WHERE id = #{id} 
+	</select>
+	
+	<select id="listFileProduct" resultMap="fileselectMap">
+		SELECT id, filename, notes, type 
+		FROM Product
+	</select>
+	 
+	<insert id="uploadFileProduct" parameterType="file">
+		INSERT INTO Product (filename, notes, type, file) 
+		VALUES (#{filename}, #{notes}, #{type}, #{file})
+	</insert> 
+	
+	<delete id="deleteFileProduct" parameterType="int">
+		DELETE
+		FROM Product
+		WHERE id = #{id}
+	</delete>
+	
+	<select id="getFileMarket" parameterType="String" resultMap="fileselectMap">
+		SELECT * 
+		FROM Market
+		WHERE id = #{id} 
+	</select>
+	
+	<select id="listFileMarket" resultMap="fileselectMap">
+		SELECT id, filename, notes, type 
+		FROM Market
+	</select>
+	 
+	<insert id="uploadFileMarket" parameterType="file">
+		INSERT INTO Market (filename, notes, type, file) 
+		VALUES (#{filename}, #{notes}, #{type}, #{file})
+	</insert> 
+	
+	<delete id="deleteFileMarket" parameterType="int">
+		DELETE
+		FROM Market
+		WHERE id = #{id}
+	</delete>
+	
+	<select id="getFileTech" parameterType="String" resultMap="fileselectMap">
+		SELECT * 
+		FROM Tech
+		WHERE id = #{id} 
+	</select>
+	
+	<select id="listFileTech" resultMap="fileselectMap">
+		SELECT id, filename, notes, type 
+		FROM Tech
+	</select>
+	 
+	<insert id="uploadFileTech" parameterType="file">
+		INSERT INTO Tech (filename, notes, type, file) 
+		VALUES (#{filename}, #{notes}, #{type}, #{file})
+	</insert> 
+	
+	<delete id="deleteFileTech" parameterType="int">
+		DELETE
+		FROM Tech
+		WHERE id = #{id}
+	</delete>
+	
+	<select id="getFileClient" parameterType="String" resultMap="fileselectMap">
+		SELECT * 
+		FROM Tech
+		WHERE id = #{id} 
+	</select>
+	
+	<select id="listFileClient" resultMap="fileselectMap">
+		SELECT id, filename, notes, type 
+		FROM Tech
+	</select>
+	 
+	<insert id="uploadFileClient" parameterType="file">
+		INSERT INTO Tech (filename, notes, type, file) 
+		VALUES (#{filename}, #{notes}, #{type}, #{file})
+	</insert> 
+	
+	<delete id="deleteFileClient" parameterType="int">
+		DELETE
+		FROM Tech
+		WHERE id = #{id}
+	</delete>			
+
+	<select id="getFileEconomy" parameterType="String" resultMap="fileselectMap">
+		SELECT * 
+		FROM Economy
+		WHERE id = #{id} 
+	</select>
+	
+	<select id="listFileEconomy" resultMap="fileselectMap">
+		SELECT id, filename, notes, type 
+		FROM Economy
+	</select>
+	 
+	<insert id="uploadFileEconomy" parameterType="file">
+		INSERT INTO Economy (filename, notes, type, file) 
+		VALUES (#{filename}, #{notes}, #{type}, #{file})
+	</insert> 
+	
+	<delete id="deleteFileEconomy" parameterType="int">
+		DELETE
+		FROM Economy
+		WHERE id = #{id}
+	</delete>	
+
+	<select id="getFileDepartment" parameterType="String" resultMap="fileselectMap">
+		SELECT * 
+		FROM Department
+		WHERE id = #{id} 
+	</select>
+	
+	<select id="listFileDepartment" resultMap="fileselectMap">
+		SELECT id, filename, notes, type 
+		FROM Department
+	</select>
+	 
+	<insert id="uploadFileDepartment" parameterType="file">
+		INSERT INTO Department (filename, notes, type, file) 
+		VALUES (#{filename}, #{notes}, #{type}, #{file})
+	</insert> 
+	
+	<delete id="deleteFileDepartment" parameterType="int">
+		DELETE
+		FROM Department
+		WHERE id = #{id}
+	</delete>
+</mapper>
