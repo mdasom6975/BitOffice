@@ -37,9 +37,9 @@
 	<script src="/js/plugins/pace.min.js"></script>
 	
 	<!--  fullcalendar 사용을 위한 선언 -->
-<!-- 	<link type="text/css" href='/css/fullcalendar.min.css' rel='stylesheet' /> -->
-<!-- 	<link href='/css/fullcalendar.print.min.css' rel='stylesheet' -->
-<!-- 		media='print' /> -->
+	<link type="text/css" href='/css/fullcalendar.min.css' rel='stylesheet' />
+	<link href='/css/fullcalendar.print.min.css' rel='stylesheet'
+		media='print' />
 	<link type="text/css" href='/css/testSchedule.css' rel='stylesheet' />
 	<script type="text/javascript" src='/js/moment.min.js'></script>
 	<script type="text/javascript" src='/js/fullcalendar.min.js'></script>

@@ -190,5 +190,24 @@ function fncAddEmployee() {
 			self.location ="/employee/addEmployee"
 		});
 		
+		//중복 INSERT 를 막기 위한 F5키 막음
+		 function noRefresh()
+		 {
+		     if (event.keyCode == 116) 
+		     {
+		         alert("새로고침을 할 수 없습니다.");
+		         event.keyCode = 2;
+		         return false;
+		     } 
+		     else if(event.ctrlKey && (event.keyCode == 78 || event.keyCode == 82)) 
+		     {
+		         return false;
+		     }
+		 }
+		 document.onkeydown = noRefresh;
+		
 	});	
+	
+	
+	 
 	

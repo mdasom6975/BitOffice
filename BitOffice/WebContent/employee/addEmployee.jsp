@@ -3,7 +3,7 @@
 
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
-<div class="container" style="background-color: white;">
+<div class="container" style="background-color: white;" onkeyup="noRefresh();" >
 
 	<div class="page-header">
 		<h3 class=" text-info">${employee.employeeName}님의 정보가 다음과 같이
