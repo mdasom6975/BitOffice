@@ -30,9 +30,8 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 <link rel="stylesheet" href="http://trentrichardson.com/examples/timepicker/jquery-ui-timepicker-addon.css">
-<link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
-<script type="text/javascript" src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
-	
+<link rel="stylesheet" href="/css/document.css">
+
 <!-- The javascript plugin to display page loading on top-->
 <script src="/js/plugins/pace.min.js"></script>
 
@@ -43,12 +42,6 @@
 $('#sampleTable').DataTable();
 </script>
 
-
-<!-- include summernote css/js -->
-<script src="/js/reservation.js"></script>
-<script type="text/javascript">
-
-</script>
 
 
 
@@ -70,26 +63,10 @@ $('#sampleTable').DataTable();
 		<!-- sidebar 메뉴 모음 -->
 				
 		<!-- sidebar 메뉴 모음 -->
-	<main class="app-content"> <c:choose>
-		<c:when test="${menu=='addReservation'}">
-			<%@include file="/reservation/addReservation.jsp"%>
-		</c:when>
-		<c:when test="${menu=='listReservation'}">
-			<%@include file="/reservation/listReservation.jsp"%>
-		</c:when>
-		<c:when test="${menu=='updateReservation'}">
-			<%@include file="/reservation/updateReservation.jsp"%>
-		</c:when>
-		<c:when test="${menu=='getReservation'}">
-			<%@include file="/reservation/getReservation.jsp"%>
-		</c:when>
-		<c:when test="${menu=='myReservation'}">
-			<%@include file="/reservation/myReservation.jsp"%>
-		</c:when>
-		<c:otherwise>
-			<%@include file="/reservation/myReservation.jsp"%>
-		</c:otherwise>
-	</c:choose> 
+	<main class="app-content">
+
+			<%@include file="/document/documents.jsp"%>
+ 
 	</main>
 
 <script src="/js/main.js"></script>

@@ -24,7 +24,7 @@
 		<context:exclude-filter 	type="annotation" 	expression="org.springframework.stereotype.Service"/>
 		<context:exclude-filter 	type="annotation" 	expression="org.springframework.stereotype.Repository"/>
 	</context:component-scan> 
-	
+
 	
    	<!-- ■ DefaultAnnotationHandlerMapping 설정 등 기타 Annotation 기반
    	        모든 기능을 사용 할 수 있는 아래의 설정으로 변경 -->
@@ -60,6 +60,7 @@
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="uploadTempDir" value="/temp" />
 		<property name="defaultEncoding" value="UTF-8" />
+		<property name="maxUploadSize" value="5242880"/>
 	</bean>
 	
 	<!--	

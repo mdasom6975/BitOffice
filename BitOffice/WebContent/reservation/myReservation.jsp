@@ -17,9 +17,11 @@
 					class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
 					<div class="row">
 						<div class="col-md-6 text-left">
-			<p class="text-primary">전체 ${resultPage.totalCount } 건의 예약이 있습니다.</p>
+			<p class="text-primary"><i class="material-icons meeting_room"></i>
+			전체 ${resultPage.totalCount } 건의 예약이 있습니다.</p>
+				<button class="btn btn-secondary btn" type="button" onclick="location.href='addReservation'">예약하기</button>
 		</div>
-				</div>
+			</div>
 					<div class="row">
 						<div class="col-sm-12">
 							<table
@@ -28,11 +30,6 @@
 								
 								<thead>
 									<tr role="row">
-										<th class="sorting_asc" tabindex="0"
-											aria-controls="sampleTable" rowspan="1" colspan="1"
-											aria-sort="ascending"
-											aria-label="Name: activate to sort column descending"
-											style="width: 7px;">수정</th>
 										<th class="sorting" tabindex="0" aria-controls="sampleTable"
 											rowspan="1" colspan="1"
 											aria-label="Position: activate to sort column ascending"
@@ -49,6 +46,11 @@
 											rowspan="1" colspan="1"
 											aria-label="Office: activate to sort column ascending"
 											style="width: 70px;">종료 시간</th>
+										<th class="sorting_asc" tabindex="0"
+											aria-controls="sampleTable" rowspan="1" colspan="1"
+											aria-sort="ascending"
+											aria-label="Name: activate to sort column descending"
+											style="width: 7px;">수정</th>
 										<th class="sorting" tabindex="0" aria-controls="sampleTable"
 											rowspan="1" colspan="1"
 											aria-label="Age: activate to sort column ascending"
@@ -60,12 +62,12 @@
 									<c:forEach var="reservation" items="${list}">
 										<c:set var="i" value="${ i+1 }" />
 										<tr role="row" class="odd">
-											<td value="${reservation.reNum }">${reservation.reNum }</td>
 											<td>${reservation.mettingRoomName }</td>
 											<td>${reservation.reserveDate}</td>
 											<td>${reservation.startTime}</td>
 											<td>${reservation.endTime}</td>
-			 								<td><button type="button" onclick="location.href='cancelReservation?reNum=${reservation.reNum}'">삭제</button></td>
+											<td id="updateRV" value="${reservation.reNum }"><i class="fa fa-pencil" aria-hidden="true"></i></td>
+											<td id="deleteRV" value="${reservation.reNum }"><i class="fa fa-times" aria-hidden="true"></i></td>
 										</tr>
 									</c:forEach>
 								</tbody>

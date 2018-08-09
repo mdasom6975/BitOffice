@@ -27,11 +27,11 @@
 <script src="/js/jquery-3.2.1.min.js"></script>
 <script src="/js/popper.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
   <!-- jQuery UI toolTip 사용 CSS-->
- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!--  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
  <!-- jQuery UI toolTip 사용 JS-->
- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!--  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 	
 	
 <!-- The javascript plugin to display page loading on top-->
@@ -55,19 +55,19 @@ $('#sampleTable').DataTable();
 
 </head>
 <body class="app sidebar-mini rtl">
-		<!-- Navbar-->
+	<!-- Navbar-->
 	<header class="app-header">
-		 <%@include file="/layout/header.jsp"%>
+		<!--       Sidebar toggle button-->
+		<%@include file="/layout/header.jsp" %>
 	</header>
 
-
-		<!-- Sidebar menu-->
+	<!-- Sidebar menu-->
 	<!-- 프로필 영역  -->
 	<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-	<aside class="app-sidebar">
-		<%@include file="/layout/side.jsp"%>
-		<!-- sidebar 메뉴 모음 -->
-	</aside>
+
+		<aside class="app-sidebar">
+		<%@include file="/layout/side.jsp" %>
+		</aside>
 
 	<main class="app-content"> <c:choose>
 		<c:when test="${menu=='listMeetingRoom'}">

@@ -22,6 +22,12 @@
 		WHERE re_num = #{reNum}	
 	</delete>
 	
+	<delete id="autoDelete" parameterType="Date">
+		DELETE
+		FROM reservation
+		WHERE reservation_date <![CDATA[<=]]> to_char(trunc(sysdate), 'yyyy-mm-dd')
+	</delete>
+	
 	<insert id="addReservation" parameterType="reservation">
 		INSERT 
 		INTO reservation(employee_no, meetingroom_name, reservation_date, start_time, end_date, reservation_detail, re_num) 
@@ -43,6 +49,7 @@
 						WHERE r.employee_no = #{employeeNo} 
 						AND r.employee_no(+) = e.employee_no 
 						AND m.meetingroom_name = r.meetingroom_name
+						AND reservation_date <![CDATA[>=]]> to_char(trunc(sysdate), 'yyyy-mm-dd')
 						ORDER BY reservation_date, start_time) inner_table 
 			WHERE ROWNUM <![CDATA[<=]]> #{search.endRowNum} ) 
 			WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum}
@@ -64,7 +71,8 @@
 				FROM ( SELECT m.meetingroom_name, r.start_time, r.end_date, r.reservation_date, r.employee_no, r.re_num 
 						FROM meetingroom m, reservation r, employee e
 						ORDER BY meetingroom_name) inner_table 
-			WHERE ROWNUM <![CDATA[<=]]> #{search.endRowNum} ) 
+			WHERE ROWNUM <![CDATA[<=]]> #{search.endRowNum} 
+			AND reservation_date <![CDATA[>=]]> to_char(trunc(sysdate), 'yyyy-mm-dd')) 
 			WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum}
 	</select>
 	

@@ -2,6 +2,7 @@ package com.bitoffice.service.reservation.impl;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -101,5 +102,10 @@ public class ReservationServiceImpl implements ReservationService {
 	public List<MeetingRoom> testReserveMeetingRoom() throws Exception{
 		
 		return reservationDAO.testReserveMeetingRoom();
+	}
+	
+	public void autoDelete(Date reserveDate) throws Exception{
+		
+		reservationDAO.autoDelete(reserveDate);
 	}
 }
