@@ -1,146 +1,72 @@
-		 $( function() {
-			    var dialog, form,
-			    
-			 
-			      meetingRoomCode=$("#meetingRoomCode"),
-			      mettingRoomName=$("#mettingRoomName"),
-			      allFields = $( [] ).add(meetingRoomCode).add(mettingRoomName),
-			      tips = $( ".validateTips" );
-			 
-			    function updateTips( t ) {
-			      tips
-			        .text( t )
-			        .addClass( "ui-state-highlight" );
-			      setTimeout(function() {
-			        tips.removeClass( "ui-state-highlight", 1500 );
-			      }, 500 );
-			    }
-			 
-			    function checkLength( o, n, min, max ) {
-			      if ( o.val().length > max || o.val().length < min ) {
-			        o.addClass( "ui-state-error" );
-			        updateTips( "Length of " + n + " must be between " +
-			          min + " and " + max + "." );
-			        return false;
-			      } else {
-			        return true;
-			      }
-			    }
-			 
-			    function checkRegexp( o, regexp, n ) {
-			      if ( !( regexp.test( o.val() ) ) ) {
-			        o.addClass( "ui-state-error" );
-			        updateTips( n );
-			        return false;
-			      } else {
-			        return true;
-			      }
-			    }
-			 
-			    function addMeetingRoom() {
-// 			    	var valid = true;
-			        allFields.removeClass( "ui-state-error" );
-			    	//유효성 체크
-// 			    	var numcheck = document.getElementById("meetingRoomCode");
-// 			    	var isnum = /^[0-9]+$/;
-// 			    	if(!isnum.test(numcheck.value)){
-// 			    		alert("코드는 숫자만 입력하세요");
-// 			    		numcheck.value="";
-// 			    		numcheck.focus();
-// 			    		return;
-// 			    	}
-// 			    	valid = valid && checkLength( meetingRoomCode, "meetingRoomCode", 3, 5 );
-//       				valid = valid && checkLength( mettingRoomName, "mettingRoomName", 4, 6 );
 
-//       				valid = valid && checkRegexp( meetingRoomCode, /^[0-9]+$/, "코드는 숫자로만 이루어져야 합니다" );
-      				
-//       				if ( valid ) {
-//       			        $( "#table table-hover table-striped tbody" ).append( "<tr>" +
-//       			          "<td>" + meetingRoomCode.val() + "</td>" +
-//       			          "<td>" + mettingRoomName.val() + "</td>" +
-//       			          "</tr>" );
-//       			        dialog.dialog( "close" );
-//       			      }
-//       			      return valid;
-			//return valid하려면 add가안됨, add하려면 valid가 안됨	      
-      			      self.location.href='/meetingRoom/addMeetingRoom?meetingRoomCode='+document.getElementById("meetingRoomCode").value
-			    						+"&mettingRoomName="+document.getElementById("mettingRoomName").value;
-	    	//$("form").attr("method", "GET").attr("action", "/meetingRoom/addMeetingRoom").submit();
-			    }
-			 
-			    dialog = $( "#dialog-form" ).dialog({
-			      autoOpen: false,
-			      show: {
-		 		        effect: "blind",
-		 		        duration: 1000
-		 		  },
-		 		 hide: {
-// 		 		        effect: "explode",
-						effect: "drop",
-		 		        duration: 1000
-		 		  },
-			      height: 400,
-			      width: 350,
-			      modal: true,
-			      buttons: {
- 			        "생성": addMeetingRoom ,
-			        "닫기": function() {
-			          dialog.dialog( "close" );
-			        }
-			      },
-			      close: function() {
-			        form[ 0 ].reset();
-			        allFields.removeClass( "ui-state-error" );
-			      }
-			    });
-			 
-			    form = dialog.find( "form" ).on( "submit", function( event ) {
-			      event.preventDefault();
-			      addMeetingRoom();
-			    });
-			 
-			    $( "#create-meetingRoom" ).button().on( "click", function() {
-			      dialog.dialog( "open" );
-			    });
-			  } );
-		
-		
-		//====update Dialog
+			$(function(){
+				$('#deleteMR').on("click", function(){
+					var meetingRoomCode=$(this).attr("value")
 	
-		 $(function() {
-		
-			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$( "td:nth-child(1)" ).on("click" , function() {
-				 self.location ="/meetingRoom/getMeetingRoom?mR="+$(this).attr("value");
+					self.location= '/meetingRoom/deleteMeetingRoom?meetingRoomCode='+meetingRoomCode
+				})
+				
 			});
-						
-			//==> userId LINK Event End User 에게 보일수 있도록 
-			$( "td:nth-child(1)" ).css("color" , "blue");
-			
-		});	
-		
-		// 		$( function() {
-		// 		    $( "#dialog" ).dialog({
-		// 		      autoOpen: false,
-		// 		      show: {
-		// 		        effect: "blind",
-		// 		        duration: 1000
-		// 		      },
-		// 		      hide: {
-		// 		        effect: "explode",
-		// 		        duration: 1000
-		// 		      }
-		// 		    });
 
-		// 		    $( "#opener" ).on( "click", function() {
-		// 		      $( "#dialog" ).dialog( "open" );
-		// 		    });
-		// 		  } );
 
-		//============= "검색"  Event  처리 =============	
-		$(function() {
-			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$("button.btn.btn-default").on("click", function() {
-				fncGetList(1);
+							
+			$(function(){
+				
+				$("#clickAdd").on("click", function() {
+					$('#myModal').modal('show');
+				});
+				
+				$("#addMeetingRoom").on("click", function() {
+					var meetingRoomCode = $("input[name='meetingRoomCode']").val();
+					var mettingRoomName = $("input[name='mettingRoomName']").val();
+					if(meetingRoomCode == null || meetingRoomCode.length<1 ){
+						$('#chkMsg').html("<p style=\"COLOR: red\">회의실 코드를 입력해주세요.</p>"); 
+						return;
+					} if(mettingRoomName == null || mettingRoomName.length<1){				
+						$('#chkMsg').html("<p style=\"COLOR: red\">회의실 이름을 입력해주세요.</p>"); 
+						return;
+					}else{
+						self.location= '/meetingRoom/addMeetingRoom?meetingRoomCode='
+							+ meetingRoomCode
+							+ "&mettingRoomName="
+							+ mettingRoomName
+					}
+				});
+				
 			});
+
+			$(function() {
+				
+				$('#updateModal').on('show.bs.modal', function(event){
+					
+					var button  = $(event.relatedTarget);
+			        var modal = $(this);
+			        
+			        var meetingRoom = button.data('whatever').split(',');
+			        
+			        console.log(meetingRoom[0])
+			        console.log(meetingRoom[1])
+			        console.log(meetingRoom[2])
+			        
+			        modal.find('#meetingRoomCode').val(meetingRoom[0])
+			         modal.find('#mettingRoomName').val(meetingRoom[1])
+			         modal.find('#mR').val(meetingRoom[2])
+
+					
+				})
+				
+				$('#updateMeetingRoom').on("click", function(){
+					$("#updateForm").attr("method","POST").attr("action","/meetingRoom/updateMeetingRoom").submit();
+				})	
+
 		});
+		
+		$(function() {
+			$("a[href='#' ]").on("click" , function() {
+				$("form")[0].reset();
+			});
+		});	
+
+		
+
+	

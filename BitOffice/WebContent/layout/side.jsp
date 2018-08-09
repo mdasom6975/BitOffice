@@ -34,13 +34,7 @@
           </ul>
         </li>
         
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">회의실</span>
-        <i class="treeview-indicator fa fa-angle-right"></i></a>
-          <ul class="treeview-menu">
-            <li><a class="treeview-item" href="/reservation/listReservation"><i class="icon fa fa-circle-o"></i>회의실 예약</a></li>
-            <li><a class="treeview-item" href="/reservation/myReservation"><i class="icon fa fa-circle-o"></i>내 예약 보기</a></li>
-            </ul>
-        </li>
+        <li><a class="app-menu__item" href="/reservation/myReservation"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">내 예약 보기</span></a></li>
             
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-calendar"></i><span class="app-menu__label">일정</span>
         <i class="treeview-indicator fa fa-angle-right"></i></a>
@@ -60,13 +54,8 @@
           </ul>
         </li>
         
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-cloud"></i><span class="app-menu__label">파일공유</span>
-        <i class="treeview-indicator fa fa-angle-right"></i></a>
-          <ul class="treeview-menu">
-            <li><a class="treeview-item" href="table-basic.html"><i class="icon fa fa-circle-o"></i> Basic Tables</a></li>
-            <li><a class="treeview-item" href="table-data-table.html"><i class="icon fa fa-circle-o"></i> Data Tables</a></li>
-          </ul>
-        </li>
+	  <li><a class="app-menu__item" href="/document/list"><i class="app-menu__icon fa fa-cloud"></i><span class="app-menu__label">클라우드</span></a></li>
+
 
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">공지사항</span>
         <i class="treeview-indicator fa fa-angle-right"></i></a>

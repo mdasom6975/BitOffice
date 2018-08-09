@@ -1,5 +1,8 @@
 package com.bitoffice.web.reservation;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -131,7 +134,7 @@ public class ReservationController {
 		
 		System.out.println("업뎃??"+reservation);
 		
-		return "redirect:/reservation/myReservation";
+		return "forward:/reservation/myReservation";
 	}
 	
 //	@RequestMapping(value="getReservation", method=RequestMethod.GET)
@@ -179,8 +182,8 @@ public class ReservationController {
 		
 //		String mettingRoomName = ((MeetingRoom)session.getAttribute("meetingRoom")).getMettingRoomName();
 //		System.out.println("meetingRoom::::::"+session.getAttribute("meetingRoom"));
-		String employeeNo = ((Employee)session.getAttribute("employee")).getEmployeeNo();
-		System.out.println(session.getAttribute("employee"));
+		String employeeNo = ((Employee)session.getAttribute("sessionEmployee")).getEmployeeNo();
+		System.out.println(session.getAttribute("sessionEmployee"));
 		System.out.println("EMPEEEEEEEEE"+employeeNo);
 		
 		if(search.getCurrentPage() == 0) {
@@ -190,6 +193,22 @@ public class ReservationController {
 		}
 		search.setPageSize(pageSize);
 		
+//		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//		
+//		Date date = new Date();
+//		
+//		String sysdate = format.format(date);// java sysdate
+//		
+//		System.out.println("자바시스데이트??"+sysdate);
+//		
+//		String reservationDate = format.format(reserveDate);
+//		
+//		if(sysdate.compareTo(reservationDate)>0) {
+//			System.out.println("auto delete process");
+//			
+//			reservationService.autoDelete(reserveDate);
+//		}
+			
 		Map<String, Object> map = reservationService.myReservation(search, employeeNo);
 		System.out.println("EMPNO::::::::::"+employeeNo);
 		

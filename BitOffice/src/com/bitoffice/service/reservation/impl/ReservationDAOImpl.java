@@ -2,6 +2,7 @@ package com.bitoffice.service.reservation.impl;
 
 import java.text.Format.Field;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -108,6 +109,11 @@ public class ReservationDAOImpl implements ReservationDAO {
 	public List<MeetingRoom> testReserveMeetingRoom() throws Exception{
 		
 		return sqlSession.selectList("ReservationMapper.getReservationList");
+	}
+	
+	public void autoDelete(Date reserveDate) throws Exception{
+		
+		sqlSession.delete("ReservationMapper.autoDelete", reserveDate);
 	}
 	
 }

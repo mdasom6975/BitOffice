@@ -26,23 +26,96 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>9:00-10:00</td>
-                  <td>10:00-11:00</td>
-                  <td>11:00-12:00</td>
-                  <td>12:00-13:00</td>
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">9:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">9:00-10:00</span></td>
+                </c:if>
+               
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">10:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">10:00-11:00</span></td>
+                </c:if>	
+                
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">11:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">11:00-12:00</span></td>
+                </c:if>
+               
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">12:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">12:00-13:00</span></td>
+                </c:if>
                 </tr>
+                
                 <tr>
-                  <td>13:00-14:00</td>
-                  <td>14:00-15:00</td>
-                  <td>15:00-16:00</td>
-                  <td>16:00-17:00</td>
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">13:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">13:00-14:00</span></td>
+                </c:if>
+               
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">14:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">14:00-15:00</span></td>
+                </c:if>
+               
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">15:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">15:00-16:00</span></td>
+                </c:if>
+                
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">16:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">16:00-17:00</span></td>
+                </c:if>
                 </tr>
+                
                 <tr>
-                  <td>17:00-18:00</td>
-                  <td>18:00-19:00</td>
-                  <td>19:00-20:00</td>
-                  <td>20:00-21:00</td>
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue" >17:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">17:00-18:00</span></td>
+                </c:if>
+               
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">18:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">18:00-19:00</span></td>
+                </c:if>
+               
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">19:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">19:00-20:00</span></td>
+                </c:if>
+                
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">20:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">20:00-21:00</span></td>
+                </c:if>
                 </tr>
+                
+
                 
               </tbody>
             </table>
@@ -60,23 +133,94 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>9:00-10:00</td>
-                  <td>10:00-11:00</td>
-                  <td>11:00-12:00</td>
-                  <td>12:00-13:00</td>
+                 <tr>
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">9:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">9:00-10:00</span></td>
+                </c:if>
+               
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">10:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">10:00-11:00</span></td>
+                </c:if>	
+                
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">11:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">11:00-12:00</span></td>
+                </c:if>
+               
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">12:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">12:00-13:00</span></td>
+                </c:if>
                 </tr>
+                
                 <tr>
-                  <td>13:00-14:00</td>
-                  <td>14:00-15:00</td>
-                  <td>15:00-16:00</td>
-                  <td>16:00-17:00</td>
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">13:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">13:00-14:00</span></td>
+                </c:if>
+               
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">14:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">14:00-15:00</span></td>
+                </c:if>
+               
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">15:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">15:00-16:00</span></td>
+                </c:if>
+                
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">16:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">16:00-17:00</span></td>
+                </c:if>
                 </tr>
+                
                 <tr>
-                  <td>17:00-18:00</td>
-                  <td>18:00-19:00</td>
-                  <td>19:00-20:00</td>
-                  <td>20:00-21:00</td>
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue" >17:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">17:00-18:00</span></td>
+                </c:if>
+               
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">18:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">18:00-19:00</span></td>
+                </c:if>
+               
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">19:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">19:00-20:00</span></td>
+                </c:if>
+                
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">20:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">20:00-21:00</span></td>
+                </c:if>
                 </tr>
                 
               </tbody>
@@ -95,23 +239,94 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>9:00-10:00</td>
-                  <td>10:00-11:00</td>
-                  <td>11:00-12:00</td>
-                  <td>12:00-13:00</td>
+                 <tr>
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">9:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">9:00-10:00</span></td>
+                </c:if>
+               
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">10:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">10:00-11:00</span></td>
+                </c:if>	
+                
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">11:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">11:00-12:00</span></td>
+                </c:if>
+               
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">12:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">12:00-13:00</span></td>
+                </c:if>
                 </tr>
+                
                 <tr>
-                  <td>13:00-14:00</td>
-                  <td>14:00-15:00</td>
-                  <td>15:00-16:00</td>
-                  <td>16:00-17:00</td>
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">13:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">13:00-14:00</span></td>
+                </c:if>
+               
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">14:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">14:00-15:00</span></td>
+                </c:if>
+               
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">15:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">15:00-16:00</span></td>
+                </c:if>
+                
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">16:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">16:00-17:00</span></td>
+                </c:if>
                 </tr>
+                
                 <tr>
-                  <td>17:00-18:00</td>
-                  <td>18:00-19:00</td>
-                  <td>19:00-20:00</td>
-                  <td>20:00-21:00</td>
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue" >17:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">17:00-18:00</span></td>
+                </c:if>
+               
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">18:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">18:00-19:00</span></td>
+                </c:if>
+               
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">19:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">19:00-20:00</span></td>
+                </c:if>
+                
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">20:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">20:00-21:00</span></td>
+                </c:if>
                 </tr>
                 
               </tbody>
@@ -130,23 +345,94 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>9:00-10:00</td>
-                  <td>10:00-11:00</td>
-                  <td>11:00-12:00</td>
-                  <td>12:00-13:00</td>
+                 <tr>
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">9:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">9:00-10:00</span></td>
+                </c:if>
+               
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">10:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">10:00-11:00</span></td>
+                </c:if>	
+                
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">11:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">11:00-12:00</span></td>
+                </c:if>
+               
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">12:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">12:00-13:00</span></td>
+                </c:if>
                 </tr>
+                
                 <tr>
-                  <td>13:00-14:00</td>
-                  <td>14:00-15:00</td>
-                  <td>15:00-16:00</td>
-                  <td>16:00-17:00</td>
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">13:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">13:00-14:00</span></td>
+                </c:if>
+               
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">14:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">14:00-15:00</span></td>
+                </c:if>
+               
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">15:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">15:00-16:00</span></td>
+                </c:if>
+                
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">16:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">16:00-17:00</span></td>
+                </c:if>
                 </tr>
+                
                 <tr>
-                  <td>17:00-18:00</td>
-                  <td>18:00-19:00</td>
-                  <td>19:00-20:00</td>
-                  <td>20:00-21:00</td>
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue" >17:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">17:00-18:00</span></td>
+                </c:if>
+               
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">18:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">18:00-19:00</span></td>
+                </c:if>
+               
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">19:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">19:00-20:00</span></td>
+                </c:if>
+                
+                <c:if test="${empty startTime}">
+                  <td onclick="location.href='addReservation'"><span style="color:blue">20:00</span></td>
+                </c:if>
+                <c:if test="${!empty startTime}">
+                  <td><span style="color:gray">20:00-21:00</span></td>
+                </c:if>
                 </tr>
                 
               </tbody>

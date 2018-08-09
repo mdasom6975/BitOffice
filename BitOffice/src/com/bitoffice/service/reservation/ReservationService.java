@@ -1,5 +1,6 @@
 package com.bitoffice.service.reservation;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -26,5 +27,6 @@ public interface ReservationService {
 	public void cancelReservation(int reNum) throws Exception;
 	
 	public List<MeetingRoom> testReserveMeetingRoom() throws Exception;
-
+	
+	public void autoDelete(Date reserveDate) throws Exception;
 }

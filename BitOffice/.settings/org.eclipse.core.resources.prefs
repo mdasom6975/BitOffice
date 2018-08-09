@@ -2,6 +2,8 @@
 <<<<<<<=HEAD
 >>>>>>>=refs/remotes/origin/master
 eclipse.preferences.version=1
+<<<<<<< HEAD
+=======
 encoding//WebContent/common/pageNavigator_new.jsp=EUC-KR
 encoding//WebContent/javascript/calendar.js=EUC-KR
 encoding//WebContent/javascript/fullcalendar.js=EUC-KR
@@ -28,3 +30,7 @@ encoding//WebContent/js/schedule.js=EUC-KR
 encoding//WebContent/js/share.js=EUC-KR
 encoding//WebContent/js/standardTime.js=EUC-KR
 encoding//WebContent/js/testSchedule.js=UTF-8
+<<<<<<< HEAD
+=======
+encoding//WebContent/schedule/listSchedule.jsp=EUC-KR
+>>>>>>> refs/remotes/origin/master

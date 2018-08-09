@@ -4,7 +4,7 @@
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html lang="ko">
 
 <head>
@@ -30,7 +30,8 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 <link rel="stylesheet" href="http://trentrichardson.com/examples/timepicker/jquery-ui-timepicker-addon.css">
-	
+<link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+<script type="text/javascript" src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 	
 <!-- The javascript plugin to display page loading on top-->
 <script src="/js/plugins/pace.min.js"></script>
@@ -55,17 +56,20 @@ $('#sampleTable').DataTable();
 <body class="app sidebar-mini rtl">
 	<!-- Navbar-->
 	<header class="app-header">
-		 <%@include file="/layout/header.jsp"%>
+		<!--       Sidebar toggle button-->
+		<%@include file="/layout/header.jsp" %>
 	</header>
 
 	<!-- Sidebar menu-->
 	<!-- 프로필 영역  -->
 	<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-	<aside class="app-sidebar">
-		<%@include file="/layout/side.jsp"%>
+
+		<aside class="app-sidebar">
+		<%@include file="/layout/side.jsp" %>
+		</aside>
 		<!-- sidebar 메뉴 모음 -->
-	</aside>
-	
+				
+		<!-- sidebar 메뉴 모음 -->
 	<main class="app-content"> <c:choose>
 		<c:when test="${menu=='addReservation'}">
 			<%@include file="/reservation/addReservation.jsp"%>
