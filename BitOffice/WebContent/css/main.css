@@ -1,4 +1,4 @@
-@charset "UTF-8";
+@charset "EUC-KR";
 /*!
  * Vali Admin
  * Author: Pratik Borsadiya
@@ -50,7 +50,7 @@
 }
 
 .disabled{
-	point-events:none;
+	pointer-events:none;
 }
 
 html {
@@ -15232,4 +15232,9 @@ be a descendant of the grid when it is being dragged.
 
 .user .user-settings label {
   color: #666;
+}
+
+#disabledId{
+	 pointer-events: none;
+	
 }

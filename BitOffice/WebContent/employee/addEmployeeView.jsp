@@ -86,12 +86,14 @@
               <h3 class="l-text">정보저장중입니다...</h3>
             </div>
 
-                  <div class="row mb-10">
-                    <div class="col-md-12">
+				<div class="tile-footer">
+<!--                   <div class="row mb-10"> -->
+<!--                     <div class="col-md-12"> -->
                       <button class="btn btn-primary" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i>제출</button>
                     <button class="btn btn-secondary" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i>취소</button>
                     </div>
-                  </div>
+<!--                   </div> -->
+
 			
 		</form>
 		<!-- form End /////////////////////////////////////-->

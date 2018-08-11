@@ -155,7 +155,36 @@
 			
 			});
 	});	
+
+	 $(document).ready(
+		function() {
+			$.ajax({
+				url : "/employee/json/listEmployee",
+				method : "GET",
+				datatype : "json",
+				headers : {
+					"Accept" : "application/json",
+					"Content-Type" : "application/json"
+				},
+				success : function(data) {
+				console.log(data.empList)
+				var name="";
+				for(var i=0; i<data.empList.length; i++){
+					name +=
+					
+					data.empList[i]
+					
+				
+				}
+				console.log(name)
+					var availableTags = [name];
+					$("#searchKeyword").autocomplete({
+						source : availableTags
+					});
+
+				}
+			});
+		});
 	 
-	
 
 		

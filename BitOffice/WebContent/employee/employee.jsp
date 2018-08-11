@@ -45,7 +45,7 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 
-	<!-- 간편주소 API 사용을 위한 선언 -->
+	<!-- 간편주소 API 사용을 위한 선언(postcodify) -->
 	<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 	
 	<!--  justgage charts사용  -->

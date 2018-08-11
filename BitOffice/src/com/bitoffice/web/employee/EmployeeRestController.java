@@ -138,7 +138,20 @@ public class EmployeeRestController {
 				Map<String, Object> map =employeeService.getEmployeeList(search,orderby);
 				Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 						pageSize);
+				
+				List<Employee> list = employeeService.treeEmployee();
+				List returnList = new ArrayList<>();
+				if (list.size() != 0) {
+		
+					for (Employee e : list) {
+						String name = e.getEmployeeName().trim();
+						returnList.add(name);
+					}
+					
+				}
+				
 				JSONObject jsonObject =new JSONObject();
+				jsonObject.put("empList", returnList);
 				jsonObject.put("list", map);
 				jsonObject.put("resultPage", resultPage);
 				

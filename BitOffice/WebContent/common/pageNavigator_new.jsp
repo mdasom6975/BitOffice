@@ -20,7 +20,7 @@
 
 					<!--  <<== ÁÂÃø nav -->
 					<c:if test="${ resultPage.currentPage <= resultPage.pageUnit }">
-						<li class="disabled">
+						<li class="disabled" id="disabledId">
 					</c:if>
 					<c:if test="${ resultPage.currentPage > resultPage.pageUnit }">
 						<li>

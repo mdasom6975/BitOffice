@@ -35,7 +35,6 @@
 		SELECT
 		position_no, position_name
 		FROM position
-		WHERE position_no >00
 		ORDER BY rank_code
 	</select>
 

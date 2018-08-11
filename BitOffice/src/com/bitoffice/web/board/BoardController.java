@@ -167,7 +167,7 @@ public class BoardController {
 		
 		boardService.delete(boardNo);
 		
-		return "redirect:/board/listBoard";
+		return "redirect:/board/listBoard?orderby=";
 	}
 	
 	@RequestMapping(value="countView")

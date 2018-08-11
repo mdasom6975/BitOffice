@@ -254,7 +254,7 @@ public class EmployeeController {
 		System.out.println("세션에 무엇이 담기나"+employee);
 		
 
-		return "forward:/employee/getEmployee?employeeNo=" + employee.getEmployeeNo();
+		return "redirect:/employee/listEmployee?orderby=";
 				//"redirect:/employee/listEmployee?orderby=";
 				//"forward:/employee/getEmployee?employeeNo=" + employee.getEmployeeNo();
 

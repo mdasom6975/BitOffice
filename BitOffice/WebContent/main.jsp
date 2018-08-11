@@ -177,7 +177,7 @@
         </div>
         <div class="col-md-6">
           <div class="tile">
-            <h3 class="tile-title">금일 회의실 예약 현황</h3>
+            <h3 class="tile-title">파일 공유</h3>
             <ul>
               <li>Built with Bootstrap 4, SASS and PUG.js</li>
             </ul>

@@ -66,8 +66,32 @@ public class sendMail {
 					tPassword=Integer.toString(random);
 					
 					//메일 내용 입력
-					message.setText(  tPassword  + " 로 로그인 해주세요. 로그인 후 반드시 비밀번호는 재설정하시길 바랍니다.");
-				
+					//message.setText(  tPassword  + " 로 로그인 해주세요. 로그인 후 반드시 비밀번호는 재설정하시길 바랍니다.");
+					
+					message.setContent("<html>\r\n" + 
+							"<head>\r\n" + 
+							"	<title>BitOffice</title>\r\n" + 
+							"</head>\r\n" + 
+							"\r\n" + 
+							"<body>\r\n" + 
+							"\r\n" + 
+							"\r\n" + 
+							"<p style=\"border:1px solid #999;padding:10px;text-align: center;width:600px;\">\r\n" + 
+							"<a href=\"http://192.168.0.33:8080/\"><img src=\"https://blogfiles.pstatic.net/MjAxODA4MTFfMTUg/MDAxNTMzOTY3NTcyOTM2.bn08xbGg3b38DjImKWoCy_SDwGKQTQGBjv7mp51_2GUg.Ec4t4cSDSq7XORCOjhzLhpCIpTftEQ25A70xsxc7p_gg.PNG.jino_ya/email.PNG\" width=\"600\"/></a><br/>\r\n" + 
+							"<br/>\r\n" + 
+							"<br/>\r\n" + 
+							"<strong>임시 비밀번호 안내 메일입니다.</strong><br/>\r\n" + 
+							"<br/>\r\n" + 
+							"<br/>\r\n" + 
+							"임시 비밀번호 : \r\n" +tPassword+
+							"<br/>\r\n" + 
+							"<br/>\r\n" + 
+							"해당 번호로 로그인 후 반드시 비밀번호를 변경 해주세요.\r\n" + 
+							"</p>\r\n" + 
+							"\r\n" + 
+							"</body>\r\n" + 
+							"</html>", "text/html; charset=EUC-KR");
+					
 					//send Message
 					Transport.send(message); // 전송
 					System.out.println("발송된 임시 비밀번호 :::::::::"+tPassword);
