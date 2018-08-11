@@ -4,7 +4,9 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import com.bitoffice.common.Search;
 import com.bitoffice.service.document.FilesService;
+import com.bitoffice.service.domain.Employee;
 import com.bitoffice.service.domain.Files;
+import com.bitoffice.service.employee.EmployeeService;
 
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,6 +25,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/document/*")
@@ -31,6 +34,9 @@ public class FilesController extends MultiActionController {
 	@Autowired
 	@Qualifier("fileServiceImpl")
 	private FilesService filesService;
+	@Autowired
+	@Qualifier("employeeServiceImpl")
+	private EmployeeService employeeService;
 	
 	public FilesController() {
 		
@@ -43,18 +49,20 @@ public class FilesController extends MultiActionController {
 
     @RequestMapping(value="upload")
     public ModelAndView upload(HttpServletRequest request,
-        HttpServletResponse response, ModelAndView modelAndView) throws Exception {
+        HttpServletResponse response, ModelAndView modelAndView, HttpSession session, @ModelAttribute("sessionEmployee") Employee sessionEmployee) throws Exception {
  
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         MultipartFile multipartFile = multipartRequest.getFile("file");
- 
+        
         Files file = new Files();
         file.setFilename(multipartFile.getOriginalFilename());
         file.setNotes(ServletRequestUtils.getStringParameter(request, "notes"));
         file.setType(multipartFile.getContentType());
         file.setFile(multipartFile.getBytes());
- 
+        file.setEmp(request.getParameter("emp"));
+        
         this.filesService.save(file);
+        System.out.println("@@@@@@@emp@@@@@"+file.getEmp());
 
         return new ModelAndView("forward:/document/list");
     }

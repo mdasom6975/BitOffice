@@ -5,7 +5,7 @@
 
 <div class="app-title">
         <div>
-          <h1> ${employee.employeeNo } ¥‘¿« øπæ‡</h1>
+          <h1> ${sessionEmployee.employeeName } ¥‘¿« øπæ‡</h1>
         </div>
       </div>
       

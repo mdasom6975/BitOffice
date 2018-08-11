@@ -14,4 +14,7 @@ public interface FileDao {
 	public void save(final Files file) throws Exception;
 	
 	public void delete(int id) throws Exception;
+	
+	public int getTotalCount(Search search) throws Exception;
+
 }

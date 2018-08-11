@@ -40,9 +40,12 @@ public class FileServiceImpl implements FilesService{
 		// TODO Auto-generated method stub
 		List<Files> list = fileDao.listAll(search);
 		
+		int totalCount = fileDao.getTotalCount(search);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
-		
+		map.put("totalCount", new Integer(totalCount));
+
 		return map;
 	}
 

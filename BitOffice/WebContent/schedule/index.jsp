@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 
+<script src="/js/schedule.js"></script>
+
 	<div class="app-title">
 		<div>
 			<h1><i class="app-menu__icon fa fa-calendar"></i>일정관리</h1>		
