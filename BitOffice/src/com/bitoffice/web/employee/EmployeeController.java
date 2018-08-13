@@ -261,7 +261,7 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping(value = "updateByAdmin", method = RequestMethod.POST)
-	public String updateByAdmin(@ModelAttribute("employee") Employee employee, HttpSession session,
+	public String updateByAdmin(@ModelAttribute("employee") Employee employee,
 			@RequestParam("file") MultipartFile file, HttpServletRequest request) throws Exception {
 		
 		System.out.println("/employee/updateByAdmin : POST");

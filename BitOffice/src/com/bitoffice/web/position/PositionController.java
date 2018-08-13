@@ -102,7 +102,7 @@ public class PositionController {
 	
 	
 	@RequestMapping(value="listPosition")
-	public String listPosition(@ModelAttribute("search") Search search, Model model, HttpServletRequest request) throws Exception{
+	public String listPosition(@ModelAttribute("search") Search search, Model model) throws Exception{
 		
 		System.out.println("/position/listPosition");
 		

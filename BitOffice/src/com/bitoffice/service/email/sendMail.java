@@ -1,6 +1,7 @@
 package com.bitoffice.service.email;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -17,7 +18,7 @@ public class sendMail {
 	public static String emailPassword(String employeeNo,String email) throws IOException {
 				System.out.println("들어왔나!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 				final String user = "mdasom6975@gmail.com"; //발신자의 이메일 아이디를 입력
-				final String password="mdasom6975@"; //발신자의 이메일 패스워드를 입력
+				final String password="ekfektha6975@"; //발신자의 이메일 패스워드를 입력
 				
 				//임시 비밀번호 생성을 위한 변수선언
 				String tPassword = "";
@@ -64,6 +65,7 @@ public class sendMail {
 					System.out.println(random);
 					
 					tPassword=Integer.toString(random);
+					SimpleDateFormat toDay = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					
 					//메일 내용 입력
 					//message.setText(  tPassword  + " 로 로그인 해주세요. 로그인 후 반드시 비밀번호는 재설정하시길 바랍니다.");

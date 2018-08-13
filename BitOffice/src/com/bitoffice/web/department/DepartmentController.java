@@ -95,7 +95,7 @@ public class DepartmentController {
 	}
 
 	@RequestMapping(value = "listDepartment")
-	public String listDepartment(@ModelAttribute("search") Search search, Model model, HttpServletRequest request)
+	public String listDepartment(@ModelAttribute("search") Search search, Model model)
 			throws Exception {
 		System.out.println("/department/listDepartment");
 
