@@ -32,7 +32,7 @@
 				<th class="sorting" tabindex="0" aria-controls="sampleTable"
 					rowspan="1" colspan="1"
 					aria-label="Position: activate to sort column ascending"
-					style="width: 70px;">유형</th>
+					style="width: 70px;">올린 직원</th>
 				<th class="sorting" tabindex="0" aria-controls="sampleTable"
 					rowspan="1" colspan="1"
 					aria-label="Position: activate to sort column ascending"
@@ -45,10 +45,10 @@
                  <c:forEach var="files" items="${list}" varStatus="counter">
                     <c:set var="i" value="${i+1 }"/>
                     <tr role="row" class="odd">
-                        <td>${files.id}</td>
+                        <td>${i }</td>
                         <td>${files.filename}</td>
                         <td>${files.notes}</td>
-                        <td>${files.type}</td>
+                        <td>${files.emp }</td>
                         <td><div align="center"><a href="download?id=${files.id}"><i class="fa fa-cloud-download fa-5" aria-hidden="true"></i></a> /
                             <a href="delete?id=${files.id}"><i class="fa fa-times fa-5" aria-hidden="true"></i></a></div>
                         </td>
@@ -72,6 +72,9 @@
                   </a>
                   <a class="dropdown-item" href="#">
                   <input type="text" name="notes" width="60" />
+                  </a>
+                  <a class="dropdown-item" href="#">
+                  <input type="text" name="emp" width="60" value="${sessionEmployee.employeeName }" readonly="readonly"/>
                   </a>
                   <a class="dropdown-item" href="#">
                   <input type="submit" name="submit" value="Add"/>

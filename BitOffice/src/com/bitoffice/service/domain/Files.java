@@ -8,6 +8,7 @@ public class Files {
     private String notes;
     private String type;
     private byte[] file;
+    private String emp;
 	public int getId() {
 		return id;
 	}
@@ -38,11 +39,18 @@ public class Files {
 	public void setFile(byte[] file) {
 		this.file = file;
 	}
+	public String getEmp() {
+		return emp;
+	}
+	public void setEmp(String emp) {
+		this.emp = emp;
+	}
 	@Override
 	public String toString() {
 		return "Files [id=" + id + ", filename=" + filename + ", notes=" + notes + ", type=" + type + ", file="
-				+ Arrays.toString(file) + "]";
+				+ Arrays.toString(file) + ", emp=" + emp + "]";
 	}
+
  
     
 }

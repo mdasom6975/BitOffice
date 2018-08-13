@@ -1,6 +1,8 @@
 package com.bitoffice.service.document.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +51,13 @@ public class FileDaoImpl implements FileDao{
 	public void delete(int id) throws Exception {
 		// TODO Auto-generated method stub
 		sqlSession.delete("FileMapper.deleteFile", id);
+	}
+
+	@Override
+	public int getTotalCount(Search search) throws Exception {
+		// TODO Auto-generated method stub
+		
+		return sqlSession.selectOne("FileMapper.fileTotalCount", search);
 	}
 	
 	

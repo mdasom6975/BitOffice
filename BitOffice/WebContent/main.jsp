@@ -35,26 +35,26 @@
 	<script type="text/javascript" src="/js/plugins/dataTables.bootstrap.min.js"></script>
 	
 	<!--  fullcalendar 사용을 위한 선언 -->
-	<link type="text/css" href='/css/fullcalendar.min.css' rel='stylesheet' />
-	<link href='/css/fullcalendar.print.min.css' rel='stylesheet'
-		media='print' />
-	<link type="text/css" href='/css/testSchedule.css' rel='stylesheet' />
-	<script type="text/javascript" src='/js/moment.min.js'></script>
-	<script type="text/javascript" src='/js/fullcalendar.min.js'></script>
-	<script type="text/javascript" src='/js/theme-chooser.js'></script>
+<!-- 	<link type="text/css" href='/css/fullcalendar.min.css' rel='stylesheet' /> -->
+<!-- 	<link href='/css/fullcalendar.print.min.css' rel='stylesheet' -->
+<!-- 		media='print' /> -->
+<!-- 	<link type="text/css" href='/css/testSchedule.css' rel='stylesheet' /> -->
+<!-- 	<script type="text/javascript" src='/js/moment.min.js'></script> -->
+<!-- 	<script type="text/javascript" src='/js/fullcalendar.min.js'></script> -->
+<!-- 	<script type="text/javascript" src='/js/theme-chooser.js'></script> -->
 	<!-- 공휴일 사용을 위한 선언 -->
-	<script type="text/javascript" src='/js/gcal.js'></script>
-	<script type="text/javascript" src='/js/locale-all.js'></script>
+<!-- 	<script type="text/javascript" src='/js/gcal.js'></script> -->
+<!-- 	<script type="text/javascript" src='/js/locale-all.js'></script> -->
 	
 	<!-- color picker -->
 	<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css" rel="stylesheet"/> -->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.5.1/css/bootstrap-colorpicker.css" rel="stylesheet"/>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.5.1/js/bootstrap-colorpicker.min.js"></script>
+<!-- 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.5.1/css/bootstrap-colorpicker.css" rel="stylesheet"/> -->
+<!-- 	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script> -->
+<!-- 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.5.1/js/bootstrap-colorpicker.min.js"></script> -->
 	
 	<!-- bootstrap datetimepicker -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" integrity="sha256-yMjaV542P+q1RnH6XByCPDfUFhmOafWbeLPmqKh11zo=" crossorigin="anonymous" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js" integrity="sha256-5YmaxAwMjIpMrVlK84Y/+NjCpKnFYa8bWWBbUHSBGfU=" crossorigin="anonymous"></script>
+<!-- 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" integrity="sha256-yMjaV542P+q1RnH6XByCPDfUFhmOafWbeLPmqKh11zo=" crossorigin="anonymous" /> -->
+<!-- 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js" integrity="sha256-5YmaxAwMjIpMrVlK84Y/+NjCpKnFYa8bWWBbUHSBGfU=" crossorigin="anonymous"></script> -->
 	
   	<script src="/js/common.js"></script>
   	<!-- Schedule 관련 function 사용을 위한 선언 -->
@@ -93,9 +93,7 @@
       
         <div class="col-md-6 col-lg-3">
           <div class="widget-small warning coloured-icon"><i class="icon fa fa-files-o fa-3x"></i>
-            <div class="info">
-              <h4>파일공유</h4>
-              <p><b>10</b></p>
+            <div class="info" id="countFile">
             </div>
           </div>
         </div>
@@ -163,30 +161,41 @@
             
           </div>
 </div>
-
-	
-	      <div class="row">
+      <div class="row">
         <div class="col-md-6">
           <div class="tile">
             <h3 class="tile-title">일정관리</h3>
             <p id="shareList">
             <span class="label label-warning" style="background-color:#FFBB00">전체공유</span>
              <span class="label label-primary" style="background-color:#0099ff"> 내일정</span></p>
-			<div><%@include file="/schedule/listSchedule.jsp"%></div>
+			<div><jsp:include page="/schedule/listSchedule.jsp"></jsp:include>
+<%-- 			<%@include file="/schedule/listSchedule.jsp"%> --%>
+			</div>
           </div>
         </div>
-        <div class="col-md-6">
+        
+       	<div class="col-md-6">
           <div class="tile">
-            <h3 class="tile-title">파일 공유</h3>
-            <ul>
-              <li>Built with Bootstrap 4, SASS and PUG.js</li>
-            </ul>
-            <p>Vali is a free and responsive admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.</p>
-            <p class="mt-4 mb-4"><a class="btn btn-primary mr-2 mb-2" href="http://pratikborsadiya.in/blog/vali-admin" target="_blank"><i class="fa fa-file"></i>Docs</a>
-            <a class="btn btn-info mr-2 mb-2" href="https://github.com/pratikborsadiya/vali-admin" target="_blank"><i class="fa fa-github"></i>GitHub</a>
-            <a class="btn btn-success mr-2 mb-2" href="https://github.com/pratikborsadiya/vali-admin/archive/master.zip" target="_blank"><i class="fa fa-download"></i>Download</a></p>
+
+            <h3 class="tile-title">저장소</h3>
+            <table class="table" >
+						<thead>
+							<tr>
+								<th>FileNo</th>
+	            				<th>파일명</th>
+	            				<th>올린 직원</th>
+	            				<th>&nbsp;</th>
+							</tr>
+						</thead>
+            		<tbody id="listFile">
+            		
+            		</tbody>
+					</table>
+            </div>
+            
+
           </div>
-        </div>
+
       </div>
     </main>
     

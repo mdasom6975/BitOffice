@@ -182,4 +182,39 @@ $(document).ready(function(){
 		
 				});  //////////공유 수락자 조회			
 	});
+/////////////////////파일목록////////////////////////
+	$(document).ready(function(){
+        $.ajax({
+           url:"/document/json/listFile",
+           method:"GET",
+           datatype:"json",
+           headers : {
+                  "Accept" : "application/json",
+                  "Content-Type" : "application/json"
+               },
+               success:function(data){
+                   $("#countFile").append(
+                 		  '<h4>공유된 파일</h4><p><b>'+
+                 		  data.resultPage.totalCount+
+                 		  '</b></p>'
+                   
+                   );
+                   
+                  
+                  for(var i=0; i<data.list.list.length; i++){
+                     
+                     $("#listFile").append(
+                        
+                              '<tr><td>'+
+                                 (i+1)+
+                                 '</td><td>'+
+                                 data.list.list[i].filename+
+                                 '</td><td>'+data.list.list[i].emp+
+                                 '</td><td><a href="/document/download?id='+data.list.list[i].id+'"><i class="fa fa-cloud-download fa-5" aria-hidden="true"></i></a></td></tr>'
+                           );
+                     
+                  }
+               }
+        });
+        });
 

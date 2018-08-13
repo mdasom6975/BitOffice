@@ -13,7 +13,14 @@
 		<result property="notes" 			column="notes" 			jdbcType="VARCHAR"/>
 		<result property="type" 			column="type" 			jdbcType="VARCHAR"/>
 		<result property="file" 			column="file" 			jdbcType="BLOB"/>
+		<result property="emp" column="emp" jdbcType="VARCHAR"></result>
 	</resultMap>
+	
+	<select id="fileTotalCount" resultType="int">
+		SELECT COUNT(*)
+		FROM (SELECT * 
+				FROM files ORDER BY id) countable
+	</select>
 	
 	<select id="getFile" parameterType="String" resultMap="fileselectMap">
 		SELECT * 
@@ -22,13 +29,13 @@
 	</select>
 	
 	<select id="listFile" resultMap="fileselectMap">
-		SELECT id, filename, notes, type 
+		SELECT id, filename, notes, emp 
 		FROM files
 	</select>
 	 
 	<insert id="uploadFile" parameterType="file">
-		INSERT INTO files (filename, notes, type, file) 
-		VALUES (#{filename}, #{notes}, #{type}, #{file})
+		INSERT INTO files (filename, notes, type, file, emp) 
+		VALUES (#{filename}, #{notes}, #{type}, #{file}, #{emp})
 	</insert> 
 	
 	<delete id="deleteFile" parameterType="int">
