@@ -54,7 +54,7 @@
           </ul>
         </li>
         
-	  <li><a class="app-menu__item" href="/document/list"><i class="app-menu__icon fa fa-cloud"></i><span class="app-menu__label">클라우드</span></a></li>
+	  <li><a class="app-menu__item" href="/document/list"><i class="app-menu__icon fa fa-cloud"></i><span class="app-menu__label">파일공유</span></a></li>
 
 	  <li><a class="app-menu__item" href="/chat/chat.jsp"><i class="app-menu__icon fa fa-comments" ariahidden="true"></i><span class="app-menu__label">채팅</span></a></li>
 

@@ -38,7 +38,8 @@
                     <div class="col-md-4">
                       <label>사번</label>
                       <input class="form-control" type="text" id="employeeNo"
-						name="employeeNo" placeholder="사번">
+						name="employeeNo" placeholder="사번" onkeyup="checkId()">
+						<span id = "chkMsg"></span>
                     </div>
                     <div class="col-md-4">
                       <label>이름</label>
@@ -77,14 +78,14 @@
 					src="http://placehold.it/180" style="width: 100px; height: 100px;">
                     </div>
                     
-                    <div class="overlay" style="visibility: hidden;" >
-              <div class="m-loader mr-4">
-                <svg class="m-circular" viewBox="25 25 50 50">
-                	<circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="4" stroke-miterlimit="10"></circle>
-                </svg>
-              </div>
-              <h3 class="l-text">정보저장중입니다...</h3>
-            </div>
+<!--                     <div class="overlay" style="visibility: hidden;" > -->
+<!--               <div class="m-loader mr-4"> -->
+<!--                 <svg class="m-circular" viewBox="25 25 50 50"> -->
+<!--                 	<circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="4" stroke-miterlimit="10"></circle> -->
+<!--                 </svg> -->
+<!--               </div> -->
+<!--               <h3 class="l-text">정보저장중입니다...</h3> -->
+<!--             </div> -->
 
 				<div class="tile-footer">
 <!--                   <div class="row mb-10"> -->

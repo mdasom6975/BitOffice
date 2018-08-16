@@ -53,6 +53,7 @@ public class AttendanceController {
 	
 	@RequestMapping( value="addAttendance", method=RequestMethod.POST )
 	public String addAttendance( @ModelAttribute("attendance") Attendance attendance, Model model) throws Exception {
+		
 
 		System.out.println("/attendance/addAttendance : POST");
 		//Business Logic
@@ -81,6 +82,8 @@ public class AttendanceController {
 		System.out.println("/attendance/updateAttendance : GET");
 		//Business Logic
 		Attendance attendance = attendanceService.getAttendance(attendanceNo);
+		
+		
 		// Model °ú View ¿¬°á
 		model.addAttribute("attendance", attendance);
 		

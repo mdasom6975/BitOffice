@@ -59,46 +59,49 @@
 			  
 					    <input type="text" class="col-lg-1" id="endip4" name="endip4" maxlength="3" onkeydown="onlyNumber(this)" placeholder="">
 	
-			    		<button type="button" id="ipsubmit" class="btn btn-primary" style="background-color:#B4E5FF;" >등 록</button>
+			    		<button type="button" id="ipsubmit" class="btn btn-primary"  >등 록</button>
 			    	  </div>	
 					</div>
 				
 			</div>
 	    </c:if>
-		<div class="row">	    		    
-		    <div class="col-md-6 text-left">
-		    	<p class="text-primary">
-		    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
-		    	</p>
-		    </div>
-		    
-		    <div class="col-md-6 text-right">
-			    <form class="form-inline" name="detailForm">
-			    
-				  <div class="form-group">
-				    <select class="form-control" name="searchCondition" >
-						<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>IP시작</option>
-						<option value="1"  ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }></option>
-					</select>
-				  </div>
-				  
-				  <div class="form-group">
-				    <label class="sr-only" for="searchKeyword">검색어</label>
-				    <input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="검색어"
-				    			 value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
-				  </div>
-				  
-				  <button type="button" class="btn btn-default">검색</button>
-				  
-				  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
-				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
-				  <input type="hidden" id="employeeNo" name="employeeNo" value="${sessionScope.sessionEmployee.employeeNo}"/>
-				  
-				</form>
-	    	</div>
-	    	
+	<div class="row">
+		<div class="col-md-6 text-left">
+			<p class="text-primary">전체 ${resultPage.totalCount } 건수, 현재
+				${resultPage.currentPage} 페이지</p>
 		</div>
-		<!-- table 위쪽 검색 Start /////////////////////////////////////-->
+
+		<div class="col-md-6 text-right" style="display: flex; justify-content: flex-end;">
+			<form class="form-inline" name="detailForm">
+
+				<div class="form-group">
+					<select class="form-control" name="searchCondition">
+						<option value="0"
+							${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>IP시작</option>
+						<option value="1"
+							${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }></option>
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label class="sr-only" for="searchKeyword">검색어</label> <input
+						type="text" class="form-control" id="searchKeyword"
+						name="searchKeyword" placeholder="검색어"
+						value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
+				</div>
+
+				<button type="button" class="btn btn-default">검색</button>
+
+				<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+				<input type="hidden" id="currentPage" name="currentPage" value="" />
+				<input type="hidden" id="employeeNo" name="employeeNo"
+					value="${sessionScope.sessionEmployee.employeeNo}" />
+
+			</form>
+		</div>
+
+	</div>
+	<!-- table 위쪽 검색 Start /////////////////////////////////////-->
 		
 		
       <!--  table Start /////////////////////////////////////-->

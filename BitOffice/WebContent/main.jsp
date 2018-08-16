@@ -117,8 +117,8 @@
       <div class="row">
 <div class="col-md-6">
           <div class="tile">
-				<h3 class="tile-title">임직원</h3>
-				<h5 class="tile-subtitle" style="text-align: right;"id="moreEmployee">more▶</h5>
+				<h3 class="tile-title"><b>임직원</b></h3>
+				<h5 class="tile-subtitle" style="text-align: right;"id="moreEmployee"><b>more▶</b></h5>
             <table class="table" >
 						<thead>
 							<tr>
@@ -141,8 +141,8 @@
         
         <div class="col-md-6">
           <div class="tile">
-            <h3 class="tile-title">최근 업데이트 공지사항</h3>
-            <h5 class="tile-subtitle" style="text-align: right;" id="moreBoard">more▶</h5>
+            <h3 class="tile-title"><b>최근 업데이트 공지사항</b></h3>
+            <h5 class="tile-subtitle" style="text-align: right;" id="moreBoard"><b>more▶</b></h5>
             <table class="table" >
 						<thead>
 							<tr>
@@ -164,7 +164,7 @@
       <div class="row">
         <div class="col-md-6">
           <div class="tile">
-            <h3 class="tile-title">일정관리</h3>
+            <h3 class="tile-title"><b>일정관리</b></h3>
             <p id="shareList">
             <span class="label label-warning" style="background-color:#FFBB00">전체공유</span>
              <span class="label label-primary" style="background-color:#0099ff"> 내일정</span></p>
@@ -177,13 +177,13 @@
        	<div class="col-md-6">
           <div class="tile">
 
-            <h3 class="tile-title">저장소</h3>
+            <h3 class="tile-title"><b>공유된 파일</b></h3>
             <table class="table" >
 						<thead>
 							<tr>
 								<th>FileNo</th>
 	            				<th>파일명</th>
-	            				<th>올린 직원</th>
+	            				<th>작성자</th>
 	            				<th>&nbsp;</th>
 							</tr>
 						</thead>

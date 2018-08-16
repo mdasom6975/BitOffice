@@ -7,9 +7,9 @@
                 <h4 class="line-head">
 <!--                 <i class="fas fa-archive"></i> -->
 				<i class="fa fa-folder open" aria-hidden="true"></i>
-                ${sessionEmployee.employeeNo }님의 저장소</h4>
+                ${sessionEmployee.employeeName }님의 저장소</h4>
                 
-	
+	<button type="button" class="btn btn-outline-primary" id="clickAdd" >파일업로드</button>
 	<div class="row">
         	<div class="col-sm-12">
 				<table
@@ -32,11 +32,11 @@
 				<th class="sorting" tabindex="0" aria-controls="sampleTable"
 					rowspan="1" colspan="1"
 					aria-label="Position: activate to sort column ascending"
-					style="width: 70px;">올린 직원</th>
+					style="width: 70px;">작성자</th>
 				<th class="sorting" tabindex="0" aria-controls="sampleTable"
 					rowspan="1" colspan="1"
 					aria-label="Position: activate to sort column ascending"
-					style="width: 70px;">&nbsp;</th>
+					style="width: 70px;">다운로드/삭제</th>
 	            </tr>
 	            </thead>
 	            <tbody>
@@ -57,54 +57,71 @@
 				</tbody>
 				</table>
 </div>
-		<div class="mb-3 bs-component">
- 	
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-              <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-              <form action="upload" method="post" enctype="multipart/form-data"> 
-                <button class="btn btn-info" type="button"><i class="fa fa-cloud-upload" aria-hidden="true"></i>파일업로드</button>
-                <div class="btn-group" role="group">
-                  <button class="btn btn-info dropdown-toggle" id="btnGroupDrop3" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                  <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; transform: translate3d(-124px, 120px, 120px); top: 0px; left: 0px; will-change: transform;">
-                  <a class="dropdown-item" href="#">
-                  <input type="file" name="file" />
-                  </a>
-                  <a class="dropdown-item" href="#">
-                  <input type="text" name="notes" width="60" />
-                  </a>
-                  <a class="dropdown-item" href="#">
-                  <input type="text" name="emp" width="60" value="${sessionEmployee.employeeName }" readonly="readonly"/>
-                  </a>
-                  <a class="dropdown-item" href="#">
-                  <input type="submit" name="submit" value="Add"/>
-                  </a>
-                  </div>
-                </div>
-                </form>
-              </div>
-            </div>
-<!-- 			<button type="button" class="btn btn-primary btn-sm" id="clickAdd" style="height:30;"><p><i class="fa fa-cloud-upload" aria-hidden="true"></i>파일업로드</p></button>	 -->
+
+
+<!-- 		<div class="mb-3 bs-component"> -->
+ 	
+<!--               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+
+<!--               <div class="btn-group" role="group" aria-label="Button group with nested dropdown"> -->
+<!--               <form action="upload" method="post" enctype="multipart/form-data">  -->
+<!--                 <div class="btn-group" role="group"> -->
+<!--                   <button class="btn btn-info" id="btnGroupDrop3" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cloud-upload" aria-hidden="true"></i>파일업로드</button> -->
+<!--                   <div class="dropdown-menu dropdown-menu-center" x-placement="bottom-end" style="position: absolute; transform: translate3d(-124px, 120px, 120px); top: 0px; left: 0px; will-change: transform;"> -->
+<!--                   <div class="form-group"> -->
+<!--                   <div class="row mb-2"> -->
+<!--                   <label for="file">파일</label> -->
+<!--                   <input type="file" name="file" /> -->
+<!--                   </div> -->
+<!--                   <div class="row mb-2"> -->
+<!--                   <label for="notes">메모</label> -->
+<!--                   <textarea class="form-control"  rows="" cols=""name="notes"  placeholder="100자 이내로 작성"></textarea> -->
+<!--                  </div> -->
+<!--                  <div class="row mb-2"> -->
+<!--                    <label for="notes">작성자</label> -->
+<%--                   <input class="form-control"  type="text" name="emp" value="${sessionEmployee.employeeName }" readonly="readonly"/> --%>
+<!--                   </div> -->
+<!--                   </div> -->
+<!--                   <a class="dropdown-item" href="#"> -->
+<!--                   <input type="submit" name="submit" value="Add"/> -->
+<!--                   </a> -->
+<!--                   </div> -->
+<!--                 </div> -->
+<!--                 </form> -->
+<!--               </div> -->
+<!--             </div> -->
+            
+   <!-- 파일 업로드 Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+      <form id="updateForm" enctype="multipart/form-data">
+        <div class="modal-header">
+        
+        <h4 class="modal-title">파일 공유</h4>
+          <button type="button" class="close" data-dismiss="modal">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">	
+          	<label for="emp">작성자</label> 
+			<input class="form-control" type="text" name="emp" id="emp" value="${sessionEmployee.employeeName }" readonly="readonly"style="width: 270px; height: 37px;">
+			<label for="notes">메모</label>
+			<textarea rows="" cols=""class="form-control" name="notes"  id="notes"placeholder="필요한 메모사항을 100자 이내로 작성해 주세요."  style="width: 270px; height: 100px;"></textarea>
+				<label for="file">&nbsp;&nbsp;</label> 
+				<input class="form-control"type="file" name="file" id="file"  style="width: 270px; height: 37px;">
+			</div> 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="uploadFile">등록</button>
+        </div>
+        </form>
+      </div>     
+    </div>
+  </div>
+	<!--  모달창 End /////////////////////////////////////-->
 		</div>
 	</div>
 	</div>
 
-<!-- 	<div class="row mb-4"> -->
-<!-- 			    <h2>Add New File</h2> -->
-<!--     <form action="upload" method="post" enctype="multipart/form-data"> -->
-<!--         <table width="60%" border="1" cellspacing="0"> -->
-<!--             <tr> -->
-<!--                 <td width="35%"><strong>File to upload</strong></td> -->
-<!--                 <td width="65%"><input type="file" name="file" /></td> -->
-<!--             </tr> -->
-<!--             <tr> -->
-<!--                 <td><strong>Notes</strong></td> -->
-<!--                 <td><input type="text" name="notes" width="60" /></td> -->
-<!--             </tr>	 -->
-<!--             <tr> -->
-<!--                 <td>&nbsp;</td> -->
-<!--                 <td><input type="submit" name="submit" value="Add"/></td> -->
-<!--             </tr> -->
-<!--         </table> -->
-<!--     </form> -->
-<!-- 	</div> -->

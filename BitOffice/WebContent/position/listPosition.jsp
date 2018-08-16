@@ -145,7 +145,7 @@
 						<td align="left">${position.positionName}</td>
 						<td align="left">${position.rankCode}</td>
 						<td data-toggle="modal" data-target="#updateModal"data-whatever="${position.positionNo},${position.positionName},${position.rankCode}" ><i class="fa fa-pencil" aria-hidden="true"></i>
-						<td align="left"><span value='${position.positionNo}' >ªË¡¶</span></td>
+						<td align="left" class="deletePosition" value="${position.positionNo}"><i class="fa fa-times" aria-hidden="true"></i></td>
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -64,7 +64,7 @@ public class FilesController extends MultiActionController {
         this.filesService.save(file);
         System.out.println("@@@@@@@emp@@@@@"+file.getEmp());
 
-        return new ModelAndView("forward:/document/list");
+        return new ModelAndView("redirect:/document/list");
     }
 
     @RequestMapping(value="download")
@@ -74,9 +74,11 @@ public class FilesController extends MultiActionController {
  
         Files file = this.filesService.find(id);
  
+        String fName = new String((file.getFilename()).getBytes("UTF-8"), "ISO-8859-1");
+        
         response.setContentType(file.getType());
         response.setContentLength(file.getFile().length);
-        response.setHeader("Content-Disposition","attachment; filename=\"" + file.getFilename() +"\"");
+        response.setHeader("Content-Disposition","attachment; filename=\"" + fName +"\"");
  
         FileCopyUtils.copy(file.getFile(), response.getOutputStream());
  

@@ -108,6 +108,7 @@ public class DepartmentController {
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
+		
 
 		// Model °ú View ¿¬°á
 		model.addAttribute("list", map.get("list"));

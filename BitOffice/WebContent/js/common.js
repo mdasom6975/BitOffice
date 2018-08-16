@@ -60,7 +60,7 @@ $(document).ready(function(){
            success:function(data){
 
               $("#countEmployee").append(
-            		  '<h4>임직원</h4><p><b>'+
+            		  '<h4><b>임직원</b></h4><p><b>'+
             		  data.resultPage.totalCount+
             		  '</b></p>'
               
@@ -113,7 +113,7 @@ $(document).ready(function(){
 					dataType : "text" ,
 					success : function(resultValue, status) {						
 			              $("#countGetApprovalWait").append(
-			            		  '<h4>결재대기건</h4><p><b>'+
+			            		  '<h4><b>결재대기건</b></h4><p><b>'+
 			            		  resultValue+
 			            		  '</b></p>'
 			              
@@ -136,7 +136,7 @@ $(document).ready(function(){
 			dataType : "text" ,
 			success : function(resultValue, status) {						
 	              $("#countGetApprovalComplete").append(
-	            		  '<h4>결재진행건</h4><p><b>'+
+	            		  '<h4><b>결재진행건</b></h4><p><b>'+
 	            		  resultValue+
 	            		  '</b></p>'
 	              
@@ -194,7 +194,7 @@ $(document).ready(function(){
                },
                success:function(data){
                    $("#countFile").append(
-                 		  '<h4>공유된 파일</h4><p><b>'+
+                 		  '<h4><b>공유된 파일</b></h4><p><b>'+
                  		  data.resultPage.totalCount+
                  		  '</b></p>'
                    

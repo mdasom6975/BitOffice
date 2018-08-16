@@ -131,7 +131,8 @@ public class EmployeeController {
 		System.out.println("/employee/addEmployee : POST");
 
 		// 업로드할 폴더 경로
-		String realFolder ="C:\\Users\\Bit\\git\\BitOffice\\BitOffice\\WebContent\\images\\signFiles";
+		String realFolder =request.getRealPath("/signFiles"); 
+				//"C:\\Users\\Bit\\git\\BitOffice\\BitOffice\\WebContent\\images\\signFiles";
 				//request.getRealPath("/signFiles"); 
 				//request.getSession().getServletContext().getRealPath("/signFiles");
 
@@ -254,7 +255,7 @@ public class EmployeeController {
 		System.out.println("세션에 무엇이 담기나"+employee);
 		
 
-		return "redirect:/employee/listEmployee?orderby=";
+		return "redirect:/employee/getEmployee?employeeNo=" + employee.getEmployeeNo();
 				//"redirect:/employee/listEmployee?orderby=";
 				//"forward:/employee/getEmployee?employeeNo=" + employee.getEmployeeNo();
 

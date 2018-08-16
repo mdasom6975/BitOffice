@@ -73,23 +73,23 @@
 	    <div class="row" style="padding-left:40px;">
 	    	<div class="form-group row"> 
 			  <div class="col-xs-1">
-	    		<button type="button" id="checkin" class="btn btn" style="background-color:#D2E1FF;" >출석</button>
+	    		<button type="button" id="checkin" class="btn btn-outline-primary"  >출석</button>
 	    	  </div>
 				&nbsp;&nbsp;&nbsp;&nbsp;		    	  
 			  <div class="col-xs-1">
-	    		<button type="button" id="checkout" class="btn btn" style="background-color:#74D19D;">퇴근</button>
+	    		<button type="button" id="checkout" class="btn btn-outline-info" >퇴근</button>
 	    	  </div>		    	  	
 			</div>			
 		</div>
 		
 		<div class="row">	    		    
-		    <div class="col-md-6 text-left">
+		    <div class="col-md-6 text-left" >
 		    	<p class="text-primary">
 		    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
 		    	</p>
 		    </div>
 		    
-		    <div class="col-md-6 text-right">
+		    <div class="col-md-6 text-right"style="display: flex; justify-content: flex-end;">
 			    <form class="form-inline" name="detailForm">	    			      
 			      
 				  <div class="form-group">
@@ -132,7 +132,7 @@
             <th align="left">퇴근일자</th>
             <th align="left">퇴근시간</th> 
             <th align="left">퇴근IP</th>
-            <th align="left">비고</th>           
+<!--             <th align="left">비고</th>            -->
           </tr>
         </thead>
        
@@ -152,7 +152,7 @@
 			  <td align="left">${attendance.leaveDate}</td> 
 			  <td align="left">${attendance.endTime}</td> 
 			  <td align="left">${attendance.endIp}</td>	
-			  <td align="left">${attendance.memo}</td>
+<%-- 			  <td align="left">${attendance.memo}</td> --%>
 			</tr>
           </c:forEach>
         

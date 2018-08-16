@@ -1,5 +1,6 @@
 package com.bitoffice.web.attendance;
 
+import java.net.URLDecoder;
 import java.util.List;
 import java.util.Map;
 
@@ -78,10 +79,20 @@ public class AttendanceRestController {
 	}
 	
 
-	@RequestMapping( value="json/updateAttendance", method=RequestMethod.GET )
+	@RequestMapping( value="json/updateAttendance", method=RequestMethod.GET)
 	public @ResponseBody void updateAttendance( @ModelAttribute("attendance") Attendance attendance, Model model ) throws Exception{
 
-		System.out.println("/attendance/updateAttendance : GET");
+		System.out.println("/attendance/json/updateAttendance : GET");
+		
+		System.out.println("1"+attendance.getMemo());
+		
+		String reMemo = attendance.getMemo();
+
+		reMemo=URLDecoder.decode(reMemo, "EUC-KR");
+
+		attendance.setMemo(reMemo);
+
+		System.out.println("reMemo"+reMemo);
 		//Business Logic
 		attendanceService.updateAttendance(attendance);
 
@@ -90,7 +101,9 @@ public class AttendanceRestController {
 	@RequestMapping( value="json/updateAttendance", method=RequestMethod.POST )
 	public @ResponseBody void updateAttendance( @ModelAttribute("attendance") Attendance attendance, Model model , HttpSession session) throws Exception{
 
-		System.out.println("/attendance/updateAttendance : POST");
+		System.out.println("/attendance/json/updateAttendance : POST");
+		
+		System.out.println("2"+attendance.getMemo());
 		//Business Logic
 		attendanceService.updateAttendance(attendance);
 

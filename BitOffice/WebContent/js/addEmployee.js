@@ -137,7 +137,7 @@ function fncAddEmployee() {
 		});
 
 		$("button.btn.btn-secondary:contains('취소')").on("click", function() {
-			$(".tab-pane fade active show")[0].reset();
+			self.location="/employee/addEmployee"
 		});
 	});
 
@@ -190,24 +190,32 @@ function fncAddEmployee() {
 			self.location ="/employee/addEmployee"
 		});
 		
-		//중복 INSERT 를 막기 위한 F5키 막음
-		 function noRefresh()
-		 {
-		     if (event.keyCode == 116) 
-		     {
-		         alert("새로고침을 할 수 없습니다.");
-		         event.keyCode = 2;
-		         return false;
-		     } 
-		     else if(event.ctrlKey && (event.keyCode == 78 || event.keyCode == 82)) 
-		     {
-		         return false;
-		     }
-		 }
-		 document.onkeydown = noRefresh;
+
 		
 	});	
+
+
+		function checkId(){
 	
+	    var employeeNo = $('#employeeNo').val();
+	    $.ajax({
+	        url:'/employee/json//idCheck',
+	        type:'post',
+	        data:{"employeeNo":employeeNo},
+	        success:function(data){
+	        	console.log(data)
+	            if(data.count == 1){
+	            	$('#chkMsg').html("<p style=\"COLOR: red\">이미 등록된 사번입니다.</p>");           
+	            }else{
+	            	 $('#chkMsg').html("<p style=\"COLOR: blue\">등록 가능한 사번입니다.</p>"); 
+	            }
+	        },
+	        error:function(){
+	                alert("에러입니다");
+	        }
+	    });
+	}; 
+
 	
 	 
 	
