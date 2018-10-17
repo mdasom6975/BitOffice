@@ -16,30 +16,30 @@ import javax.mail.internet.MimeMessage;
 public class sendMail {
 	
 	public static String emailPassword(String employeeNo,String email) throws IOException {
-				System.out.println("µé¾î¿Ô³ª!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-				final String user = "mdasom6975@gmail.com"; //¹ß½ÅÀÚÀÇ ÀÌ¸ŞÀÏ ¾ÆÀÌµğ¸¦ ÀÔ·Â
-				final String password="ekfektha6975@"; //¹ß½ÅÀÚÀÇ ÀÌ¸ŞÀÏ ÆĞ½º¿öµå¸¦ ÀÔ·Â
+				System.out.println("ë“¤ì–´ì™”ë‚˜!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				final String user = "aaaaa@gmail.com"; //ë°œì‹ ìì˜ ì´ë©”ì¼ ì•„ì´ë””ë¥¼ ì…ë ¥
+				final String password="aaaaaa"; //ë°œì‹ ìì˜ ì´ë©”ì¼ íŒ¨ìŠ¤ì›Œë“œë¥¼ ì…ë ¥
 				
-				//ÀÓ½Ã ºñ¹Ğ¹øÈ£ »ı¼ºÀ» À§ÇÑ º¯¼ö¼±¾ğ
+				//ì„ì‹œ ë¹„ë°€ë²ˆí˜¸ ìƒì„±ì„ ìœ„í•œ ë³€ìˆ˜ì„ ì–¸
 				String tPassword = "";
 			
 				Properties prop = new Properties();
 				
-				//"mail.smtp.host"Àº ÀÌ¸ŞÀÏ ¹ß¼ÛÀ» Ã³¸®ÇØÁÙ STMP ¼­¹ö¸¦ ³ªÅ¸³À´Ï´Ù.gmailÀ» SMTP¼­¹ö·Î »ç¿ëÇÒ °æ¿ì "smtp.gmail.com" À¸·Î ¼³Á¤, naver¸¦ SMTP¼­¹ö·Î »ç¿ëÇÒ °æ¿ì "smtp.naver.com" À¸·Î ¼³Á¤ÇÕ´Ï´Ù.
+				//"mail.smtp.host"ì€ ì´ë©”ì¼ ë°œì†¡ì„ ì²˜ë¦¬í•´ì¤„ STMP ì„œë²„ë¥¼ ë‚˜íƒ€ëƒ…ë‹ˆë‹¤.gmailì„ SMTPì„œë²„ë¡œ ì‚¬ìš©í•  ê²½ìš° "smtp.gmail.com" ìœ¼ë¡œ ì„¤ì •, naverë¥¼ SMTPì„œë²„ë¡œ ì‚¬ìš©í•  ê²½ìš° "smtp.naver.com" ìœ¼ë¡œ ì„¤ì •í•©ë‹ˆë‹¤.
 				prop.put("mail.smtp.host", "smtp.gmail.com"); 
-				 //"mail.smtp.port "Àº SMTP¼­¹ö¿Í Åë½ÅÇÏ´Â Æ÷Æ®¸¦ ¸»ÇÏ´Âµ¥ gmailÀÏ °æ¿ì 587¸¦ NaverÀÇ °æ¿ì 465À» »ç¿ëÇÑ´Ù´Âµ¥...
+				 //"mail.smtp.port "ì€ SMTPì„œë²„ì™€ í†µì‹ í•˜ëŠ” í¬íŠ¸ë¥¼ ë§í•˜ëŠ”ë° gmailì¼ ê²½ìš° 587ë¥¼ Naverì˜ ê²½ìš° 465ì„ ì‚¬ìš©í•œë‹¤ëŠ”ë°...
 				prop.put("mail.smtp.port", 587);
 				prop.put("mail.smtp.auth", "true");
-				//¾Æ·¡ ¼Ò½º¾²¸é ¿¡·¯
+				//ì•„ë˜ ì†ŒìŠ¤ì“°ë©´ ì—ëŸ¬
 				//		prop.put("mail.smtp.ssl.enable", "true");
-				//±×·¡¼­ ¾Æ·¡ µÎÁÙ·Î Ãß°¡
+				//ê·¸ë˜ì„œ ì•„ë˜ ë‘ì¤„ë¡œ ì¶”ê°€
 				prop.put("mail.smtp.starttls.enable", "true");
 				prop.put("mail.transport.protocol", "smtp");
 				prop.put("mail.smtp.socketFactory.fallback", "true");
 //				prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 				
 				
-				//SMTP ¼­¹öÀÇ Á¤º¸¿Í »ç¿ëÀÚ Á¤º¸¸¦ ±â¹İÀ¸·Î Session Å¬·¡½ºÀÇ ÀÎ½ºÅÏ½º »ı¼º
+				//SMTP ì„œë²„ì˜ ì •ë³´ì™€ ì‚¬ìš©ì ì •ë³´ë¥¼ ê¸°ë°˜ìœ¼ë¡œ Session í´ë˜ìŠ¤ì˜ ì¸ìŠ¤í„´ìŠ¤ ìƒì„±
 				Session session = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
 					protected PasswordAuthentication getPasswordAuthentication() {
 						return new PasswordAuthentication(user, password);
@@ -47,18 +47,18 @@ public class sendMail {
 					}
 				});
 				
-				//Message Å¬·¡½ºÀÇ °´Ã¼¸¦ »ç¿ëÇÏ¿© ¼ö½ÅÀÚ¿Í ³»¿ë, Á¦¸ñÀÇ ¸Ş¼¼Áö¸¦ ÀÛ¼ºÇÑ´Ù.
-				//Transport Å¬·¡½º¸¦ »ç¿ëÇÏ¿© ÀÛ¼ºÇÑ ¸Ş¼¼Áö¸¦ Àü´ŞÇÑ´Ù.
+				//Message í´ë˜ìŠ¤ì˜ ê°ì²´ë¥¼ ì‚¬ìš©í•˜ì—¬ ìˆ˜ì‹ ìì™€ ë‚´ìš©, ì œëª©ì˜ ë©”ì„¸ì§€ë¥¼ ì‘ì„±í•œë‹¤.
+				//Transport í´ë˜ìŠ¤ë¥¼ ì‚¬ìš©í•˜ì—¬ ì‘ì„±í•œ ë©”ì„¸ì§€ë¥¼ ì „ë‹¬í•œë‹¤.
 				
 				try {
 					MimeMessage message = new MimeMessage(session);
 					
 					message.setFrom(new InternetAddress(user));
-					//¼ö½ÅÀÚ ¸ŞÀÏ ÁÖ¼Ò
+					//ìˆ˜ì‹ ì ë©”ì¼ ì£¼ì†Œ
 					message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
 					
-					//¸ŞÀÏÁ¦¸ñ
-					message.setSubject("ºñÆ® ¿ÀÇÇ½º ÀÓ½Ã ºñ¹Ğ¹øÈ£ ¹ß¼Û ¾È³» ¸ŞÀÏ");
+					//ë©”ì¼ì œëª©
+					message.setSubject("ë¹„íŠ¸ ì˜¤í”¼ìŠ¤ ì„ì‹œ ë¹„ë°€ë²ˆí˜¸ ë°œì†¡ ì•ˆë‚´ ë©”ì¼");
 					
 					int random = (int)(Math.random() * 1000000) + 100000;
 					
@@ -67,8 +67,8 @@ public class sendMail {
 					tPassword=Integer.toString(random);
 					SimpleDateFormat toDay = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					
-					//¸ŞÀÏ ³»¿ë ÀÔ·Â
-					//message.setText(  tPassword  + " ·Î ·Î±×ÀÎ ÇØÁÖ¼¼¿ä. ·Î±×ÀÎ ÈÄ ¹İµå½Ã ºñ¹Ğ¹øÈ£´Â Àç¼³Á¤ÇÏ½Ã±æ ¹Ù¶ø´Ï´Ù.");
+					//ë©”ì¼ ë‚´ìš© ì…ë ¥
+					//message.setText(  tPassword  + " ë¡œ ë¡œê·¸ì¸ í•´ì£¼ì„¸ìš”. ë¡œê·¸ì¸ í›„ ë°˜ë“œì‹œ ë¹„ë°€ë²ˆí˜¸ëŠ” ì¬ì„¤ì •í•˜ì‹œê¸¸ ë°”ëë‹ˆë‹¤.");
 					
 					message.setContent("<html>\r\n" + 
 							"<head>\r\n" + 
@@ -82,28 +82,28 @@ public class sendMail {
 							"<a href=\"http://192.168.0.33:8080/\"><img src=\"https://blogfiles.pstatic.net/MjAxODA4MTFfMTUg/MDAxNTMzOTY3NTcyOTM2.bn08xbGg3b38DjImKWoCy_SDwGKQTQGBjv7mp51_2GUg.Ec4t4cSDSq7XORCOjhzLhpCIpTftEQ25A70xsxc7p_gg.PNG.jino_ya/email.PNG\" width=\"600\"/></a><br/>\r\n" + 
 							"<br/>\r\n" + 
 							"<br/>\r\n" + 
-							"<strong>ÀÓ½Ã ºñ¹Ğ¹øÈ£ ¾È³» ¸ŞÀÏÀÔ´Ï´Ù.</strong><br/>\r\n" + 
+							"<strong>ì„ì‹œ ë¹„ë°€ë²ˆí˜¸ ì•ˆë‚´ ë©”ì¼ì…ë‹ˆë‹¤.</strong><br/>\r\n" + 
 							"<br/>\r\n" + 
 							"<br/>\r\n" + 
-							"ÀÓ½Ã ºñ¹Ğ¹øÈ£ : \r\n" +tPassword+
+							"ì„ì‹œ ë¹„ë°€ë²ˆí˜¸ : \r\n" +tPassword+
 							"<br/>\r\n" + 
 							"<br/>\r\n" + 
-							"ÇØ´ç ¹øÈ£·Î ·Î±×ÀÎ ÈÄ ¹İµå½Ã ºñ¹Ğ¹øÈ£¸¦ º¯°æ ÇØÁÖ¼¼¿ä.\r\n" + 
+							"í•´ë‹¹ ë²ˆí˜¸ë¡œ ë¡œê·¸ì¸ í›„ ë°˜ë“œì‹œ ë¹„ë°€ë²ˆí˜¸ë¥¼ ë³€ê²½ í•´ì£¼ì„¸ìš”.\r\n" + 
 							"</p>\r\n" + 
 							"\r\n" + 
 							"</body>\r\n" + 
 							"</html>", "text/html; charset=EUC-KR");
 					
 					//send Message
-					Transport.send(message); // Àü¼Û
-					System.out.println("¹ß¼ÛµÈ ÀÓ½Ã ºñ¹Ğ¹øÈ£ :::::::::"+tPassword);
+					Transport.send(message); // ì „ì†¡
+					System.out.println("ë°œì†¡ëœ ì„ì‹œ ë¹„ë°€ë²ˆí˜¸ :::::::::"+tPassword);
 					System.out.println("message sent successfully!!!!!!!!!!!!!!!!!");
 				} catch(AddressException e) {
 					e.printStackTrace();
-					return "½ÇÆĞ";
+					return "ì‹¤íŒ¨";
 				} catch(MessagingException e){
 					e.printStackTrace();
-					return "½ÇÆĞ";
+					return "ì‹¤íŒ¨";
 				}
 		return tPassword;
 	}
